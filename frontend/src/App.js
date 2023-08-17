@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import MainPage from './Components/MainPage';
 import Login from './Components/Login';
 import Page404 from './Components/Page404';
