@@ -24,7 +24,8 @@ const Login = () => {
 
   const onSubmit = async (values) => {
     console.log(values);
-    await axios.post('/api/v1/login', values);
+    await axios.post('/api/v1/login', values)
+    .then((response) => console.log(response))
   };
 
   return (
