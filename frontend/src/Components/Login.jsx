@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
@@ -22,10 +22,17 @@ const Login = () => {
     email: '',
   };
 
-  const onSubmit = async (values) => {
-    console.log(values);
-    await axios.post('/api/v1/login', values)
-    .then((response) => console.log(response))
+  const onSubmit = (values) => {
+    // console.log(values); http://localhost:5001/api/v1/data
+    axios.post('/api/v1/login', { username: 'admin', password: 'admin' }).then((response) => {
+      const {token} = response
+      console.log(response.data); // => { token: ..., username: 'admin' }
+      localStorage.setItem('token', token);
+    });
+    
+    // .then((response) => {
+      // localStorage.setItem(key, response);
+    // })
   };
 
   return (
