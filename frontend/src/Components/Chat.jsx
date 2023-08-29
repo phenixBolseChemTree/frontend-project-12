@@ -6,9 +6,7 @@ const Chat = () => {
   const token = localStorage.token
     useEffect(() => {
       if (token === undefined) {
-        // setTimeout(() => {
           navigate('/login');
-        // }, 0);
       }
     }, []);
   return (
