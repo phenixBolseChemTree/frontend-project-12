@@ -26,8 +26,10 @@ const Login = () => {
 
   const onSubmit = (values) => {
     axios.post('/api/v1/login', { username: 'admin', password: 'admin' }).then((response) => {
-      const { token } = response
+      const { token } = response.data
+      console.log(response.data);
       localStorage.setItem('token', token);
+      console.log(localStorage);
       navigate('/');
     }
     );
