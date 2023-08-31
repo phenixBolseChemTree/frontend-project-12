@@ -24,7 +24,7 @@ const Chat = () => {
   }, [dispatch, navigate, token]);
 
   console.log('chatData', chatData);
-  const { channels, messages } = chatData; // alse messages
+  const { channels } = chatData; // alse messages
   return (
     <div className="container">
       <div className="row">

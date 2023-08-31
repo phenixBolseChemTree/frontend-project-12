@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
-import { useEffect } from 'react';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
