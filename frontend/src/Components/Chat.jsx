@@ -10,6 +10,7 @@ const Chat = () => {
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app);
   const [textInputForm, setInputForm] = useState('');
+  // const [messagesState, setMessages] = useState([]); 
 
   const token = localStorage.token
   useEffect(() => {
@@ -29,10 +30,11 @@ const Chat = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Вы отправили: ', textInputForm);
-    const username = localStorage.username;
-    socket.emit('newMessage', { body: textInputForm, channelId: 1, username: username });
+    const username = localStorage.firstName;
+    socket.emit('newMessage', { body: textInputForm, username, channelId: 1 });
     socket.on('newMessage', (payload) => {
       console.log('payload', payload); // => { body: "new message", channelId: 7, id: 8, username: "admin" }
+      // нужно перерендеривать 
     });
     setInputForm('')
   };
@@ -44,6 +46,7 @@ const Chat = () => {
   const { channels, messages } = chatData;
   console.log('channels', channels);
   console.log('!!!messages', messages);
+  // setMessages(messages);
   return (
     <div className="container">
       <div className="row">
@@ -63,7 +66,9 @@ const Chat = () => {
             <ul className="list-group">
               <li className="list-group-item">
                 <h2>Поле с будущим чатом</h2>
-                {/* {messages.length && messages.map(({message}))} */}
+                {messages.length && messages.map(({body, username, id}) => (
+                  <li key={id}>{`${username}: ${body}`}</li>
+                ))}
               </li>
             </ul>
             <div className="mt-auto px-5 py-3">
