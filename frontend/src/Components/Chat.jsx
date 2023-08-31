@@ -1,13 +1,16 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChannel } from '../Redux/channelsSlice';
-
+import io from 'socket.io-client';
+const socket = io.connect("http://localhost:3000/");
 const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app);
+  const [textInputForm, setInputForm] = useState('');
+
   const token = localStorage.token
   useEffect(() => {
     if (token === undefined) {
@@ -23,8 +26,19 @@ const Chat = () => {
     }
   }, [dispatch, navigate, token]);
 
-  console.log('chatData', chatData);
-  const { channels } = chatData; // alse messages
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Вы отправили: ', textInputForm);
+    setInputForm('')
+  };
+  
+  const handleChange = (e) => {
+    setInputForm(e.target.value);
+  };
+
+  const { channels, messages } = chatData; // alse messages
+  console.log('channels', channels);
+  console.log('!!!messages', messages);
   return (
     <div className="container">
       <div className="row">
@@ -47,10 +61,18 @@ const Chat = () => {
                 {/* {messages.length && messages.map(({message}))} */}
               </li>
             </ul>
-            <div className="message-form mt-3">
-              <input type="text" className="form-control border border-dark" placeholder="Введите сообщение..." />
-              <button className="btn btn-primary mt-2 border border-dark">Отправить</button>
+            <div className="mt-auto px-5 py-3">
+              <form onSubmit={handleSubmit} className="py-1 border rounded-2">
+                <div className="input-group has-validation">
+                  <input type="text" value={textInputForm} onChange={handleChange} className="border-0 p-0 ps-2 form-control" placeholder="Введите сообщение..." />
+                  <button type="submit" className="btn btn-group-vertical">Отправить</button>
+                </div>
+              </form>
             </div>
+            {/* <div className="message-form mt-3">
+              <input type="text" value={textInput} onChange={handleInputChange} className="form-control border border-dark" placeholder="Введите сообщение..." />
+              <button type="submit" className="btn btn-primary mt-2 border border-dark">Отправить</button>
+            </div> */}
           </div>
         </div>
       </div>

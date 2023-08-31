@@ -27,12 +27,12 @@ const Login = () => {
   const onSubmit = ({email, firstName, lastName}) => {
     axios.post('/api/v1/login', { username: 'admin', password: 'admin' }).then((response) => {
       const { token } = response.data
-      console.log(response.data);
+      // console.log(response.data);
       localStorage.setItem('token', token);
       localStorage.setItem('email', email);
       localStorage.setItem('firstName', firstName);
       localStorage.setItem('lastName', lastName);
-      console.log(localStorage);
+      // console.log(localStorage);
       navigate('/');
     }
     );

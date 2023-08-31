@@ -11,7 +11,7 @@ const channelsSlice = createSlice({
   },
   reducers: {
     addChannel: (state, action) => {
-      console.log('channels123', action);
+      // console.log('channels123', action);
       return action.payload;
     },
     removeChannel: (state, action) => {
