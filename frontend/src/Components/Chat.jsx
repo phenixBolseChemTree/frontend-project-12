@@ -29,6 +29,11 @@ const Chat = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Вы отправили: ', textInputForm);
+    const username = localStorage.username;
+    socket.emit('newMessage', { body: textInputForm, channelId: 1, username: username });
+    socket.on('newMessage', (payload) => {
+      console.log('payload', payload); // => { body: "new message", channelId: 7, id: 8, username: "admin" }
+    });
     setInputForm('')
   };
   
@@ -36,7 +41,7 @@ const Chat = () => {
     setInputForm(e.target.value);
   };
 
-  const { channels, messages } = chatData; // alse messages
+  const { channels, messages } = chatData;
   console.log('channels', channels);
   console.log('!!!messages', messages);
   return (
@@ -69,10 +74,6 @@ const Chat = () => {
                 </div>
               </form>
             </div>
-            {/* <div className="message-form mt-3">
-              <input type="text" value={textInput} onChange={handleInputChange} className="form-control border border-dark" placeholder="Введите сообщение..." />
-              <button type="submit" className="btn btn-primary mt-2 border border-dark">Отправить</button>
-            </div> */}
           </div>
         </div>
       </div>
