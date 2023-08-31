@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
+import { useEffect } from 'react';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -24,17 +25,19 @@ const Login = () => {
   };
   const navigate = useNavigate();
 
-  const onSubmit = (values) => {
+  const onSubmit = ({email, firstName, lastName}) => {
     axios.post('/api/v1/login', { username: 'admin', password: 'admin' }).then((response) => {
       const { token } = response.data
       console.log(response.data);
       localStorage.setItem('token', token);
+      localStorage.setItem('email', email);
+      localStorage.setItem('firstName', firstName);
+      localStorage.setItem('lastName', lastName);
       console.log(localStorage);
       navigate('/');
     }
     );
   };
-
   return (
     <div className="container mt-5">
       <h1>Здесь будет форма Formik</h1>
