@@ -54,7 +54,7 @@ const Chat = () => {
           <div className="channel-list">
             <h3>Каналы</h3>
             <ul className="list-group">
-              {channels.length && channels.map(({ id, name }) => (
+              {channels.length !== 0 && channels.map(({ id, name }) => (
                 <li key={id} className="list-group-item border border-dark">{name}</li>
               ))}
             </ul>
@@ -64,12 +64,11 @@ const Chat = () => {
           <div className="chat">
             <h3>Чат</h3>
             <ul className="list-group">
-              <li className="list-group-item">
-                <h2>Поле с будущим чатом</h2>
-                {messages.length && messages.map(({body, username, id}) => (
-                  <li key={id}>{`${username}: ${body}`}</li>
+              <div className="list-group-item">
+                {messages.length !== 0 && messages.map(({body, username, id}) => (
+                  <div key={id}><strong>{username}:</strong> {body}</div>
                 ))}
-              </li>
+              </div>
             </ul>
             <div className="mt-auto px-5 py-3">
               <form onSubmit={handleSubmit} className="py-1 border rounded-2">
