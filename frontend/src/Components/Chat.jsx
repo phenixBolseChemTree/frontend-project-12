@@ -10,7 +10,7 @@ const Chat = () => {
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app);
   const [textInputForm, setInputForm] = useState('');
-  // const [messagesState, setMessages] = useState([]); 
+  const [messagesState, setMessages] = useState([]); 
 
   const token = localStorage.token
   useEffect(() => {
@@ -25,6 +25,10 @@ const Chat = () => {
         dispatch(addChannel(response.data));
       });
     }
+      socket.on('newMessage', (message) => {
+        console.log('message', message);
+        setMessages((prevMessages) => [...prevMessages, message]);
+      });
   }, [dispatch, navigate, token]);
 
   const handleSubmit = (e) => {
@@ -32,10 +36,6 @@ const Chat = () => {
     console.log('Вы отправили: ', textInputForm);
     const username = localStorage.firstName;
     socket.emit('newMessage', { body: textInputForm, username, channelId: 1 });
-    socket.on('newMessage', (payload) => {
-      console.log('payload', payload); // => { body: "new message", channelId: 7, id: 8, username: "admin" }
-      // нужно перерендеривать 
-    });
     setInputForm('')
   };
   
@@ -46,7 +46,6 @@ const Chat = () => {
   const { channels, messages } = chatData;
   console.log('channels', channels);
   console.log('!!!messages', messages);
-  // setMessages(messages);
   return (
     <div className="container">
       <div className="row">
@@ -65,7 +64,7 @@ const Chat = () => {
             <h3>Чат</h3>
             <ul className="list-group">
               <div className="list-group-item">
-                {messages.length !== 0 && messages.map(({body, username, id}) => (
+                {messagesState.length !== 0 && messagesState.map(({body, username, id}) => (
                   <div key={id}><strong>{username}:</strong> {body}</div>
                 ))}
               </div>
