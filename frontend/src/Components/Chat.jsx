@@ -4,19 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChannel } from '../Redux/channelsSlice';
 import io from 'socket.io-client';
+
 const socket = io.connect("http://localhost:3000/");
+
 const Chat = () => {
+  console.log(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app);
   const [textInputForm, setInputForm] = useState('');
-  const [messagesState, setMessages] = useState([]); 
+  const [messagesState, setMessages] = useState([]);
 
-  const token = localStorage.token
+  const token = localStorage.token;
+
   useEffect(() => {
     if (token === undefined) {
       navigate('/login');
-    } else {
+    }
+  }, [navigate, token]);
+
+  useEffect(() => {
+    if (token !== undefined) {
       axios.get('/api/v1/data', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -24,21 +32,22 @@ const Chat = () => {
       }).then((response) => {
         dispatch(addChannel(response.data));
       });
-    }
+
       socket.on('newMessage', (message) => {
-        console.log('message', message);
+        console.log('message!@#!@', message);
         setMessages((prevMessages) => [...prevMessages, message]);
       });
-  }, [dispatch, navigate, token]);
+    }
+  }, [dispatch, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Вы отправили: ', textInputForm);
     const username = localStorage.firstName;
     socket.emit('newMessage', { body: textInputForm, username, channelId: 1 });
-    setInputForm('')
+    setInputForm('');
   };
-  
+
   const handleChange = (e) => {
     setInputForm(e.target.value);
   };
@@ -46,6 +55,10 @@ const Chat = () => {
   const { channels, messages } = chatData;
   console.log('channels', channels);
   console.log('!!!messages', messages);
+  let trash = [...messages];
+  if (channels.length === 0 || messages.length === 0) {
+    trash = [...trash, ...messagesState];
+  }
   return (
     <div className="container">
       <div className="row">
@@ -64,7 +77,7 @@ const Chat = () => {
             <h3>Чат</h3>
             <ul className="list-group">
               <div className="list-group-item">
-                {messagesState.length !== 0 && messagesState.map(({body, username, id}) => (
+                {trash.length !== 0 && trash.map(({ body, username, id }) => (
                   <div key={id}><strong>{username}:</strong> {body}</div>
                 ))}
               </div>
