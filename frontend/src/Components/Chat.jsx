@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChannel } from '../Redux/channelsSlice';
+import Chanells from '../Components/Chanells';
+import ChatMain from "./ChatMain";
 import io from 'socket.io-client';
 
 const socket = io.connect("http://localhost:3000/");
@@ -12,7 +14,6 @@ const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app);
-  const [textInputForm, setInputForm] = useState('');
   const [messagesState, setMessages] = useState([]);
 
   const token = localStorage.token;
@@ -40,58 +41,17 @@ const Chat = () => {
     }
   }, [dispatch, token]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Вы отправили: ', textInputForm);
-    const username = localStorage.firstName;
-    socket.emit('newMessage', { body: textInputForm, username, channelId: 1 });
-    setInputForm('');
-  };
-
-  const handleChange = (e) => {
-    setInputForm(e.target.value);
-  };
-
   const { channels, messages } = chatData;
-  console.log('channels', channels);
+  console.log('!!!chatData', chatData)
+  console.log('!!!channels', channels);
   console.log('!!!messages', messages);
-  let trash = [...messages];
-  if (channels.length === 0 || messages.length === 0) {
-    trash = [...trash, ...messagesState];
-  }
+  let messagesAll = [...messages];
+  messagesAll = [...messagesAll, ...messagesState];
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-3">
-          <div className="channel-list">
-            <h3>Каналы</h3>
-            <ul className="list-group">
-              {channels.length !== 0 && channels.map(({ id, name }) => (
-                <li key={id} className="list-group-item border border-dark">{name}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="col-md-9">
-          <div className="chat">
-            <h3>Чат</h3>
-            <ul className="list-group">
-              <div className="list-group-item">
-                {trash.length !== 0 && trash.map(({ body, username, id }) => (
-                  <div key={id}><strong>{username}:</strong> {body}</div>
-                ))}
-              </div>
-            </ul>
-            <div className="mt-auto px-5 py-3">
-              <form onSubmit={handleSubmit} className="py-1 border rounded-2">
-                <div className="input-group has-validation">
-                  <input type="text" value={textInputForm} onChange={handleChange} className="border-0 p-0 ps-2 form-control" placeholder="Введите сообщение..." />
-                  <button type="submit" className="btn btn-group-vertical">Отправить</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        <Chanells channels={channels} socket={socket} />
+        <ChatMain messagesAll={messagesAll} socket={socket} />
       </div>
     </div>
   );

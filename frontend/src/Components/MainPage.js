@@ -8,7 +8,7 @@ const MainPage = () => (
       <ul>
         <li>
           <Link to="/login">Page Login</Link>
-        </li>
+        </li> 
         <li>
           <Link to="/qweqweqwqweqweqeq">404 test</Link>
         </li>
