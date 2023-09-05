@@ -1,13 +1,15 @@
-import React from "react";
-import Modal from "./Modal";
+import React, { useState } from "react";
+// import Modal from "./Modal";
 
 const Chanells = ({ channels, setSelectedChannel }) => {
+  // const [active, setActive] = useState(true);
   if (channels) {
-    return (
+    return (<>
+      {/* <Modal active={active} setActive={setActive} /> */}
       <div className="col-md-3">
         <div className="channel-list">
           <h3>Каналы</h3>
-          <Modal />
+          {/* <button type="button" data-testid="item-add" onChange={() => setActive(true)} className="btn btn-secondary">Add Chanel</button> */}
           <ul className="list-group">
             {channels.length !== 0 && channels.map(({ id, name }) => (
               <li key={id} className="list-group-item border border-dark">
@@ -22,6 +24,7 @@ const Chanells = ({ channels, setSelectedChannel }) => {
           </ul>
         </div>
       </div>
+    </>
     )
   }
 }

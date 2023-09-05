@@ -1,28 +1,26 @@
-import React from "react";
+import React, { useState } from 'react';
+// import Modal from 'react-modal';
 
-const Modal = () => {
+// const getId = (() => {
+//   let idChanell = 3;
+//   return () => {
+//     id += 1;
+//     return id;
+//   };
+// })();
 
-  // <div class="modal-dialog">
-  //     <div class="modal-content">
-  //       <div class="modal-header">
-  //         <div class="modal-title h4">Add</div>
-  //         <button type="button" class="btn-close" aria-label="Close"></button>
-  //       </div>
-  //       <div class="modal-body">
-  //         <form>
-  //           <div class="form-group">
-  //             <input class="form-control" data-testid="input-body" name="body" required="" value="" />
-  //           </div>
-  //           <input class="btn btn-primary" type="submit" value="submit" />
-  //         </form>
-  //       </div>
-  //     </div>
-  //   </div>
+
+const Modal = ({ active, setActive }) => {
+  // const [active, setActive] = useState(true);
   return (
-    <div class="mb-3">
-      <button type="button" data-testid="item-add" className="btn btn-secondary">add</button>
+    <div className={active ? 'modal active' : 'modal'} onClick={() => setActive(false)}>
+      <div className="mb-3" onClick={(e) => e.stopPropagation()}>
+        <h1>loream ipsum loream ipsum loream ipsum loream ipsum </h1>
+        <h1>loream ipsum loream ipsum loream ipsum loream ipsum </h1>
+        <h1>loream ipsum loream ipsum loream ipsum loream ipsum </h1>
+        <h1>loream ipsum loream ipsum loream ipsum loream ipsum </h1>
+      </div>
     </div>
-  )
+  );
 }
-
 export default Modal;
