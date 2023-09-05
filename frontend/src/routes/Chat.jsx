@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChannel } from '../Redux/channelsSlice';
-import CustomModal from "../Components/Modal";
 import Chanells from '../Components/Chanells';
 import ChatMain from "../Components/ChatMain";
 import io from 'socket.io-client';

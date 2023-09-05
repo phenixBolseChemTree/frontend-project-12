@@ -3,16 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-
-// const getId = (() => {
-//   let idChanell = 3;
-//   return () => {
-//     idChanell += 1;
-//     return idChanell;
-//   };
-// })();
-
-
 const CustomModal = ({ socket }) => {
   const [show, setShow] = useState(false);
   const [channelName, setChannelName] = useState('');
