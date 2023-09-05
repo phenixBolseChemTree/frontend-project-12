@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const ChatMain = ({ messagesAll, socket }) => {
+const ChatMain = ({ messagesAll, socket, selectedChannel }) => {
   console.log(123);
   const [textInputForm, setInputForm] = useState('');
 
@@ -7,7 +7,9 @@ const ChatMain = ({ messagesAll, socket }) => {
     e.preventDefault();
     console.log('Вы отправили: ', textInputForm);
     const username = localStorage.firstName;
-    socket.emit('newMessage', { body: textInputForm, username, channelId: 1 });
+    socket.emit('newMessage', {
+      body: textInputForm, username, channelId: selectedChannel
+    });
     setInputForm('');
   };
 
@@ -22,7 +24,7 @@ const ChatMain = ({ messagesAll, socket }) => {
         <h3>Чат</h3>
         <ul className="list-group">
           <div className="list-group-item">
-            {messagesAll.length !== 0 && messagesAll.map(({ body, username, id }) => (
+            {messagesAll.length !== 0 && messagesAll.filter(({ channelId }) => channelId === selectedChannel).map(({ body, username, id }) => (
               <div key={id}><strong>{username}:</strong> {body}</div>
             ))}
           </div>

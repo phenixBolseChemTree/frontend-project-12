@@ -4,10 +4,10 @@ import {
   Route,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MainPage from './Components/MainPage';
-import Login from './Components/Login';
-import Page404 from './Components/Page404';
-import Chat from './Components/Chat';
+import MainPage from './routes/MainPage';
+import Login from './routes/Login';
+import Page404 from './routes/Page404';
+import Chat from './routes/Chat';
 import { useEffect } from 'react';
 
 const App = () => {

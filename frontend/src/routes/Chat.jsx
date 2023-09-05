@@ -4,13 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChannel } from '../Redux/channelsSlice';
 import Chanells from '../Components/Chanells';
-import ChatMain from "./ChatMain";
+import ChatMain from "../Components/ChatMain";
 import io from 'socket.io-client';
 
 const socket = io.connect("http://localhost:3000/");
 
+const INITIAL_CHANNEL = 1
+
 const Chat = () => {
-  console.log(1);
+  const [selectedChannel, setSelectedChannel] = useState(INITIAL_CHANNEL);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app);
@@ -41,6 +44,12 @@ const Chat = () => {
     }
   }, [dispatch, token]);
 
+  useEffect(() => {
+    console.log(selectedChannel)
+  }, [
+    selectedChannel
+  ])
+
   const { channels, messages } = chatData;
   console.log('!!!chatData', chatData)
   console.log('!!!channels', channels);
@@ -50,8 +59,9 @@ const Chat = () => {
   return (
     <div className="container">
       <div className="row">
-        <Chanells channels={channels} socket={socket} />
-        <ChatMain messagesAll={messagesAll} socket={socket} />
+        SelectedChannel: {selectedChannel}
+        <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
+        <ChatMain selectedChannel={selectedChannel} messagesAll={messagesAll} socket={socket} />
       </div>
     </div>
   );
