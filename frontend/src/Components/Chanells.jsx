@@ -1,5 +1,4 @@
 import React from "react";
-import io from 'socket.io-client';
 import Modal from "./Modal";
 
 const Chanells = ({ channels, setSelectedChannel }) => {
@@ -15,8 +14,8 @@ const Chanells = ({ channels, setSelectedChannel }) => {
                 <button
                   onClick={() => setSelectedChannel(id)}
                   type="button"
-                  class="w-100 rounded-0 text-start btn btn-secondary">
-                  <span class="me-1">#</span>{name}
+                  className="w-100 rounded-0 text-start btn btn-secondary">
+                  <span className="me-1">#</span>{name}
                 </button>
               </li>
             ))}

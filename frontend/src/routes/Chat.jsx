@@ -45,7 +45,7 @@ const Chat = () => {
   }, [dispatch, token]);
 
   useEffect(() => {
-    console.log(selectedChannel)
+    console.log('selectedChannel', selectedChannel)
   }, [
     selectedChannel
   ])

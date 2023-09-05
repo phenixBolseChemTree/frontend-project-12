@@ -20,7 +20,7 @@ const Modal = () => {
   //   </div>
   return (
     <div class="mb-3">
-      <button type="button" data-testid="item-add" class="btn btn-secondary">add</button>
+      <button type="button" data-testid="item-add" className="btn btn-secondary">add</button>
     </div>
   )
 }
