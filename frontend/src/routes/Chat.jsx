@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChannel } from '../Redux/channelsSlice';
+import CustomModal from "../Components/Modal";
 import Chanells from '../Components/Chanells';
 import ChatMain from "../Components/ChatMain";
 import io from 'socket.io-client';
@@ -60,6 +61,7 @@ const Chat = () => {
     <div className="container">
       <div className="row">
         SelectedChannel: {selectedChannel}
+        <CustomModal />
         <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
         <ChatMain selectedChannel={selectedChannel} messagesAll={messagesAll} socket={socket} />
       </div>

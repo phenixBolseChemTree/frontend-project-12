@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-// import Modal from "./Modal";
+import React from "react";
 
 const Chanells = ({ channels, setSelectedChannel }) => {
-  // const [active, setActive] = useState(true);
   if (channels) {
     return (<>
-      {/* <Modal active={active} setActive={setActive} /> */}
       <div className="col-md-3">
         <div className="channel-list">
           <h3>Каналы</h3>
