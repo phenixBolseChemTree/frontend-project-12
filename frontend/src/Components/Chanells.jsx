@@ -1,12 +1,13 @@
 import React from "react";
+import CustomModal from "./Modal";
 
-const Chanells = ({ channels, setSelectedChannel }) => {
+const Chanells = ({ channels, setSelectedChannel, socket }) => {
   if (channels) {
     return (<>
       <div className="col-md-3">
         <div className="channel-list">
           <h3>Каналы</h3>
-          {/* <button type="button" data-testid="item-add" onChange={() => setActive(true)} className="btn btn-secondary">Add Chanel</button> */}
+          <CustomModal socket={socket} />
           <ul className="list-group">
             {channels.length !== 0 && channels.map(({ id, name }) => (
               <li key={id} className="list-group-item border border-dark">

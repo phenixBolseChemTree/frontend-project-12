@@ -13,7 +13,7 @@ import Form from 'react-bootstrap/Form';
 // })();
 
 
-const CustomModal = () => {
+const CustomModal = ({ socket }) => {
   const [show, setShow] = useState(false);
   const [channelName, setChannelName] = useState('');
 
@@ -21,18 +21,18 @@ const CustomModal = () => {
   const handleShow = () => setShow(true);
 
   const handleInputChange = (e) => {
-    // Обработчик для обновления состояния при вводе данных
     setChannelName(e.target.value);
-    console.log('Введено', e.target.value);
   };
 
   const handleSubmit = (e) => {
-    console.log('Форма отправлена!!!', e);
+    e.preventDefault();
+    socket.emit('newChannel', { name: channelName });
+    console.log('Форма отправлена!!!', channelName);
   }
   return (
     <>
-      <Button className='' variant="primary" onClick={handleShow}>
-        Launch demo modal
+      <Button variant="primary" onClick={handleShow}>
+        +
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -43,23 +43,23 @@ const CustomModal = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Control
-                type="email"
+                type="text"
                 placeholder="Введите имя нового канала..."
                 onChange={handleInputChange}
                 value={channelName}
                 autoFocus
               />
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                  Создать канал
+                </Button>
+              </Modal.Footer>
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   )

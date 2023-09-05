@@ -46,7 +46,10 @@ const Chat = () => {
   }, [dispatch, token]);
 
   useEffect(() => {
-    console.log('selectedChannel', selectedChannel)
+    // console.log('selectedChannel', selectedChannel)
+    socket.on('newChannel', (payload) => {
+      console.log(payload) // { id: 6, name: "new channel", removable: true }
+    });
   }, [
     selectedChannel
   ])
@@ -61,7 +64,6 @@ const Chat = () => {
     <div className="container">
       <div className="row">
         SelectedChannel: {selectedChannel}
-        <CustomModal />
         <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
         <ChatMain selectedChannel={selectedChannel} messagesAll={messagesAll} socket={socket} />
       </div>
