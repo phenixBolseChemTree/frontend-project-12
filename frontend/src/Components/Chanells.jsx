@@ -1,5 +1,5 @@
 import React from "react";
-import CustomModal from "./Modal";
+import CustomModal from "./ModalMakeChannels";
 
 const Chanells = ({ channels, setSelectedChannel, socket }) => {
 const handleClickDelete = (id) => {
