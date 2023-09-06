@@ -9,6 +9,18 @@ import io from 'socket.io-client';
 
 const socket = io.connect("http://localhost:3000/");
 
+const getData = (action, dispatch) => {
+  socket.on(action, () => {
+    axios.get('/api/v1/data', {
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    }).then((response) => {
+      dispatch(addChannel(response.data));
+    });
+  })
+}
+
 const INITIAL_CHANNEL = 1
 
 const Chat = () => {
@@ -17,8 +29,6 @@ const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app);
-  const [messagesState, setMessages] = useState([]);
-
   const token = localStorage.token;
 
   useEffect(() => {
@@ -36,35 +46,26 @@ const Chat = () => {
       }).then((response) => {
         dispatch(addChannel(response.data));
       });
-
-      socket.on('newMessage', (message) => {
-        console.log('message!@#!@', message);
-        setMessages((prevMessages) => [...prevMessages, message]);
-      });
     }
   }, [dispatch, token]);
 
   useEffect(() => {
-    // console.log('selectedChannel', selectedChannel)
-    socket.on('newChannel', (payload) => {
-      console.log(payload) // { id: 6, name: "new channel", removable: true }
-    });
+    getData('newMessage', dispatch)
+    getData('newChannel', dispatch)
+    getData('removeChannel', dispatch)
+    getData('editChannel', token, dispatch)
   }, [
-    selectedChannel
+    selectedChannel, dispatch, token
   ])
 
   const { channels, messages } = chatData;
   console.log('!!!chatData', chatData)
-  console.log('!!!channels', channels);
-  console.log('!!!messages', messages);
-  let messagesAll = [...messages];
-  messagesAll = [...messagesAll, ...messagesState];
   return (
     <div className="container">
       <div className="row">
         SelectedChannel: {selectedChannel}
         <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
-        <ChatMain selectedChannel={selectedChannel} messagesAll={messagesAll} socket={socket} />
+        <ChatMain selectedChannel={selectedChannel} messages={messages} socket={socket} />
       </div>
     </div>
   );

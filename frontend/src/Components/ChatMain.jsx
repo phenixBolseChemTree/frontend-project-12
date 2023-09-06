@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-const ChatMain = ({ messagesAll, socket, selectedChannel }) => {
-  console.log(123);
+const ChatMain = ({ messages, socket, selectedChannel }) => {
   const [textInputForm, setInputForm] = useState('');
 
   const handleSubmit = (e) => {
@@ -24,7 +23,7 @@ const ChatMain = ({ messagesAll, socket, selectedChannel }) => {
         <h3>Чат</h3>
         <ul className="list-group">
           <div className="list-group-item">
-            {messagesAll.length !== 0 && messagesAll.filter(({ channelId }) => channelId === selectedChannel).map(({ body, username, id }) => (
+            {messages.length !== 0 && messages.filter(({ channelId }) => channelId === selectedChannel).map(({ body, username, id }) => (
               <div key={id}><strong>{username}:</strong> {body}</div>
             ))}
           </div>

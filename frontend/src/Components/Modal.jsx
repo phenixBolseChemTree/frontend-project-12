@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import * as Yup from 'yup';
 
-const CustomModal = ({ socket }) => {
+const validationSchema = Yup.object().shape({
+  channelName: Yup.string().required('Пожалуйста, введите имя канала.'),
+});
+
+const CustomModal = ({ socket, chanells }) => {
   const [show, setShow] = useState(false);
   const [channelName, setChannelName] = useState('');
 
