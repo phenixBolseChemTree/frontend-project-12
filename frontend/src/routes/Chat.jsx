@@ -53,7 +53,7 @@ const Chat = () => {
     getData('newMessage', dispatch)
     getData('newChannel', dispatch)
     getData('removeChannel', dispatch)
-    getData('editChannel', token, dispatch)
+    getData('renameChannel', dispatch)
   }, [
     selectedChannel, dispatch, token
   ])

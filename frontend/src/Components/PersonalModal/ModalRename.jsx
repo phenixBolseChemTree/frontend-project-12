@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
@@ -10,28 +10,34 @@ const SignupSchema = Yup.object().shape({
     .required('Обязательное поле'),
 });
 
-const OptionsModal = ({ socket, id, name }) => {
+
+const ModalRename = ({ socket, id, name }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleRename = (id, value) => {
+    console.log('value!!!', value);
+    socket.emit('renameChannel', { id, name: value });
+  };
 
   return (
     <>
       <button variant="primary" onClick={handleShow}>
-        +
+        Переименовать
       </button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Новый канал</Modal.Title>
+          <Modal.Title>Переименовать канал {name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h2>Уверены?</h2>
+
           <Formik
             initialValues={{ channelName: '' }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              socket.emit('newChannel', { name: values.channelName });
               handleClose();
             }}
           >
@@ -48,13 +54,16 @@ const OptionsModal = ({ socket, id, name }) => {
                     onChange={handleChange} value={values.channelName} />
                   <ErrorMessage name="channelName" component="div" className="text-danger" />
                 </div>
-                <button type="submit" className="btn btn-primary">Создать</button>
+                <button onClick={() => handleRename(id, values.channelName)} className="btn btn-primary">Создать</button>
+
               </Form>
             )}
           </Formik>
+
         </Modal.Body>
       </Modal>
     </>
   )
 }
-export default OptionsModal;
+
+export default ModalRename;

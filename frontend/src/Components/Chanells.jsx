@@ -1,15 +1,9 @@
 import React from "react";
 import CustomModal from "./ModalMakeChannels";
+// import OptionsModal from "./componentsUtil/OptionsModal";
+import Options from "./componentsUtil/Options";
 
 const Chanells = ({ channels, setSelectedChannel, socket }) => {
-const handleClickDelete = (id) => {
-  console.log('удалено!!!');
-  socket.emit('removeChannel', { id });
-}
-const handleClickedit = () => {
-  console.log('будущее изменение');
-}
-
   if (channels) {
     return (<>
       <div className="col-md-3">
@@ -26,12 +20,8 @@ const handleClickedit = () => {
                     className="w-100 rounded-0 text-start btn btn-secondary">
                     <span className="me-1">#</span>{name}
                   </button>
-                  <button onClick={() => handleClickDelete(id)}>
-                    Удалить
-                  </button>
-                  <button onClick={() => handleClickedit(id)}>
-                    Переименовать
-                  </button>
+                  {/* <OptionsModal socket={socket} id={id} name={name} /> */}
+                  <Options socket={socket} id={id} name={name} />
                 </li>
                 )
               } else {
