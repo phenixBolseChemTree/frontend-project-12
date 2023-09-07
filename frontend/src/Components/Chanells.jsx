@@ -1,5 +1,5 @@
 import React from "react";
-import CustomModal from "./ModalMakeChannels";
+import ModalMakeChannels from "./ModalMakeChannels";
 // import OptionsModal from "./componentsUtil/OptionsModal";
 import Options from "./componentsUtil/Options";
 
@@ -9,7 +9,7 @@ const Chanells = ({ channels, setSelectedChannel, socket }) => {
       <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
         <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
           <b>Каналы</b>
-          <CustomModal socket={socket} chanells={channels} />
+          <ModalMakeChannels socket={socket} chanells={channels} />
         </div>
         <ul className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
           {channels.length !== 0 && channels.map(({ id, name, removable }) => {

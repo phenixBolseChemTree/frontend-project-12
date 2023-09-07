@@ -18,8 +18,8 @@ const getData = (action, dispatch) => {
     }).then((response) => {
       dispatch(addChannel(response.data));
     });
-  })
-}
+  });
+};
 
 const INITIAL_CHANNEL = 1
 
@@ -54,6 +54,17 @@ const Chat = () => {
     getData('newChannel', dispatch)
     getData('removeChannel', dispatch)
     getData('renameChannel', dispatch)
+    socket.on('newChannel', (payload) => {
+      // console.log(payload) // { id: 6, name: "new channel", removable: true }
+      setSelectedChannel(payload.id);
+    });
+    socket.on('removeChannel', (payload) => {
+      // console.log(payload) // { id: 6, name: "new channel", removable: true }
+      if (selectedChannel === payload.id) {
+        setSelectedChannel(1);
+      }
+      // setSelectedChannel(payload.id);
+    });
   }, [
     selectedChannel, dispatch, token
   ])
@@ -64,9 +75,9 @@ const Chat = () => {
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
         {/* SelectedChannel: {selectedChannel} */}
-        
+
         <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
-        <ChatMain selectedChannel={selectedChannel} messages={messages} socket={socket} />
+        <ChatMain selectedChannel={selectedChannel} messages={messages} socket={socket} channels={channels} />
       </div>
     </div>
   );

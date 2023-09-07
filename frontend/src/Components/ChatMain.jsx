@@ -1,7 +1,21 @@
 import React, { useState } from "react";
-const ChatMain = ({ messages, socket, selectedChannel }) => {
-  const [textInputForm, setInputForm] = useState('');
 
+const currentNameChannel = (channels, id) => {
+  const foundChannel = channels.find(channel => channel.id === id);
+  if (foundChannel) {
+    return foundChannel.name;
+  }
+  return null; // или любое другое значение, которое вы хотите вернуть, если канал не найден
+}
+
+const getCurrentMessages = (messages, selectedChannel) => {
+  return messages.filter(({ channelId }) => channelId === selectedChannel)
+}
+const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
+  const [textInputForm, setInputForm] = useState('');
+  const nameChanel = currentNameChannel(channels, selectedChannel);
+  const currentMessages = getCurrentMessages(messages, selectedChannel);
+console.log('currentMessages123123123length', currentMessages.length);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Вы отправили: ', textInputForm);
@@ -21,12 +35,12 @@ const ChatMain = ({ messages, socket, selectedChannel }) => {
     <div className="col p-0 h-100">
       <div className="chat d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
-          <p className="m-0"><b># general</b></p>
-          <span className="text-muted">7 сообщений</span>
+          <p className="m-0"><b># {nameChanel}</b></p>
+          <span className="text-muted">{currentMessages.length} сообщений</span>
         </div>
         <div id='messages-box' className="chat-messages overflow-auto px-5 ">
 
-          {messages.length !== 0 && messages.filter(({ channelId }) => channelId === selectedChannel).map(({ body, username, id }) => (
+          {messages.length !== 0 && currentMessages.map(({ body, username, id }) => (
             <div className="text-break mb-2" key={id}><strong>{username}:</strong> {body}</div>
           ))}
 
