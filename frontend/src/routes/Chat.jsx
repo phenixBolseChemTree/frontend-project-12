@@ -61,9 +61,10 @@ const Chat = () => {
   const { channels, messages } = chatData;
   console.log('!!!chatData', chatData)
   return (
-    <div className="container">
-      <div className="row">
-        SelectedChannel: {selectedChannel}
+    <div className="container h-100 my-4 overflow-hidden rounded shadow">
+      <div className="row h-100 bg-white flex-md-row">
+        {/* SelectedChannel: {selectedChannel} */}
+        
         <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
         <ChatMain selectedChannel={selectedChannel} messages={messages} socket={socket} />
       </div>

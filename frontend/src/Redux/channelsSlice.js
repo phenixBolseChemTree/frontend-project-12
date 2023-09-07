@@ -12,10 +12,6 @@ const channelsSlice = createSlice({
       // console.log('channels123', action);
       return action.payload;
     },
-    removeChannel: (state, action) => {
-      const channelId = action.payload;
-      delete state[channelId];
-    },
   },
 });
 

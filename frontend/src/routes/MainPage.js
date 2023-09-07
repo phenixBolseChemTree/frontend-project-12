@@ -4,8 +4,8 @@ import { Outlet, Link } from 'react-router-dom';
 
 const MainPage = () => (
   <>
-    <nav>
-      <ul>
+    {/* <nav> 
+        <ul>
         <li>
           <Link to="/login">Page Login</Link>
         </li> 
@@ -15,7 +15,13 @@ const MainPage = () => (
         <li>
           <Link to="/">Chat</Link>
         </li>
-      </ul>
+      </ul> */}
+    <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container"><a class="navbar-brand" href="/">Vanin Chat</a>
+        <button type="button" class="btn btn-primary">Выйти</button>
+        <a class="navbar-brand" href="/">Chat</a>
+        <a class="navbar-brand" href="/login">Login</a>
+      </div>
     </nav>
     <hr />
     <Outlet />

@@ -18,16 +18,19 @@ const ChatMain = ({ messages, socket, selectedChannel }) => {
 
 
   return (
-    <div className="col-md-9">
-      <div className="chat">
-        <h3>Чат</h3>
-        <ul className="list-group">
-          <div className="list-group-item">
-            {messages.length !== 0 && messages.filter(({ channelId }) => channelId === selectedChannel).map(({ body, username, id }) => (
-              <div key={id}><strong>{username}:</strong> {body}</div>
-            ))}
-          </div>
-        </ul>
+    <div className="col p-0 h-100">
+      <div className="chat d-flex flex-column h-100">
+        <div className="bg-light mb-4 p-3 shadow-sm small">
+          <p className="m-0"><b># general</b></p>
+          <span className="text-muted">7 сообщений</span>
+        </div>
+        <div id='messages-box' className="chat-messages overflow-auto px-5 ">
+
+          {messages.length !== 0 && messages.filter(({ channelId }) => channelId === selectedChannel).map(({ body, username, id }) => (
+            <div className="text-break mb-2" key={id}><strong>{username}:</strong> {body}</div>
+          ))}
+
+        </div>
         <div className="mt-auto px-5 py-3">
           <form onSubmit={handleSubmit} className="py-1 border rounded-2">
             <div className="input-group has-validation">
