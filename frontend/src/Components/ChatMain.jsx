@@ -15,7 +15,6 @@ const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
   const [textInputForm, setInputForm] = useState('');
   const nameChanel = currentNameChannel(channels, selectedChannel);
   const currentMessages = getCurrentMessages(messages, selectedChannel);
-console.log('currentMessages123123123length', currentMessages.length);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Вы отправили: ', textInputForm);
