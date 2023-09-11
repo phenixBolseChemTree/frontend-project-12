@@ -12,36 +12,75 @@ const SignupSchema = Yup.object().shape({
 });
 
 
-const ChannelsModal = ({ action, name, id, socket }) => {
+const ChannelsModal = ({ action, name, id, socket, channels }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleEvent = () => {
+  const handleDelete = () => {
     socket.emit('removeChannel', { id });
     handleClose();
+  };
+  const handleRename = (id, value) => {
+    socket.emit('renameChannel', { id, name: value });
   };
 
   return (
     <>
-      <text variant="primary" onClick={handleShow}>
-        {action === 'delete' ? 'Удалить канал:' : 'Переименовать канал:'}
-      </text>
+      <t variant="primary" onClick={handleShow}>
+        {action === 'delete' ? 'Удалить канал' : 'Переименовать канал'}
+      </t>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{action === 'delete' ? 'Удалить канал:' : 'Переименовать канал:'}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className='lead'>{action === 'delete' ? 'Уверены?' : 'Форма'}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Закрыть
-          </Button>
-          <Button variant="primary" onClick={handleEvent}>
-            {action === 'delete' ? 'Удалить' : 'Отправить'}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {action === 'delete' &&
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Удалить канал</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='lead'>Уверены?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Закрыть
+            </Button>
+            <Button autoFocus variant="primary" onClick={handleDelete}>
+              Удалить
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      }
+      {action === 'rename' &&
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Переименовать канал {name}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Formik
+              initialValues={{ channelName: '' }}
+              validationSchema={SignupSchema}
+              onSubmit={(values) => {
+                handleClose();
+              }}
+            >
+              {({ values, handleChange, handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <Field
+                      type="text"
+                      id="channelName"
+                      name="channelName"
+                      className="form-control"
+                      autoFocus
+                      placeholder="Введите имя канала..."
+                      onChange={handleChange} value={values.channelName} />
+                    <ErrorMessage name="channelName" component="div" className="text-danger" />
+                  </div>
+                  <button onClick={() => handleRename(id, values.channelName)} className="btn btn-primary">Создать</button>
+
+                </Form>
+              )}
+            </Formik>
+          </Modal.Body>
+        </Modal>
+      }
     </>
   );
 }

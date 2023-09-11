@@ -16,14 +16,14 @@ const MainPage = () => (
           <Link to="/">Chat</Link>
         </li>
       </ul> */}
-    <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-white" style={{
+    <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white" style={{
       position: 'fixed',
       width: '100%',
     }}>
-      <div class="container"><a class="navbar-brand" href="/">Vanin Chat</a>
-        <button type="button" class="btn btn-primary">Выйти</button>
-        <a class="navbar-brand" href="/">Chat</a>
-        <a class="navbar-brand" href="/login">Login</a>
+      <div className="container"><a className="navbar-brand" href="/">Vanin Chat</a>
+        <button type="button" className="btn btn-primary">Выйти</button>
+        <a className="navbar-brand" href="/">Chat</a>
+        <a className="navbar-brand" href="/login">Login</a>
       </div>
     </nav>
     <div style={{
