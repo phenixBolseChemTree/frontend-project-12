@@ -72,7 +72,7 @@ const Chat = () => {
   const { channels, messages } = chatData;
   console.log('!!!chatData', chatData)
   return (
-    <div className="container h-100 my-4 overflow-hidden rounded shadow">
+    <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
         {/* SelectedChannel: {selectedChannel} */}
 

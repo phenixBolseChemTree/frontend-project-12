@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import Dropdown from 'react-bootstrap/Dropdown';
+
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
@@ -23,9 +25,11 @@ const ModalRename = ({ socket, id, name }) => {
 
   return (
     <>
-      <button variant="primary" onClick={handleShow}>
+      {/* <button variant="primary" onClick={handleShow}>
         Переименовать
-      </button>
+      </button> */}
+      <Dropdown.Item onClick={() => handleShow}>Переименовать : {id}</Dropdown.Item>
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

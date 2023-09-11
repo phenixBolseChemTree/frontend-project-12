@@ -8,7 +8,7 @@ import MainPage from './routes/MainPage';
 import Login from './routes/Login';
 import Page404 from './routes/Page404';
 import Chat from './routes/Chat';
-import { useEffect } from 'react';
+import './App.css'
 
 const App = () => {
   return (
