@@ -2,14 +2,14 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import ChannelsModal from './ChannelsModal';
+import ChannelsModal from './Components/ChannelsModal';
 import cn from 'classnames'
 const ButtonChannel = ({ socket, id, name, setSelectedChannel, selectedChannel, removable, channels }) => {
   const isSelected = selectedChannel === id;
   // console.log('id: ', name, id);
   // console.log('selectedChannel: ', selectedChannel);
 
-  const buttonClasses = cn('w-100 rounded-0 text-start btn', {
+  const buttonClasses = cn('w-100 rounded-0 text-start btn border-0', {
     'bg-secondary text-white': isSelected, // Если selectedChannel === id, добавьте классы для серой кнопки и белого текста
   });
 

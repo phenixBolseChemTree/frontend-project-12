@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addChannel } from '../Redux/channelsSlice';
+import { addChatData } from '../Redux/channelsSlice';
 import Chanells from '../Components/Chanells';
 import ChatMain from "../Components/ChatMain";
 import io from 'socket.io-client';
@@ -16,7 +16,7 @@ const getData = (action, dispatch) => {
         Authorization: `Bearer ${localStorage.token}`,
       },
     }).then((response) => {
-      dispatch(addChannel(response.data));
+      dispatch(addChatData(response.data));
     });
   });
 };
@@ -44,7 +44,7 @@ const Chat = () => {
           Authorization: `Bearer ${token}`,
         },
       }).then((response) => {
-        dispatch(addChannel(response.data));
+        dispatch(addChatData(response.data));
       });
     }
   }, [dispatch, token]);
@@ -70,7 +70,7 @@ const Chat = () => {
   ])
 
   const { channels, messages } = chatData;
-  console.log('!!!chatData', chatData)
+  // console.log('!!!chatData', chatData)
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">

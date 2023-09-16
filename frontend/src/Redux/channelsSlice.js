@@ -8,11 +8,11 @@ const channelsSlice = createSlice({
     currentChannelId: null,
   },
   reducers: {
-    addChannel: (state, action) => {
+    addChatData: (state, action) => {
       return action.payload;
     },
   },
 });
 
-export const { addChannel, removeChannel } = channelsSlice.actions;
+export const { addChatData, removeChannel } = channelsSlice.actions;
 export default channelsSlice.reducer;

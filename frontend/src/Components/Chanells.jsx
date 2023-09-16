@@ -1,6 +1,6 @@
 import React from "react";
 import ModalMakeChannels from "./ModalMakeChannels";
-import ButtonChannel from "./ChennelsStuct/ButtonChannel";
+import ButtonChannel from "./ChennelsStuct/buttonChannel/ButtonChannel";
 
 const Chanells = ({ channels, setSelectedChannel, selectedChannel, socket }) => {
   if (channels) {
