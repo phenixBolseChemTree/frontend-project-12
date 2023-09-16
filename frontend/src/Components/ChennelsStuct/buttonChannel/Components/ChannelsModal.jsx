@@ -27,9 +27,9 @@ const ChannelsModal = ({ action, name, id, socket, channels }) => {
 
   return (
     <>
-      <t variant="primary" onClick={handleShow}>
+      <label variant="primary" onClick={handleShow}>
         {action === 'delete' ? 'Удалить канал' : 'Переименовать канал'}
-      </t>
+      </label>
 
       {action === 'delete' &&
         <Modal show={show} onHide={handleClose}>

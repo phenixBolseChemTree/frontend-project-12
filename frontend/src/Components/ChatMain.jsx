@@ -28,7 +28,7 @@ const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-      console.log("Вы отправили: ", values.textInputForm);
+      // console.log("Вы отправили: ", values.textInputForm);
       const username = localStorage.firstName;
       resetForm()
       socket.emit("newMessage", {

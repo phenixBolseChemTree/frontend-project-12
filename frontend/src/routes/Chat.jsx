@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addChatData } from '../Redux/channelsSlice';
+import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/channelsSlice';
 import Chanells from '../Components/Chanells';
 import ChatMain from "../Components/ChatMain";
 import io from 'socket.io-client';
@@ -10,15 +10,30 @@ import io from 'socket.io-client';
 const socket = io.connect("http://localhost:3000/");
 
 const getData = (action, dispatch) => {
-  socket.on(action, () => {
-    axios.get('/api/v1/data', {
-      headers: {
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    }).then((response) => {
-      dispatch(addChatData(response.data));
-    });
-  });
+  socket.on(action, (payload) => {
+    socket.off(action);
+    switch (action) {
+      case 'newMessage':
+        console.log('newMessage', payload);
+        dispatch(setNewMessage(payload));
+        break;
+      case 'newChannel':
+        console.log('newChannel');
+        dispatch(setNewChannel(payload));
+        break;
+      case 'removeChannel':
+        console.log('removeChannel');
+        dispatch(setRemoveChannel(payload));
+        break;
+      case 'renameChannel':
+        console.log('renameChannel');
+        dispatch(setRenameChannel(payload));
+        break;
+      default:
+        return
+    }
+  }
+  );
 };
 
 const INITIAL_CHANNEL = 1
@@ -50,32 +65,19 @@ const Chat = () => {
   }, [dispatch, token]);
 
   useEffect(() => {
+    console.log('эффекты работают!!!');
     getData('newMessage', dispatch)
     getData('newChannel', dispatch)
     getData('removeChannel', dispatch)
     getData('renameChannel', dispatch)
-    socket.on('newChannel', (payload) => {
-      // console.log(payload) // { id: 6, name: "new channel", removable: true }
-      setSelectedChannel(payload.id);
-    });
-    socket.on('removeChannel', (payload) => {
-      // console.log(payload) // { id: 6, name: "new channel", removable: true }
-      if (selectedChannel === payload.id) {
-        setSelectedChannel(1);
-      }
-      // setSelectedChannel(payload.id);
-    });
   }, [
     selectedChannel, dispatch, token
   ])
 
   const { channels, messages } = chatData;
-  // console.log('!!!chatData', chatData)
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        {/* SelectedChannel: {selectedChannel} */}
-
         <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
         <ChatMain selectedChannel={selectedChannel} messages={messages} socket={socket} channels={channels} />
       </div>
