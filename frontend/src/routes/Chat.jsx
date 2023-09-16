@@ -11,7 +11,6 @@ const socket = io.connect("http://localhost:3000/");
 
 const getData = (action, dispatch) => {
   socket.on(action, (payload) => {
-    socket.off(action);
     switch (action) {
       case 'newMessage':
         console.log('newMessage', payload);
@@ -62,19 +61,21 @@ const Chat = () => {
         dispatch(addChatData(response.data));
       });
     }
-  }, [dispatch, token]);
 
-  useEffect(() => {
     console.log('эффекты работают!!!');
+
     getData('newMessage', dispatch)
     getData('newChannel', dispatch)
     getData('removeChannel', dispatch)
     getData('renameChannel', dispatch)
+  }, [dispatch, token]);
+
+  useEffect(() => {
   }, [
-    selectedChannel, dispatch, token
+    dispatch, token
   ])
 
-  const { channels, messages } = chatData;
+  const { channels, messages, currentChannelId } = chatData;
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
