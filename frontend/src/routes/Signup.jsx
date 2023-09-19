@@ -2,6 +2,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
+import Alert from 'react-bootstrap/Alert';
+import { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
@@ -9,16 +11,19 @@ const SignupSchema = Yup.object().shape({
     .min(3, 'Минимум 2 буквы')
     .max(20, 'Максимум 20 букв')
     .required('Обязательное поле'),
-    password: Yup.string()
+  password: Yup.string()
     .min(6, 'Минимум 6 символов')
     .max(50, 'Максимум 50 символов')
     .required('Обязательное поле'),
-    passwordRes: Yup.string()
+  passwordRes: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
     .required('Обязательное поле'),
 });
 
 const Login = () => {
+
+  const [show, setShow] = useState(false);
+
   const initialValues = {
     name: '',
     password: '',
@@ -26,18 +31,22 @@ const Login = () => {
   };
   const navigate = useNavigate();
 
-  const onSubmit = ({name, password}) => {
+  const onSubmit = ({ name, password }) => {
     console.log(name);
     console.log(password);
     axios.post('/api/v1/signup', { username: String(name), password: String(password) }).then((response) => {
       const { token } = response.data
-      // console.log(response.data);
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
 
       navigate('/');
-    }
-    );
+    })
+      .catch((e) => {
+        console.log('отлавливаем ошибку!!!', e);
+        // Такой пользователь уже существует
+        setShow(true)
+        // alert('Такой пользователь уже существует');
+      })
   };
   return (
     <div className="container mt-5">
@@ -66,6 +75,14 @@ const Login = () => {
             <ErrorMessage name="passwordRes" component="div" className="text-danger" />
           </div>
 
+          { show &&
+          <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+            <Alert.Heading>Ошибка!</Alert.Heading>
+            <p>
+              Такой пользователь уже существует
+            </p>
+          </Alert>
+          }
           <button type="submit" className="btn btn-primary">Отправить</button>
         </Form>
       </Formik>
