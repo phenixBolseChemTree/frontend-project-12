@@ -6,12 +6,12 @@ import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, 'Минимум 2 буквы')
-    .max(50, 'Максимум 50 букв')
+    .min(3, 'Минимум 2 буквы')
+    .max(20, 'Максимум 20 букв')
     .required('Обязательное поле'),
     password: Yup.string()
-    .min(2, 'Минимум 2 буквы')
-    .max(50, 'Максимум 50 букв')
+    .min(6, 'Минимум 6 символов')
+    .max(50, 'Максимум 50 символов')
     .required('Обязательное поле'),
     passwordRes: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
