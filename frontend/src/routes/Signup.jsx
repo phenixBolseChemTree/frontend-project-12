@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
@@ -38,14 +38,11 @@ const Login = () => {
       const { token } = response.data
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
-
       navigate('/');
     })
       .catch((e) => {
         console.log('отлавливаем ошибку!!!', e);
-        // Такой пользователь уже существует
         setShow(true)
-        // alert('Такой пользователь уже существует');
       })
   };
   return (

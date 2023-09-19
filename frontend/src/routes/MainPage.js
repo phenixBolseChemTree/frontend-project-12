@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const MainPage = () => {
-  const [showBtnOut, setShowBtnOut] = useState(localStorage.length !== 0);
+  const dispatch = useDispatch();
+  const btnOut = useSelector(state => state.app.btnOut);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();
-    setShowBtnOut(false);
-    navigate('/signup');
+    navigate('/login');
   }
 
   return (
@@ -19,10 +22,10 @@ const MainPage = () => {
       }}>
         <div className="container">
           <Link to="/" className="navbar-brand">Hexlet Chat</Link>
-          <Link to="/" className="navbar-brand">Chat</Link>
           <Link to="/login" className="navbar-brand">Login</Link>
           <Link to="/signup" className="navbar-brand">Signup</Link>
-          {showBtnOut && <button type="button" onClick={handleLogout} className="btn btn-primary">Выйти</button>}
+          {/* {btnOut && <button type="button" onClick={handleLogout} className="btn btn-primary">Выйти</button>} */}
+          <button type="button" onClick={handleLogout} className="btn btn-primary">Выйти 2</button>
         </div>
       </nav>
       <div style={{
