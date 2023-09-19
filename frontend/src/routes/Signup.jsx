@@ -13,32 +13,35 @@ const SignupSchema = Yup.object().shape({
     .min(2, 'Минимум 2 буквы')
     .max(50, 'Максимум 50 букв')
     .required('Обязательное поле'),
+    passwordRes: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
+    .required('Обязательное поле'),
 });
 
 const Login = () => {
   const initialValues = {
     name: '',
     password: '',
+    passwordRes: '',
   };
   const navigate = useNavigate();
-  
-  const handleClick = () => {
-    navigate('/signup')
-  }
 
   const onSubmit = ({name, password}) => {
     console.log(name);
     console.log(password);
-    axios.post('/api/v1/login', { username: String(name), password: String(password) }).then((response) => {
+    axios.post('/api/v1/signup', { username: String(name), password: String(password) }).then((response) => {
       const { token } = response.data
+      // console.log(response.data);
+      localStorage.setItem('username', name);
       localStorage.setItem('token', token);
+
       navigate('/');
     }
     );
   };
   return (
     <div className="container mt-5">
-      <h1>Залогиниться</h1>
+      <h1>Зарегестрироваться</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={SignupSchema}
@@ -57,10 +60,15 @@ const Login = () => {
             <ErrorMessage name="password" component="div" className="text-danger" />
           </div>
 
+          <div className="mb-3">
+            <label htmlFor="passwordRes" className="form-label">Повторите пароль</label>
+            <Field type="passwordRes" id="passwordRes" name="passwordRes" className="form-control" />
+            <ErrorMessage name="passwordRes" component="div" className="text-danger" />
+          </div>
+
           <button type="submit" className="btn btn-primary">Отправить</button>
         </Form>
       </Formik>
-      <button onClick={() => handleClick()}>Еще не зарегестрированы?</button>
     </div>
   );
 };

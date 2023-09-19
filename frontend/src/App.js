@@ -8,6 +8,7 @@ import MainPage from './routes/MainPage';
 import Login from './routes/Login';
 import Page404 from './routes/Page404';
 import Chat from './routes/Chat';
+import Signup from './routes/Signup';
 import './App.css'
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainPage />} >
           <Route path='/' element={<Chat />} />
+          <Route path='signup' element={<Signup />} />
           <Route path='login' element={<Login />} />
           <Route path='*' element={<Page404 />} />
         </Route>

@@ -24,6 +24,7 @@ const MainPage = () => (
         <button type="button" className="btn btn-primary">Выйти</button>
         <a className="navbar-brand" href="/">Chat</a>
         <a className="navbar-brand" href="/login">Login</a>
+        <a className="navbar-brand" href="/signup">Signup</a>
       </div>
     </nav>
     <div style={{

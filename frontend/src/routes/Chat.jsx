@@ -49,7 +49,11 @@ const Chat = () => {
     if (token === undefined) {
       navigate('/login');
     }
-  }, [navigate, token]);
+    getData('newMessage', dispatch)
+    getData('newChannel', dispatch)
+    getData('removeChannel', dispatch)
+    getData('renameChannel', dispatch)
+  }, [navigate, token, dispatch]);
 
   useEffect(() => {
     if (token !== undefined) {
@@ -61,13 +65,6 @@ const Chat = () => {
         dispatch(addChatData(response.data));
       });
     }
-
-    console.log('эффекты работают!!!');
-
-    getData('newMessage', dispatch)
-    getData('newChannel', dispatch)
-    getData('removeChannel', dispatch)
-    getData('renameChannel', dispatch)
   }, [dispatch, token]);
 
   useEffect(() => {
