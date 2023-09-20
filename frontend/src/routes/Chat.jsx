@@ -49,6 +49,9 @@ const Chat = () => {
     if (token === undefined) {
       navigate('/login');
     }
+  }, [navigate, token])
+
+  useEffect(() => {
     getData('newMessage', dispatch)
     getData('newChannel', dispatch)
     getData('removeChannel', dispatch)
