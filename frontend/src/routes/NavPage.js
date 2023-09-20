@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { setData } from '../Redux/authSlice';
 
 
-const MainPage = () => {
+const NavPage = () => {
+  // const dispatch = useDispatch();
+  // const data = useSelector(state => state.app.auth)
+
+  // useEffect(() => {
+
+  // }, )
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    // dispatch(setData(null))
     localStorage.clear();
     navigate('/login');
   }
@@ -35,4 +44,4 @@ const MainPage = () => {
   )
 }
 
-export default MainPage;
+export default NavPage;

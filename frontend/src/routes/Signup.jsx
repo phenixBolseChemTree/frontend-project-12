@@ -1,12 +1,12 @@
-// import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import img from '../img/hexlet_human/happy_man.jpg'
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
-import { useState } from 'react';
 import * as Yup from 'yup';
+
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
