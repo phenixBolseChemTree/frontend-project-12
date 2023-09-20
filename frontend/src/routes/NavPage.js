@@ -1,24 +1,22 @@
-// import React, { useEffect, useState } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { setData } from '../Redux/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setData } from '../Redux/authSlice';
 
 
 const NavPage = () => {
-  // const dispatch = useDispatch();
-  // const data = useSelector(state => state.app.auth)
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-
-  // }, )
+  const { data } = useSelector(state => state.app.auth)
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // dispatch(setData(null))
+    dispatch(setData(null))
+
     localStorage.clear();
     navigate('/login');
   }
+  console.log('data!!!', data);
 
   return (
     <>
@@ -28,10 +26,9 @@ const NavPage = () => {
       }}>
         <div className="container">
           <Link to="/" className="navbar-brand">Hexlet Chat</Link>
-          <Link to="/login" className="navbar-brand">Login</Link>
-          <Link to="/signup" className="navbar-brand">Signup</Link>
-          {/* {btnOut && <button type="button" onClick={handleLogout} className="btn btn-primary">Выйти</button>} */}
-          <button type="button" onClick={handleLogout} className="btn btn-primary">Выйти 2</button>
+          {/* <Link to="/login" className="navbar-brand">Login</Link>
+          <Link to="/signup" className="navbar-brand">Signup</Link> */}
+          {data && <button type="button" onClick={handleLogout} className="btn btn-primary">Выйти</button>}
         </div>
       </nav>
       <div style={{

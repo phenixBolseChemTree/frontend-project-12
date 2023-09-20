@@ -7,6 +7,7 @@ const authSlice = createSlice({
   },
   reducers: {
     setData: (state, action) => {
+      console.log('токен сохранен!!!');
       state.data = action.payload;
     },
   },

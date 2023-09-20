@@ -7,6 +7,8 @@ import Alert from 'react-bootstrap/Alert';
 import { useState } from 'react';
 import axios from 'axios';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { setData } from '../Redux/authSlice';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -20,6 +22,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const dispath = useDispatch();
   const [show, setShow] = useState(false);
 
   const initialValues = {
@@ -39,6 +42,7 @@ const Login = () => {
       const { token } = response.data
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
+      dispath(setData(token))
       navigate('/');
     }
     )
