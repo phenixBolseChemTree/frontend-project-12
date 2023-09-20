@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/channelsSlice';
+import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice';
 import Chanells from '../Components/Chanells';
 import ChatMain from "../Components/ChatMain";
 import io from 'socket.io-client';
@@ -42,7 +42,7 @@ const Chat = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const chatData = useSelector(state => state.app);
+  const chatData = useSelector(state => state.app.chat);
   const token = localStorage.token;
 
   useEffect(() => {

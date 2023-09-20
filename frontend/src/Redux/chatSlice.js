@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const channelsSlice = createSlice({
+const chatSlice = createSlice({
   name: 'app',
   initialState: {
     channels: [],
@@ -44,5 +44,5 @@ const channelsSlice = createSlice({
   },
 });
 
-export const { addChatData, setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel } = channelsSlice.actions;
-export default channelsSlice.reducer;
+export const { addChatData, setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel } = chatSlice.actions;
+export default chatSlice.reducer;

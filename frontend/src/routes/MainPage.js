@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 
 
 const MainPage = () => {
-  const dispatch = useDispatch();
-  const btnOut = useSelector(state => state.app.btnOut);
+  // const dispatch = useDispatch();
+  // const btnOut = useSelector(state => state.app.btnOut);
 
   const navigate = useNavigate();
 
