@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import { Modal, Button } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -55,7 +55,12 @@ const CustomModal = ({ socket, chanells }) => {
                     onChange={handleChange} value={values.channelName} />
                   <ErrorMessage name="channelName" component="div" className="text-danger" />
                 </div>
-                <button type="submit" className="btn btn-primary">{t('modal.btnCreate')}</button>
+                <Modal.Footer>
+                  <button type="submit" className="btn btn-primary">{t('modal.btnCreate')}</button>
+                  <Button variant="secondary" onClick={handleClose}>
+                    {t('modal.btnCancel')}
+                  </Button>
+                </Modal.Footer>
               </Form>
             )}
           </Formik>

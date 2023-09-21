@@ -73,10 +73,8 @@ const ChannelsModal = ({ action, name, id, socket, channels }) => {
                       onChange={handleChange} value={values.channelName} />
                     <ErrorMessage name="channelName" component="div" className="text-danger" />
                   </div>
-                  <button onClick={() => handleRename(id, values.channelName)} className="btn btn-primary">{t('modal.btnCreate')}</button>
                   <Modal.Footer>
                     <button onClick={() => handleRename(id, values.channelName)} className="btn btn-primary">{t('modal.btnCreate')}</button>
-
                     <Button variant="secondary" onClick={handleClose}>
                       {t('modal.btnCancel')}
                     </Button>
