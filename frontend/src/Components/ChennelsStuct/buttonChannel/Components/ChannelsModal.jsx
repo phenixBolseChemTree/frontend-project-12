@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 const SignupSchema = Yup.object().shape({
   channelName: Yup.string()
@@ -13,6 +14,7 @@ const SignupSchema = Yup.object().shape({
 
 
 const ChannelsModal = ({ action, name, id, socket, channels }) => {
+  const { t } = useTranslation('');
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,21 +30,21 @@ const ChannelsModal = ({ action, name, id, socket, channels }) => {
   return (
     <>
       <label variant="primary" onClick={handleShow}>
-        {action === 'delete' ? 'Удалить канал' : 'Переименовать канал'}
+        {action === 'delete' ? t('modal.removeChannel') : t('modal.renameChannel')}
       </label>
 
       {action === 'delete' &&
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Удалить канал</Modal.Title>
+            <Modal.Title>{t('modal.removeChannel')}</Modal.Title>
           </Modal.Header>
-          <Modal.Body className='lead'>Уверены?</Modal.Body>
+          <Modal.Body className='lead'>{t('modal.shure')}</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-              Закрыть
+              {t('modal.btnCancel')}
             </Button>
             <Button autoFocus variant="primary" onClick={handleDelete}>
-              Удалить
+              {t('modal.btnDelete')}
             </Button>
           </Modal.Footer>
         </Modal>
@@ -50,7 +52,7 @@ const ChannelsModal = ({ action, name, id, socket, channels }) => {
       {action === 'rename' &&
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Переименовать канал {name}</Modal.Title>
+            <Modal.Title>{t('modal.renameChannel')} {name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Formik
@@ -69,11 +71,10 @@ const ChannelsModal = ({ action, name, id, socket, channels }) => {
                       name="channelName"
                       className="form-control"
                       autoFocus
-                      placeholder="Введите имя канала..."
                       onChange={handleChange} value={values.channelName} />
                     <ErrorMessage name="channelName" component="div" className="text-danger" />
                   </div>
-                  <button onClick={() => handleRename(id, values.channelName)} className="btn btn-primary">Создать</button>
+                  <button onClick={() => handleRename(id, values.channelName)} className="btn btn-primary">{t('modal.btnCreate')}</button>
 
                 </Form>
               )}

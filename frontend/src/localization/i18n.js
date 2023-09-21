@@ -12,55 +12,68 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true,
-    fallbackLng: 'ru',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
     resources: {
-      ru: {
-        nav: {
-          chatName: 'Hexlet Chat',
-          logOut: 'Выйти',
-        },
-        chat: {
-          channels: 'Каналы',
-          messages: 'сообщений',
-          form: 'Введите сообщение',
-        },
-        login: {
-          'come': 'Войти',
-          'yourName': 'Ваш ник',
-          'password': 'Пароль',
-          'no account': 'Нет аккаунта',
-          'registration': 'Регистрация'
-        },
-        signup: {
-          'registration': 'Регистрация',
-          'userName': 'Имя пользователя',
-          'password': 'Пароль',
-          'resPassword': 'Подтвердите пароль',
-          'btnRegistration': 'Зарегестрироваться'
-        },
-        errorPage: {
-          'pageIsNotFound': 'Страница не найдена',
-          'ButYouCanMoveOn': 'Но вы можете перейти',
-          'onMainPage': 'на главную страницу',
-          'resPassword': 'Подтвердите пароль',
-          'btnRegistration': 'Зарегестрироваться'
-        },
-        modal: {
-          addChannel: 'Добавить канал',
-          removeChannel: 'Удалить канал',
-          renameChannel: 'Переименовать канал',
-          btnCreate: 'Cоздать',
-          btnCancel: 'Отменить',
-          btnDelete: 'Удалить',
-          shure: 'Уверены?',
-        },
-        tubBar: {
-          channels: 'Удалить',
-          newChannel: 'Переименовать'
-        },
+      en: {
+        translation: {
+          nav: {
+            chatName: 'Hexlet Chat1',
+            logOut: 'Выйти1',
+          },
+          chat: {
+            channels: 'Каналы1',
+            messages: 'сообщений1',
+            formPlaceholder: 'Введите сообщение...1',
+            send: 'Отправить1'
+          },
+          login: {
+            come: 'Войти1',
+            yourName: 'Ваш ник1',
+            password: 'Пароль1',
+            noAccount: 'Нет аккаунта?1',
+            registration: 'Регистрация1',
+            btnSend: 'Отправить1'
+          },
+          signup: {
+            registration: 'Регистрация1',
+            userName: 'Имя пользователя1',
+            password: 'Пароль1',
+            resPassword: 'Подтвердите пароль1',
+            btnRegistration: 'Зарегестрироваться1'
+          },
+          error404Page: {
+            pageIsNotFound: 'Страница не найдена1',
+            ButYouCanMoveOn: 'Но вы можете перейти1',
+            onMainPage: 'на главную страницу1',
+            resPassword: 'Подтвердите пароль1',
+            btnRegistration: 'Зарегестрироваться1'
+          },
+          error: {
+            errorText: 'Ошибка1',
+            AlertUserAlreadyExists: 'Неверные имя пользователся или пароль1',
+            minWord3: 'Минимум 3 буквы1',
+            maxWord20: 'Максимум 20 букв1',
+            minСharacters2: 'Минимум 2 символа1',
+            maxCharacters50: 'Максимум 50 символов1',
+            requiredField: 'Обязательное поле1'
+          },
+          modal: {
+            addChannel: 'Добавить канал1',
+            removeChannel: 'Удалить канал1',
+            renameChannel: 'Переименовать канал1',
+            btnCreate: 'Cоздать1',
+            btnCancel: 'Отменить1',
+            btnDelete: 'Удалить1',
+            shure: 'Уверены?1',
+          },
+          dropdownBar: {
+            channels: 'Удалить1',
+            newChannel: 'Переименовать1'
+          },
+        }
       }
     }
   });

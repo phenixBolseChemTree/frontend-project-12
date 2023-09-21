@@ -8,6 +8,7 @@ import Alert from 'react-bootstrap/Alert';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '../Redux/authSlice';
+import { useTranslation } from 'react-i18next';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -24,6 +25,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const { t } = useTranslation();
   const dispath = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -61,7 +63,7 @@ const Login = () => {
                 <img
                   src={img}
                   className="rounded-circle"
-                  alt="Регистрация"
+                  alt={t('signup.registration')}
                 />
               </div>
               <Formik
@@ -71,19 +73,19 @@ const Login = () => {
               >
                 <Form>
                   <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Имя пользователя</label>
+                    <label htmlFor="name" className="form-label">{t('signup.userName')}</label>
                     <Field type="text" id="name" name="name" className="form-control" />
                     <ErrorMessage name="name" component="div" className="text-danger" />
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Пароль</label>
+                    <label htmlFor="password" className="form-label">{t('signup.password')}</label>
                     <Field type="text" id="password" name="password" className="form-control" />
                     <ErrorMessage name="password" component="div" className="text-danger" />
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="passwordRes" className="form-label">Повторите пароль</label>
+                    <label htmlFor="passwordRes" className="form-label">{t('signup.resPassword')}</label>
                     <Field type="passwordRes" id="passwordRes" name="passwordRes" className="form-control" />
                     <ErrorMessage name="passwordRes" component="div" className="text-danger" />
                   </div>
@@ -93,6 +95,7 @@ const Login = () => {
                       <Alert.Heading>Ошибка!</Alert.Heading>
                       <p>
                         Такой пользователь уже существует
+                        {t('error.errorText')}
                       </p>
                     </Alert>
                   }
