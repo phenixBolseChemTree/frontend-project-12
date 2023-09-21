@@ -3,6 +3,9 @@ import { Modal, Button } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import ToastFeedback from './Toast';
+import { ToastContainer, toast } from "react-toastify";
+
 
 const CustomModal = ({ socket, chanells }) => {
   const { t } = useTranslation();
@@ -17,6 +20,14 @@ const CustomModal = ({ socket, chanells }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const addNotification = () => {
+    const types = ["success", "info", "warning", "error"];
+    toast("Lorem ipsum dolor sit amet, consectetur adipiscing elit", {
+      type: types[Math.floor(Math.random() * types.length)],
+      position: 'top-right'
+    });
+  };
 
   return (
     <>
@@ -39,6 +50,8 @@ const CustomModal = ({ socket, chanells }) => {
             validationSchema={SignupSchema}
             onSubmit={(values) => {
               socket.emit('newChannel', { name: values.channelName });
+              // <ToastFeedback />
+              addNotification()
               handleClose();
             }}
           >

@@ -6,6 +6,7 @@ import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addCh
 import Chanells from '../Components/Chanells';
 import ChatMain from "../Components/ChatMain";
 import io from 'socket.io-client';
+import ToastFeedback from "../Components/Toast";
 
 const socket = io.connect("http://localhost:3000/");
 
@@ -79,6 +80,7 @@ const Chat = () => {
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
+      <div><ToastFeedback /></div>
         <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
         <ChatMain selectedChannel={selectedChannel} messages={messages} socket={socket} channels={channels} />
       </div>
