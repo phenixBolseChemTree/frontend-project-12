@@ -20,61 +20,64 @@ i18n
       en: {
         translation: {
           nav: {
-            chatName: 'Hexlet Chat1',
-            logOut: 'Выйти1',
+            chatName: 'Hexlet Chat',
+            logOut: 'Выйти',
           },
           chat: {
-            channels: 'Каналы1',
-            messages: 'сообщений1',
-            formPlaceholder: 'Введите сообщение...1',
-            send: 'Отправить1'
+            channels: 'Каналы',
+            messages: {
+              "key_one": "{{count}} сообщение",
+              "key_few": "{{count}} сообщения",
+              "key_many": "{{count}} сообщений"
+            },
+            formPlaceholder: 'Введите сообщение...',
+            send: 'Отправить'
           },
           login: {
-            come: 'Войти1',
-            yourName: 'Ваш ник1',
-            password: 'Пароль1',
-            noAccount: 'Нет аккаунта?1',
-            registration: 'Регистрация1',
-            btnSend: 'Отправить1'
+            come: 'Войти',
+            yourName: 'Ваш ник',
+            password: 'Пароль',
+            noAccount: 'Нет аккаунта?',
+            registration: 'Регистрация',
+            btnSend: 'Отправить'
           },
           signup: {
-            registration: 'Регистрация1',
-            userName: 'Имя пользователя1',
-            password: 'Пароль1',
-            resPassword: 'Подтвердите пароль1',
-            btnRegistration: 'Зарегестрироваться1'
+            registration: 'Регистрация',
+            userName: 'Имя пользователя',
+            password: 'Пароль',
+            resPassword: 'Подтвердите пароль',
+            btnRegistration: 'Зарегестрироваться'
           },
           error404Page: {
-            pageIsNotFound: 'Страница не найдена1',
-            ButYouCanMoveOn: 'Но вы можете перейти1',
-            onMainPage: 'на главную страницу1',
-            resPassword: 'Подтвердите пароль1',
-            btnRegistration: 'Зарегестрироваться1'
+            pageIsNotFound: 'Страница не найдена',
+            ButYouCanMoveOn: 'Но вы можете перейти',
+            onMainPage: 'на главную страницу',
+            resPassword: 'Подтвердите пароль',
+            btnRegistration: 'Зарегестрироваться'
           },
           error: {
-            errorText: 'Ошибка1',
-            AlertUserAlreadyExists: 'Неверные имя пользователся или пароль1',
-            AlertUserAlreadyExists: 'Неверные имя пользователся или пароль1',
-            minWord3: 'Минимум 3 буквы1',
-            maxWord20: 'Максимум 20 букв1',
-            minWord3AndmaxWord20: 'От 3 до 20 символов1',
-            minСharacters2: 'Минимум 2 символа1',
-            maxCharacters50: 'Максимум 50 символов1',
-            requiredField: 'Обязательное поле1'
+            errorText: 'Ошибка',
+            AlertUserAlreadyExists: 'Неверные имя пользователся или пароль',
+            minWord3: 'Минимум 3 буквы',
+            maxWord20: 'Максимум 20 букв',
+            minWord3AndmaxWord20: 'От 3 до 20 символов',
+            minСharacters2: 'Минимум 2 символа',
+            maxCharacters50: 'Максимум 50 символов',
+            requiredField: 'Обязательное поле'
           },
           modal: {
-            addChannel: 'Добавить канал1',
-            removeChannel: 'Удалить канал1',
-            renameChannel: 'Переименовать канал1',
-            btnCreate: 'Cоздать1',
-            btnCancel: 'Отменить1',
-            btnDelete: 'Удалить1',
-            shure: 'Уверены?1',
-            formPlaceholder: 'Введите имя канала...1',
+            addChannel: 'Добавить канал',
+            removeChannel: 'Удалить канал',
+            renameChannel: 'Переименовать канал',
+            btnCreate: 'Cоздать',
+            btnCancel: 'Отменить',
+            btnDelete: 'Удалить',
+            shure: 'Уверены?',
+            formPlaceholder: 'Введите имя канала...',
           },
           dropdownBar: {
-            channels: 'Удалить1',
-            newChannel: 'Переименовать1'
+            channels: 'Удалить',
+            newChannel: 'Переименовать'
           },
         }
       }

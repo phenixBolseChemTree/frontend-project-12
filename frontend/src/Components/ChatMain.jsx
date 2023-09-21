@@ -25,6 +25,11 @@ const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
   const nameChanel = currentNameChannel(channels, selectedChannel);
   const currentMessages = getCurrentMessages(messages, selectedChannel);
 
+  const messageCount = currentMessages.length;
+  const messageKey = messageCount === 1 ? 'key_one' : messageCount >= 2 && messageCount <= 4 ? 'key_few' : 'key_many';
+  const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
+
+  console.log('currentMessages.length!!!', currentMessages.length)
   const formik = useFormik({
     initialValues: {
       textInputForm: "",
@@ -50,7 +55,7 @@ const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
           <p className="m-0">
             <b># {nameChanel}</b>
           </p>
-          <span className="text-muted">{currentMessages.length} {t('chat.messages')}</span>
+          <span className="text-muted">{messageText}</span>
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5">
           {messages.length !== 0 &&
@@ -70,9 +75,9 @@ const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 className={`border-0 p-0 ps-2 form-control ${formik.touched.textInputForm &&
-                    formik.errors.textInputForm
-                    ? "is-invalid"
-                    : ""
+                  formik.errors.textInputForm
+                  ? "is-invalid"
+                  : ""
                   }`}
                 placeholder={t('chat.formPlaceholder')}
               />
