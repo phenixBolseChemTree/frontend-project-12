@@ -48,8 +48,9 @@ const Chat = () => {
   useEffect(() => {
     if (token === undefined) {
       navigate('/login');
+      return;
     }
-  }, [navigate, token])
+  })
 
   useEffect(() => {
     getData('newMessage', dispatch)
@@ -59,15 +60,14 @@ const Chat = () => {
   }, [navigate, token, dispatch]);
 
   useEffect(() => {
-    if (token !== undefined) {
-      axios.get('/api/v1/data', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }).then((response) => {
-        dispatch(addChatData(response.data));
-      });
-    }
+    axios.get('/api/v1/data', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => {
+      dispatch(addChatData(response.data));
+    });
+
   }, [dispatch, token]);
 
   useEffect(() => {

@@ -16,7 +16,7 @@ const NavPage = () => {
     localStorage.clear();
     navigate('/login');
   }
-  console.log('data!!!', data);
+  // console.log('data!!!', data);
 
   return (
     <>

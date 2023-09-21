@@ -25,8 +25,6 @@ const SignupSchema = Yup.object().shape({
 
 const Login = () => {
   const dispath = useDispatch();
-  // const { data } = useSelector(state => state.app.auth);
-
 
   const [show, setShow] = useState(false);
 
@@ -42,6 +40,7 @@ const Login = () => {
     console.log(password);
     axios.post('/api/v1/signup', { username: String(name), password: String(password) }).then((response) => {
       const { token } = response.data
+      console.log('response!!!', response);
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
       dispath(setData(token))
