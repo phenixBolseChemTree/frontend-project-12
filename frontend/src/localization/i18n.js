@@ -54,8 +54,10 @@ i18n
           error: {
             errorText: 'Ошибка1',
             AlertUserAlreadyExists: 'Неверные имя пользователся или пароль1',
+            AlertUserAlreadyExists: 'Неверные имя пользователся или пароль1',
             minWord3: 'Минимум 3 буквы1',
             maxWord20: 'Максимум 20 букв1',
+            minWord3AndmaxWord20: 'От 3 до 20 символов1',
             minСharacters2: 'Минимум 2 символа1',
             maxCharacters50: 'Максимум 50 символов1',
             requiredField: 'Обязательное поле1'
@@ -68,6 +70,7 @@ i18n
             btnCancel: 'Отменить1',
             btnDelete: 'Удалить1',
             shure: 'Уверены?1',
+            formPlaceholder: 'Введите имя канала...1',
           },
           dropdownBar: {
             channels: 'Удалить1',
