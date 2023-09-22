@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
 
 
 const currentNameChannel = (channels, id) => {
@@ -35,12 +36,14 @@ const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-      // console.log("Вы отправили: ", values.textInputForm);
-      const username = localStorage.username;
       resetForm()
+
+      filter.loadDictionary('ru');
+      const validatedText = filter.clean(values.textInputForm);
+
       socket.emit("newMessage", {
-        body: values.textInputForm,
-        username,
+        body: validatedText,
+        username: localStorage.username,
         channelId: selectedChannel,
       });
       setSubmitting(false); // Разблокировка кнопки отправки
