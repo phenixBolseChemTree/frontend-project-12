@@ -33,6 +33,7 @@ const NavPage = () => {
 
           {/* <Link to="/login" className="navbar-brand">Login</Link>
           <Link to="/signup" className="navbar-brand">Signup</Link> */}
+          <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>
           {data && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
         </div>
       </nav>

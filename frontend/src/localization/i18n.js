@@ -55,6 +55,12 @@ i18n
             resPassword: 'Подтвердите пароль',
             btnRegistration: 'Зарегестрироваться'
           },
+          toast: {
+            addChannel: 'Канал создан',
+            removeChannel: 'Канал удалён',
+            renameChannel: 'Канал переименован',
+            'networkError': 'Ошибка сети'
+          },
           error: {
             errorText: 'Ошибка',
             AlertUserAlreadyExists: 'Неверные имя пользователся или пароль',

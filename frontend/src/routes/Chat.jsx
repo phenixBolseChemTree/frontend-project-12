@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice';
 import Chanells from '../Components/Chanells';
 import ChatMain from "../Components/ChatMain";
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+
+
 import io from 'socket.io-client';
-import ToastFeedback from "../Components/Toast";
+import { useTranslation } from "react-i18next";
 
 const socket = io.connect("http://localhost:3000/");
 
@@ -44,6 +48,7 @@ const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app.chat);
+  const { t } = useTranslation();
   const token = localStorage.token;
 
   useEffect(() => {
@@ -67,7 +72,12 @@ const Chat = () => {
       },
     }).then((response) => {
       dispatch(addChatData(response.data));
-    });
+    }).catch((e) => {
+      // toast()
+      toast(t('toast.networkError'), {
+        type: 'danger', position: 'top-right'
+      });
+    })
 
   }, [dispatch, token]);
 
@@ -80,9 +90,9 @@ const Chat = () => {
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-      <div><ToastFeedback /></div>
         <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
         <ChatMain selectedChannel={selectedChannel} messages={messages} socket={socket} channels={channels} />
+        <ToastContainer />
       </div>
     </div>
   );

@@ -4,12 +4,20 @@ import Modal from 'react-bootstrap/Modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const ChannelsModal = ({ action, name, id, socket, channels }) => {
   const { t } = useTranslation('');
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const notify = (textAction) => {
+    const texti18 = `toast.${textAction}`;
+    toast(t(texti18), {
+      type: 'success', position: 'top-right'
+    });
+  }
 
   const SignupSchema = Yup.object().shape({
     channelName: Yup.string()
@@ -20,10 +28,12 @@ const ChannelsModal = ({ action, name, id, socket, channels }) => {
 
   const handleDelete = () => {
     socket.emit('removeChannel', { id });
+    notify('removeChannel')
     handleClose();
   };
   const handleRename = (id, value) => {
     socket.emit('renameChannel', { id, name: value });
+    notify('renameChannel')
   };
 
   return (
@@ -79,7 +89,6 @@ const ChannelsModal = ({ action, name, id, socket, channels }) => {
                       {t('modal.btnCancel')}
                     </Button>
                   </Modal.Footer>
-
                 </Form>
               )}
             </Formik>
