@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Container, Row, Col, Card } from 'react-bootstrap';
@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '../Redux/authSlice';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../Components/AuthContext';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -27,7 +28,7 @@ const SignupSchema = Yup.object().shape({
 const Login = () => {
   const { t } = useTranslation();
   const dispath = useDispatch();
-
+  const { login } = useContext(AuthContext);
   const [show, setShow] = useState(false);
 
   const initialValues = {
@@ -47,6 +48,7 @@ const Login = () => {
       localStorage.setItem('token', token);
       dispath(setData(token))
       navigate('/');
+      login()
     })
       .catch((e) => {
         console.log('отлавливаем ошибку!!!', e);

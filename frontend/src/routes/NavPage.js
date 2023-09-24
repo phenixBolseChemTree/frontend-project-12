@@ -2,20 +2,33 @@ import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '../Redux/authSlice';
 import { useTranslation } from 'react-i18next';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../Components/AuthContext';
 
 
 
 const NavPage = () => {
   const { t } = useTranslation();
-
   const dispatch = useDispatch();
-
   const { data } = useSelector(state => state.app.auth)
-
   const navigate = useNavigate();
+  const { isLoggedIn, logout, login } = useContext(AuthContext);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      login();
+    } else {
+      // тут будет редирект на login
+    }
+  }, [login]);
+
 
   const handleLogout = () => {
     dispatch(setData(null))
+
+    logout()
 
     localStorage.clear();
     navigate('/login');
@@ -30,11 +43,10 @@ const NavPage = () => {
       }}>
         <div className="container">
           <Link to="/" className="navbar-brand">{t('nav.chatName')}</Link>
-
           {/* <Link to="/login" className="navbar-brand">Login</Link>
           <Link to="/signup" className="navbar-brand">Signup</Link> */}
-          <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>
-          {data && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
+          {isLoggedIn && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
+
         </div>
       </nav>
       <div style={{

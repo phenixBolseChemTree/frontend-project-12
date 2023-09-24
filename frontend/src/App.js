@@ -1,16 +1,11 @@
 import {
-  BrowserRouter,
-  Routes,
-  Route,
+  BrowserRouter, Routes, Route,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavPage from './routes/NavPage';
-import Login from './routes/Login';
-import Page404 from './routes/Page404';
-import Chat from './routes/Chat';
-import Signup from './routes/Signup';
 import './App.css'
 import { Provider, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
+import { AuthProvider } from './Components/AuthContext';
+import { NavPage, Chat, Login, Signup, Page404 } from './routes/pages';
 
 const REACT_APP_ROLLBAR_ACCESS_TOKEN = process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN
 const REACT_APP_ENV = process.env.REACT_APP_ENV
@@ -25,16 +20,18 @@ const App = () => {
   return (
     <Provider config={rollbarConfig}>
       <ErrorBoundary>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<NavPage />} >
-              <Route path='/' element={<Chat />} />
-              <Route path='signup' element={<Signup />} />
-              <Route path='login' element={<Login />} />
-              <Route path='*' element={<Page404 />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<NavPage />} >
+                <Route path='/' element={<Chat />} />
+                <Route path='signup' element={<Signup />} />
+                <Route path='login' element={<Login />} />
+                <Route path='*' element={<Page404 />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
       </ErrorBoundary>
     </Provider>
   );

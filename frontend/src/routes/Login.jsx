@@ -4,12 +4,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import img from '../img/hexlet_human/red_flag.jpeg'
 import Alert from 'react-bootstrap/Alert';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '../Redux/authSlice';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../Components/AuthContext';
 
 // const SignupSchema = Yup.object().shape({
 //   name: Yup.string()
@@ -26,6 +27,8 @@ const Login = () => {
   const { t } = useTranslation()
   const dispath = useDispatch();
   const [show, setShow] = useState(false);
+  const { login } = useContext(AuthContext);
+
 
   const initialValues = {
     name: '',
@@ -46,6 +49,7 @@ const Login = () => {
       localStorage.setItem('token', token);
       dispath(setData(token))
       navigate('/');
+      login();
     }
     )
       .catch((e) => {
@@ -90,7 +94,7 @@ const Login = () => {
                       <Alert variant="danger" onClose={() => setShow(false)} dismissible>
                         <Alert.Heading>{t('error.errorText')}</Alert.Heading>
                         <p>
-                        {t('error.AlertUserAlreadyExists')}
+                          {t('error.AlertUserAlreadyExists')}
                         </p>
                       </Alert>
                     }
