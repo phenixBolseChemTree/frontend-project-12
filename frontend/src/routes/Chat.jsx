@@ -7,10 +7,10 @@ import Chanells from '../Components/Chanells';
 import ChatMain from "../Components/ChatMain";
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
-
-
 import io from 'socket.io-client';
 import { useTranslation } from "react-i18next";
+
+
 
 const socket = io.connect("http://localhost:3000/");
 
@@ -73,13 +73,12 @@ const Chat = () => {
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch((e) => {
-      // toast()
       toast(t('toast.networkError'), {
         type: 'danger', position: 'top-right'
       });
     })
 
-  }, [dispatch, token]);
+  }, [dispatch, token, t]);
 
   useEffect(() => {
   }, [
