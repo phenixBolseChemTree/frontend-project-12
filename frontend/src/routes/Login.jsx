@@ -7,8 +7,6 @@ import Alert from 'react-bootstrap/Alert';
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { setData } from '../Redux/authSlice';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../Components/AuthContext';
 
@@ -25,7 +23,6 @@ import { AuthContext } from '../Components/AuthContext';
 
 const Login = () => {
   const { t } = useTranslation()
-  const dispath = useDispatch();
   const [show, setShow] = useState(false);
   const { login } = useContext(AuthContext);
 
@@ -36,10 +33,6 @@ const Login = () => {
   };
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/signup')
-  }
-
   const onSubmit = ({ name, password }) => {
     console.log(name);
     console.log(password);
@@ -47,7 +40,6 @@ const Login = () => {
       const { token } = response.data
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
-      dispath(setData(token))
       navigate('/');
       login();
     }

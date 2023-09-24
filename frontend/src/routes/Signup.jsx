@@ -6,8 +6,6 @@ import img from '../img/hexlet_human/happy_man.jpg'
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { setData } from '../Redux/authSlice';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../Components/AuthContext';
 
@@ -27,7 +25,6 @@ const SignupSchema = Yup.object().shape({
 
 const Login = () => {
   const { t } = useTranslation();
-  const dispath = useDispatch();
   const { login } = useContext(AuthContext);
   const [show, setShow] = useState(false);
 
@@ -46,7 +43,7 @@ const Login = () => {
       console.log('response!!!', response);
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
-      dispath(setData(token))
+      // dispath(setData(token))
       navigate('/');
       login()
     })

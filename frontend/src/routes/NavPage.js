@@ -1,6 +1,4 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setData } from '../Redux/authSlice';
 import { useTranslation } from 'react-i18next';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../Components/AuthContext';
@@ -9,8 +7,6 @@ import { AuthContext } from '../Components/AuthContext';
 
 const NavPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const { data } = useSelector(state => state.app.auth)
   const navigate = useNavigate();
   const { isLoggedIn, logout, login } = useContext(AuthContext);
 
@@ -26,14 +22,11 @@ const NavPage = () => {
 
 
   const handleLogout = () => {
-    dispatch(setData(null))
-
     logout()
 
     localStorage.clear();
     navigate('/login');
   }
-  // console.log('data!!!', data);
 
   return (
     <>
