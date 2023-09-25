@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-const ChannelsModal = ({ action, name, id, socket, channels }) => {
+const ChannelsModal = ({ action, name, id, socket, channels, setSelectedChannel, selectedChannel }) => {
   const { t } = useTranslation('');
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -30,6 +30,11 @@ const ChannelsModal = ({ action, name, id, socket, channels }) => {
     socket.emit('removeChannel', { id });
     notify('removeChannel')
     handleClose();
+    console.log('!!!id', id);
+    console.log('!!!selectedChannel', selectedChannel);
+    if(id === selectedChannel ) { // вы в текущем канале
+      setSelectedChannel(1)
+    }
   };
   const handleRename = (id, value) => {
     socket.emit('renameChannel', { id, name: value });

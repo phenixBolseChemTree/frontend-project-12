@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // import PopUp from '../Components/PopUp';
 
-const CustomModal = ({ socket, chanells }) => {
+const CustomModal = ({ socket, chanells, selectedChannel }) => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
 
@@ -49,7 +49,8 @@ const CustomModal = ({ socket, chanells }) => {
             initialValues={{ channelName: '' }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              socket.emit('newChannel', { name: values.channelName });
+              socket.emit('newChannel', { name: values.channelName })
+              // setSelectedChannel() // понять как найти id
               handleClose();
             }}
           >

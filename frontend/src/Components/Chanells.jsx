@@ -11,7 +11,7 @@ const Chanells = ({ channels, setSelectedChannel, selectedChannel, socket }) => 
       <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
         <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
           <b>{t('chat.channels')}</b>
-          <ModalMakeChannels socket={socket} channels={channels} />
+          <ModalMakeChannels socket={socket} channels={channels} setSelectedChannel={setSelectedChannel} />
         </div>
         <ul className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
           {channels.length !== 0 && channels.map(({ id, name, removable }) => {

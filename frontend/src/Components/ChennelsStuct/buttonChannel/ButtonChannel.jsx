@@ -30,7 +30,7 @@ const ButtonChannel = ({ socket, id, name, setSelectedChannel, selectedChannel, 
             className={buttonClasses} // Примените те же классы к кнопке
             onClick={() => setSelectedChannel(id)}><span className="me-1">#</span>{name}</Button>
           <DropdownButton title="" style={{ color: 'black', background: 'white' }} as={ButtonGroup} id="bg-nested-dropdown">
-            <Dropdown.Item eventKey="1"><ChannelsModal action={'delete'} name={name} id={id} socket={socket} /></Dropdown.Item>
+            <Dropdown.Item eventKey="1"><ChannelsModal action={'delete'} name={name} id={id} socket={socket} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} /></Dropdown.Item>
             <Dropdown.Item eventKey="2"><ChannelsModal action={'rename'} name={name} id={id} socket={socket} channels={channels} /></Dropdown.Item>
           </DropdownButton>
         </ButtonGroup>
