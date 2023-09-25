@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
+import { useSelector } from "react-redux";
 
 
 const currentNameChannel = (channels, id) => {
@@ -21,10 +22,12 @@ const validationSchema = Yup.object().shape({
   textInputForm: Yup.string().required("Введите сообщение..."),
 });
 
-const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
+const ChatMain = ({ socket }) => {
+  const {messages, channels, currentChannelId} = useSelector(state => state.app);
+
   const { t } = useTranslation();
-  const nameChanel = currentNameChannel(channels, selectedChannel);
-  const currentMessages = getCurrentMessages(messages, selectedChannel);
+  const nameChanel = currentNameChannel(channels, currentChannelId);
+  const currentMessages = getCurrentMessages(messages, currentChannelId);
 
   const messageCount = currentMessages.length;
   const messageKey = messageCount === 1 ? 'key_one' : messageCount >= 2 && messageCount <= 4 ? 'key_few' : 'key_many';
@@ -44,7 +47,7 @@ const ChatMain = ({ messages, socket, selectedChannel, channels }) => {
       socket.emit("newMessage", {
         body: validatedText,
         username: localStorage.username,
-        channelId: selectedChannel,
+        channelId: currentChannelId,
       });
       setSubmitting(false); // Разблокировка кнопки отправки
     },
