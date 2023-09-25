@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-const ChannelsModal = ({ action, name, id, socket, channels, setSelectedChannel, selectedChannel }) => {
+const ChannelsModal = ({ action, id, socket }) => {
   const { t } = useTranslation('');
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -30,11 +30,6 @@ const ChannelsModal = ({ action, name, id, socket, channels, setSelectedChannel,
     socket.emit('removeChannel', { id });
     notify('removeChannel')
     handleClose();
-    console.log('!!!id', id);
-    console.log('!!!selectedChannel', selectedChannel);
-    if(id === selectedChannel ) { // вы в текущем канале
-      setSelectedChannel(1)
-    }
   };
   const handleRename = (id, value) => {
     socket.emit('renameChannel', { id, name: value });
@@ -66,7 +61,7 @@ const ChannelsModal = ({ action, name, id, socket, channels, setSelectedChannel,
       {action === 'rename' &&
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{t('modal.renameChannel')} {name}</Modal.Title>
+            <Modal.Title>{t('modal.renameChannel')}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Formik

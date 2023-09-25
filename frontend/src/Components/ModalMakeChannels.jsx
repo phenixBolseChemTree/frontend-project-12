@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // import PopUp from '../Components/PopUp';
 
-const CustomModal = ({ socket, chanells, selectedChannel }) => {
+const CustomModal = ({ socket }) => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
 

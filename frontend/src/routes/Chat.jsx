@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice';
@@ -40,11 +40,7 @@ const getData = (action, dispatch) => {
   );
 };
 
-const INITIAL_CHANNEL = 1
-
 const Chat = () => {
-  const [selectedChannel, setSelectedChannel] = useState(INITIAL_CHANNEL);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector(state => state.app);
@@ -85,12 +81,12 @@ const Chat = () => {
     dispatch, token
   ])
 
-  const { channels, messages, currentChannelId } = chatData;
+  const { channels, messages } = chatData;
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        <Chanells selectedChannel={selectedChannel} setSelectedChannel={setSelectedChannel} channels={channels} socket={socket} />
-        <ChatMain selectedChannel={selectedChannel} messages={messages} socket={socket} channels={channels} />
+        <Chanells channels={channels} socket={socket} />
+        <ChatMain messages={messages} socket={socket} channels={channels} />
         <ToastContainer />
       </div>
     </div>
