@@ -1,5 +1,5 @@
 import { Button, Dropdown, ButtonGroup, DropdownButton } from 'react-bootstrap';
-// import ChannelsModal from '../C÷omponents/ChannelsModal';
+import ChannelsModal from '../Components/ChannelsModal';
 // import ModalDelete from '../Components/modal/ModalDelete'
 // import ModalRename from '../Components/modal/ModalRename'
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,10 +36,10 @@ const ButtonChannel = ({ socket, id, name, removable, channels }) => {
             className={btnClassesPart1} // нужно привязать событие к кнопке Dropdown а не той что в ChannelsModal
             onClick={() => handleSetChannet(id)}><span className="me-1">#</span>{name}</Button>
           <DropdownButton title="" style={{ color: 'black', background: 'white' }} as={ButtonGroup} id="bg-nested-dropdown">
-            {/* <Dropdown.Item eventKey="1"><ModalDelete action={'delete'} id={id} socket={socket} /></Dropdown.Item> */}
-            {/* <Dropdown.Item eventKey="2"><ModalRename action={'rename'} id={id} socket={socket} channels={channels} /></Dropdown.Item> */}
-            {/* <Dropdown.Item eventKey="1"><ChannelsModal action={'delete'} id={id} socket={socket} /></Dropdown.Item>
-            <Dropdown.Item eventKey="2"><ChannelsModal action={'rename'} id={id} socket={socket} channels={channels} /></Dropdown.Item> */}
+            {/* <Dropdown.Item eventKey="1"><ModalDelete id={id} socket={socket} /></Dropdown.Item> */}
+            {/* <Dropdown.Item eventKey="2"><ModalRename id={id} socket={socket} channels={channels} /></Dropdown.Item> */}
+            <Dropdown.Item eventKey="1"><ChannelsModal action={'delete'} id={id} socket={socket} /></Dropdown.Item>
+            <Dropdown.Item eventKey="2"><ChannelsModal action={'rename'} id={id} socket={socket} channels={channels} /></Dropdown.Item>
             <Dropdown.Item eventKey="1">123</Dropdown.Item>
             <Dropdown.Item eventKey="2">321</Dropdown.Item>
           </DropdownButton>

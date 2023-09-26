@@ -5,7 +5,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import ModalRename from '../../../PersonalModal/ModalRename';
 
 const ChannelsModal = ({ action, id, socket }) => {
   const { t } = useTranslation('');

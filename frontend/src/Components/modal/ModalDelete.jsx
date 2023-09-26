@@ -2,7 +2,7 @@ import { Dropdown } from "bootstrap";
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 
-const ModalDelete = ({ socket, id, name }) => {
+const ModalDelete = ({ socket, id}) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -20,7 +20,7 @@ const ModalDelete = ({ socket, id, name }) => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Удалить канал {name}</Modal.Title>
+          <Modal.Title>Удалить канал </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h2>Уверены?</h2>

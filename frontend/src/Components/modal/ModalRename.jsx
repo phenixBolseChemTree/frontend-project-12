@@ -25,11 +25,7 @@ const ModalRename = ({ socket, id, name }) => {
 
   return (
     <>
-      {/* <button variant="primary" onClick={handleShow}>
-        Переименовать
-      </button> */}
       <Dropdown.Item onClick={() => handleShow}>Переименовать : {id}</Dropdown.Item>
-
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
