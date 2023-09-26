@@ -50,7 +50,6 @@ const CustomModal = ({ socket }) => {
             validationSchema={SignupSchema}
             onSubmit={(values) => {
               socket.emit('newChannel', { name: values.channelName })
-              // setSelectedChannel() // понять как найти id
               handleClose();
             }}
           >

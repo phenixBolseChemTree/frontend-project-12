@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import ModalRename from '../../../PersonalModal/ModalRename';
 
 const ChannelsModal = ({ action, id, socket }) => {
   const { t } = useTranslation('');
@@ -53,7 +54,6 @@ const ChannelsModal = ({ action, id, socket }) => {
               {t('modal.btnCancel')}
             </Button>
             <Button
-              autoFocus
               variant="primary"
               onClick={handleDelete}
             >
@@ -84,12 +84,6 @@ const ChannelsModal = ({ action, id, socket }) => {
                       name="channelName"
                       className="form-control"
                       autoFocus
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault(); // Предотвращаем стандартное поведение Enter (избегаем сабмита формы)
-                          handleSubmit(); // Вызываем метод handleSubmit из Formik для отправки формы
-                        }
-                      }}
                       onChange={handleChange} value={values.channelName} />
                     <ErrorMessage name="channelName" component="div" className="text-danger" />
                   </div>

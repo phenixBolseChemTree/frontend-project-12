@@ -1,6 +1,6 @@
 import React from "react";
 import ModalMakeChannels from "./ModalMakeChannels";
-import ButtonChannel from "./ChennelsStuct/buttonChannel/ButtonChannel";
+import ButtonChannel from "./ButtonChannel";
 import { useTranslation } from 'react-i18next';
 
 
