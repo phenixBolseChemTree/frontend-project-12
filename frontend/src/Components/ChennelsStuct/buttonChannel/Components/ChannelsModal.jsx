@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -52,7 +52,11 @@ const ChannelsModal = ({ action, id, socket }) => {
             <Button variant="secondary" onClick={handleClose}>
               {t('modal.btnCancel')}
             </Button>
-            <Button autoFocus variant="primary" onClick={handleDelete}>
+            <Button
+              autoFocus
+              variant="primary"
+              onClick={handleDelete}
+            >
               {t('modal.btnDelete')}
             </Button>
           </Modal.Footer>
@@ -80,6 +84,12 @@ const ChannelsModal = ({ action, id, socket }) => {
                       name="channelName"
                       className="form-control"
                       autoFocus
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault(); // Предотвращаем стандартное поведение Enter (избегаем сабмита формы)
+                          handleSubmit(); // Вызываем метод handleSubmit из Formik для отправки формы
+                        }
+                      }}
                       onChange={handleChange} value={values.channelName} />
                     <ErrorMessage name="channelName" component="div" className="text-danger" />
                   </div>
