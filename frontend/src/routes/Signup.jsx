@@ -9,20 +9,6 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../Components/AuthContext';
 
-const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, 'Минимум 2 буквы')
-    .max(20, 'Максимум 20 букв')
-    .required('Обязательное поле'),
-  password: Yup.string()
-    .min(6, 'Минимум 6 символов')
-    .max(50, 'Максимум 50 символов')
-    .required('Обязательное поле'),
-  passwordRes: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
-    .required('Обязательное поле'),
-});
-
 const Login = () => {
   const { t } = useTranslation();
   const { login } = useContext(AuthContext);
@@ -71,6 +57,8 @@ const Login = () => {
                 onSubmit={onSubmit}
               >
                 <Form>
+                <h1 class="text-center mb-4">{t('login.registration')}</h1>
+
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">{t('signup.userName')}</label>
                     <Field type="text" id="name" name="name" className="form-control" />
