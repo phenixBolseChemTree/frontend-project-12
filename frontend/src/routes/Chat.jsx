@@ -47,12 +47,12 @@ const Chat = () => {
   const { t } = useTranslation();
   const token = localStorage.token;
 
-  useEffect(() => {
-    if (token === undefined) {
-      navigate('/login');
-      return;
-    }
-  })
+  // useEffect(() => {
+  //   if (token === undefined) {
+  //     navigate('/login');
+  //     return;
+  //   }
+  // })
 
   useEffect(() => {
     getData('newMessage', dispatch)
@@ -69,6 +69,7 @@ const Chat = () => {
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch((e) => {
+      navigate('/login');
       toast(t('toast.networkError'), {
         type: 'danger', position: 'top-right'
       });
