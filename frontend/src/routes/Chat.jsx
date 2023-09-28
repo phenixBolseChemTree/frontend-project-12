@@ -10,35 +10,7 @@ import { toast } from 'react-toastify';
 import io from 'socket.io-client';
 import { useTranslation } from "react-i18next";
 
-
-
 const socket = io.connect("http://localhost:3000/");
-
-const getData = (action, dispatch) => {
-  socket.on(action, (payload) => {
-    switch (action) {
-      case 'newMessage':
-        console.log('newMessage', payload);
-        dispatch(setNewMessage(payload));
-        break;
-      case 'newChannel':
-        console.log('newChannel');
-        dispatch(setNewChannel(payload));
-        break;
-      case 'removeChannel':
-        console.log('removeChannel');
-        dispatch(setRemoveChannel(payload));
-        break;
-      case 'renameChannel':
-        console.log('renameChannel');
-        dispatch(setRenameChannel(payload));
-        break;
-      default:
-        return
-    }
-  }
-  );
-};
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -46,20 +18,39 @@ const Chat = () => {
   const chatData = useSelector(state => state.app);
   const { t } = useTranslation();
   const token = localStorage.token;
-
-  // useEffect(() => {
-  //   if (token === undefined) {
-  //     navigate('/login');
-  //     return;
-  //   }
-  // })
-
+  
   useEffect(() => {
-    getData('newMessage', dispatch)
-    getData('newChannel', dispatch)
-    getData('removeChannel', dispatch)
-    getData('renameChannel', dispatch)
-  }, [navigate, token, dispatch]);
+    const getData = (action) => {
+      socket.on(action, (payload) => {
+        switch (action) {
+          case 'newMessage':
+            console.log('newMessage', payload);
+            dispatch(setNewMessage(payload));
+            break;
+          case 'newChannel':
+            console.log('newChannel');
+            dispatch(setNewChannel(payload));
+            break;
+          case 'removeChannel':
+            console.log('removeChannel');
+            dispatch(setRemoveChannel(payload));
+            break;
+          case 'renameChannel':
+            console.log('renameChannel');
+            dispatch(setRenameChannel(payload));
+            break;
+          default:
+            return;
+        }
+      });
+    };
+  
+    getData('newMessage');
+    getData('newChannel');
+    getData('removeChannel');
+    getData('renameChannel');
+  }, [dispatch]);
+  
 
   useEffect(() => {
     axios.get('/api/v1/data', {
@@ -75,7 +66,7 @@ const Chat = () => {
       });
     })
 
-  }, [dispatch, token, t]);
+  }, [dispatch, token, t, navigate]);
 
   useEffect(() => {
   }, [
