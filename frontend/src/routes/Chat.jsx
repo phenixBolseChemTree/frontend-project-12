@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice';
+import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../redux/chatSlice';
 import Channels from '../Components/Сhannels'
-import ChatMain from "../Components/ChatMain";
+import ChatMain from "../Components/ChatView";
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import io from 'socket.io-client';

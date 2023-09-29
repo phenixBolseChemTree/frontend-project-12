@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Dropdown, ButtonGroup, DropdownButton } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentChannelId } from '../Redux/chatSlice';
+import { setCurrentChannelId } from '../redux/chatSlice';
 import MyModal from './СhannelsModal';
 import cn from 'classnames'
 import { useTranslation } from 'react-i18next';
