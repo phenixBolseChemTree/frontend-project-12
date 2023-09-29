@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice'
 import Channels from '../Components/Сhannels'
-import ChatMain from "../Components/ChatView";
+import ChatView from "../Components/ChatView";
 import { ToastContainer } from 'react-toastify';
 import io from 'socket.io-client';
 import { useTranslation } from "react-i18next";
@@ -74,7 +74,7 @@ const Chat = () => {
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
         <Channels channels={channels} socket={socket} />
-        <ChatMain messages={messages} socket={socket} channels={channels} />
+        <ChatView messages={messages} socket={socket} channels={channels} />
         <ToastContainer />
       </div>
     </div>

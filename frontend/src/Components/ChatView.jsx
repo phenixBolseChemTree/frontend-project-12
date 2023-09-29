@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
   textInputForm: Yup.string().required("Введите сообщение..."),
 });
 
-const ChatMain = ({ socket }) => {
+const ChatView = ({ socket }) => {
   const {messages, channels, currentChannelId} = useSelector(state => state.app);
 
   const { t } = useTranslation();
@@ -85,6 +85,7 @@ const ChatMain = ({ socket }) => {
                   : ""
                   }`}
                 placeholder={t('chat.formPlaceholder')}
+                autoFocus
               />
               <button
                 type="submit"
@@ -110,4 +111,4 @@ const ChatMain = ({ socket }) => {
   );
 };
 
-export default ChatMain;
+export default ChatView;
