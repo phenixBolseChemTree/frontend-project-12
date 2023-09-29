@@ -9,24 +9,24 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../Components/AuthContext';
 
-const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, 'Минимум 2 буквы')
-    .max(20, 'Максимум 20 букв')
-    .required('Обязательное поле'),
-  password: Yup.string()
-    .min(6, 'Минимум 6 символов')
-    .max(50, 'Максимум 50 символов')
-    .required('Обязательное поле'),
-  passwordRes: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
-    .required('Обязательное поле'),
-});
-
 const Signup = () => {
   const { t } = useTranslation();
   const { login } = useContext(AuthContext);
   const [show, setShow] = useState(false);
+
+  const SignupSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, t('error.minWord3AndmaxWord20'))
+      .max(20, t('error.minWord3AndmaxWord20'))
+      .required(t('error.requiredField')),
+    password: Yup.string()
+      .min(6, t('error.minCharacters6'))
+      // .max(50, 'Максимум 50 символов')
+      .required(t('error.requiredField')),
+    passwordRes: Yup.string()
+      .oneOf([Yup.ref('password'), null], t('error.samePasswords'))
+      .required(t('error.requiredField')),
+  });
 
   const initialValues = {
     name: '',

@@ -67,9 +67,11 @@ i18n
             minWord3: 'Минимум 3 буквы',
             maxWord20: 'Максимум 20 букв',
             minWord3AndmaxWord20: 'От 3 до 20 символов',
+            minCharacters6: 'Не менее 6 символов',
             minСharacters2: 'Минимум 2 символа',
             maxCharacters50: 'Максимум 50 символов',
-            requiredField: 'Обязательное поле'
+            requiredField: 'Обязательное поле',
+            samePasswords: 'Пароли должны совпадать',
           },
           modal: {
             addChannel: 'Добавить канал',
