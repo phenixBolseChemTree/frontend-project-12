@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice';
-import Chanells from '../Components/Chanells';
+import Channels from '../Components/Сhannels'
 import ChatMain from "../Components/ChatMain";
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
@@ -77,7 +77,7 @@ const Chat = () => {
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        <Chanells channels={channels} socket={socket} />
+        <Channels channels={channels} socket={socket} />
         <ChatMain messages={messages} socket={socket} channels={channels} />
         <ToastContainer />
       </div>

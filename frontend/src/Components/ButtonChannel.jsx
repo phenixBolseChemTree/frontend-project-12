@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { Button, Dropdown, ButtonGroup, DropdownButton } from 'react-bootstrap';
-// import ChannelsModal from '../Components/ChannelsModal';
-// import ModalDelete from '../Components/modal/ModalDelete'
-// import ModalRename from '../Components/modal/ModalRename'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentChannelId } from '../Redux/chatSlice';
-import MyModal from './modal/myModal';
+import MyModal from './СhannelsModal';
 import cn from 'classnames'
 import { useTranslation } from 'react-i18next';
 const ButtonChannel = ({ socket, id, name, removable, channels }) => {
