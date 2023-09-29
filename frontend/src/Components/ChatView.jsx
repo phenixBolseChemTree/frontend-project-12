@@ -66,7 +66,7 @@ const ChatView = ({ socket }) => {
           {messages.length !== 0 &&
             currentMessages.map(({ body, username, id }) => (
               <div className="text-break mb-2" key={id}>
-                <strong>{username}:</strong> {body}
+                <b>{username}</b>: {body}
               </div>
             ))}
         </div>
