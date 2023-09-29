@@ -71,7 +71,7 @@ const Signup = () => {
                 onSubmit={onSubmit}
               >
                 <Form>
-                <h1 class="text-center mb-4">{t('login.registration')}</h1>
+                <h1 className="text-center mb-4">{t('login.registration')}</h1>
 
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">{t('signup.userName')}</label>
