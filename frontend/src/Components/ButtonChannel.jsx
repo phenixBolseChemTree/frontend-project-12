@@ -5,7 +5,7 @@ import { setCurrentChannelId } from '../Redux/chatSlice';
 import MyModal from './СhannelsModal';
 import cn from 'classnames'
 import { useTranslation } from 'react-i18next';
-const ButtonChannel = ({ socket, id, name, removable, channels }) => {
+const ButtonChannel = ({ socket, id, name, removable }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();

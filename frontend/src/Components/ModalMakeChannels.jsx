@@ -6,8 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import PopUp from '../Components/PopUp';
-
 const CustomModal = ({ socket }) => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);

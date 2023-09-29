@@ -17,12 +17,7 @@ const Chanells = ({ channels, socket }) => {
           {channels.length !== 0 && channels.map(({ id, name, removable }) => {
             return (
               <li key={id} className="nav-item w-100">
-                <ButtonChannel
-                  removable={removable}
-                  name={name}
-                  id={id}
-                  socket={socket}
-                  channels={channels}
+                <ButtonChannel removable={removable} name={name} id={id} socket={socket}
                 />
               </li>
             )
