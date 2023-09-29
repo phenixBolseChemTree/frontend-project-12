@@ -63,7 +63,7 @@ i18n
           },
           error: {
             errorText: 'Ошибка',
-            AlertUserAlreadyExists: 'Неверные имя пользователся или пароль',
+            AlertUserAlreadyExists: 'Неверные имя пользователя или пароль',
             minWord3: 'Минимум 3 буквы',
             maxWord20: 'Максимум 20 букв',
             minWord3AndmaxWord20: 'От 3 до 20 символов',
@@ -72,6 +72,7 @@ i18n
             maxCharacters50: 'Максимум 50 символов',
             requiredField: 'Обязательное поле',
             samePasswords: 'Пароли должны совпадать',
+            invalidNameOrPassword : 'Неверные имя пользователя или пароль'
           },
           modal: {
             addChannel: 'Добавить канал',
