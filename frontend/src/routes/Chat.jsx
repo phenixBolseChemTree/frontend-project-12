@@ -2,13 +2,14 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../redux/chatSlice';
+import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice'
 import Channels from '../Components/Сhannels'
 import ChatMain from "../Components/ChatView";
 import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
 import io from 'socket.io-client';
 import { useTranslation } from "react-i18next";
+// import { toast } from 'react-toastify';
+
 
 const socket = io.connect("http://localhost:3000/");
 
@@ -18,7 +19,7 @@ const Chat = () => {
   const chatData = useSelector(state => state.app);
   const { t } = useTranslation();
   const token = localStorage.token;
-  
+
   useEffect(() => {
     const getData = (action) => {
       socket.on(action, (payload) => {
@@ -44,13 +45,13 @@ const Chat = () => {
         }
       });
     };
-  
+
     getData('newMessage');
     getData('newChannel');
     getData('removeChannel');
     getData('renameChannel');
   }, [dispatch]);
-  
+
 
   useEffect(() => {
     axios.get('/api/v1/data', {
@@ -61,17 +62,12 @@ const Chat = () => {
       dispatch(addChatData(response.data));
     }).catch((e) => {
       navigate('/login');
-      toast(t('toast.networkError'), {
-        type: 'danger', position: 'top-right'
-      });
+    //   toast(t('toast.networkError'), { // выводить если долгий запрос
+    //     type: 'danger', position: 'top-right'
+    //   });
     })
 
   }, [dispatch, token, t, navigate]);
-
-  useEffect(() => {
-  }, [
-    dispatch, token
-  ])
 
   const { channels, messages } = chatData;
   return (
