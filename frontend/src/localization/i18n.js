@@ -31,7 +31,8 @@ i18n
               "key_many": "{{count}} сообщений"
             },
             formPlaceholder: 'Введите сообщение...',
-            send: 'Отправить'
+            send: 'Отправить',
+            newMessage: 'Новое сообщение',
           },
           login: {
             come: 'Войти',
