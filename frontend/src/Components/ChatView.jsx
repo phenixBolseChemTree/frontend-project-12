@@ -79,7 +79,8 @@ const ChatView = ({ socket }) => {
                 value={formik.values.textInputForm}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                aria-label={t('chat.newMessage')}
+                // aria-label={t('chat.newMessage')}
+                aria-label="Новое сообщение"
                 className={`border-0 p-0 ps-2 form-control ${formik.touched.textInputForm &&
                   formik.errors.textInputForm
                   ? "is-invalid"
