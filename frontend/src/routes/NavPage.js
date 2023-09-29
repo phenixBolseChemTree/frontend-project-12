@@ -17,7 +17,7 @@ const NavPage = () => {
       login();
     } else {
       // тут будет редирект на login
-      navigate('/login');
+      // navigate('/login');
     }
   }, [login, navigate]);
 

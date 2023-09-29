@@ -23,7 +23,7 @@ const SignupSchema = Yup.object().shape({
     .required('Обязательное поле'),
 });
 
-const Login = () => {
+const Signup = () => {
   const { t } = useTranslation();
   const { login } = useContext(AuthContext);
   const [show, setShow] = useState(false);
@@ -111,4 +111,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -6,7 +6,7 @@ import img from '../img/hexlet_human/red_flag.jpeg'
 import Alert from 'react-bootstrap/Alert';
 import { useState, useContext } from 'react';
 import axios from 'axios';
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../Components/AuthContext';
 
