@@ -1,16 +1,12 @@
-import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Modal, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from 'yup';
-import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 
-const ChannelsModal = ({ action, id, socket, openModal, closeModal }) => {
-  const { t } = useTranslation('');
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+function MyModal({action, socket, id, showModal, closeModal }) {
+  const { t } = useTranslation()
 
   const notify = (textAction) => {
     const texti18 = `toast.${textAction}`;
@@ -26,10 +22,11 @@ const ChannelsModal = ({ action, id, socket, openModal, closeModal }) => {
       .required(''),
   });
 
+
   const handleDelete = () => {
     socket.emit('removeChannel', { id });
     notify('removeChannel')
-    handleClose();
+    closeModal();
   };
   const handleRename = (id, value) => {
     socket.emit('renameChannel', { id, name: value });
@@ -38,14 +35,14 @@ const ChannelsModal = ({ action, id, socket, openModal, closeModal }) => {
 
   return (
     <>
-      {action === 'delete' &&
-        <Modal show={show} onHide={handleClose}>
+      {showModal === 'delete' &&
+        <Modal show={showModal} onHide={closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>{t('modal.removeChannel')}</Modal.Title>
           </Modal.Header>
           <Modal.Body className='lead'>{t('modal.shure')}</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={closeModal}>
               {t('modal.btnCancel')}
             </Button>
             <Button
@@ -57,8 +54,8 @@ const ChannelsModal = ({ action, id, socket, openModal, closeModal }) => {
           </Modal.Footer>
         </Modal>
       }
-      {action === 'rename' &&
-        <Modal show={show} onHide={handleClose}>
+      {showModal === 'rename' &&
+        <Modal show={showModal} onHide={closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>{t('modal.renameChannel')}</Modal.Title>
           </Modal.Header>
@@ -67,7 +64,7 @@ const ChannelsModal = ({ action, id, socket, openModal, closeModal }) => {
               initialValues={{ channelName: '' }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
-                handleClose();
+                closeModal();
               }}
             >
               {({ values, handleChange, handleSubmit }) => (
@@ -84,7 +81,7 @@ const ChannelsModal = ({ action, id, socket, openModal, closeModal }) => {
                   </div>
                   <Modal.Footer>
                     <button onClick={() => handleRename(id, values.channelName)} className="btn btn-primary">{t('modal.btnCreate')}</button>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={closeModal}>
                       {t('modal.btnCancel')}
                     </Button>
                   </Modal.Footer>
@@ -98,5 +95,4 @@ const ChannelsModal = ({ action, id, socket, openModal, closeModal }) => {
   );
 }
 
-
-export default ChannelsModal
+export default MyModal;

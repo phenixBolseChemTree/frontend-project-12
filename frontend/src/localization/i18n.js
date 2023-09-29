@@ -82,8 +82,8 @@ i18n
             formPlaceholder: 'Введите имя канала...',
           },
           dropdownBar: {
-            channels: 'Удалить',
-            newChannel: 'Переименовать'
+            delete: 'Удалить',
+            rename: 'Переименовать'
           },
         }
       }

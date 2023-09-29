@@ -1,11 +1,16 @@
+import { useState } from 'react';
 import { Button, Dropdown, ButtonGroup, DropdownButton } from 'react-bootstrap';
-import ChannelsModal from '../Components/ChannelsModal';
+// import ChannelsModal from '../Components/ChannelsModal';
 // import ModalDelete from '../Components/modal/ModalDelete'
 // import ModalRename from '../Components/modal/ModalRename'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentChannelId } from '../Redux/chatSlice';
+import MyModal from './modal/myModal';
 import cn from 'classnames'
+import { useTranslation } from 'react-i18next';
 const ButtonChannel = ({ socket, id, name, removable, channels }) => {
+  const { t } = useTranslation();
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
   const currentChannelId = useSelector(state => state.app.currentChannelId);
@@ -13,11 +18,20 @@ const ButtonChannel = ({ socket, id, name, removable, channels }) => {
   const btnClassesPart1 = cn('w-100 rounded-0 text-start btn border-0', {
     'bg-secondary text-white': isSelected, // Если selectedChannel === id, добавьте классы для серой кнопки и белого текста
   });
-  // const btnClassesPart2 = 
 
   const handleSetChannet = (id) => {
     dispatch(setCurrentChannelId(id));
   }
+
+  const closeModal = () => {
+    console.log('состояние закрылось');
+    setShowModal(false);
+  };
+
+  const openModal = (action) => {
+    console.log('состояние открылось');
+    setShowModal(action);
+  };
 
   return (
     <>
@@ -30,20 +44,16 @@ const ButtonChannel = ({ socket, id, name, removable, channels }) => {
         </button>
       )}
       {removable && (
-        <ButtonGroup className="d-flex justify-content-start">
+        <><ButtonGroup className="d-flex justify-content-start">
           <Button
             style={{ color: 'black', background: 'white' }}
             className={btnClassesPart1} // нужно привязать событие к кнопке Dropdown а не той что в ChannelsModal
             onClick={() => handleSetChannet(id)}><span className="me-1">#</span>{name}</Button>
           <DropdownButton title="" style={{ color: 'black', background: 'white' }} as={ButtonGroup} id="bg-nested-dropdown">
-            {/* <Dropdown.Item eventKey="1"><ModalDelete id={id} socket={socket} /></Dropdown.Item> */}
-            {/* <Dropdown.Item eventKey="2"><ModalRename id={id} socket={socket} channels={channels} /></Dropdown.Item> */}
-            <Dropdown.Item eventKey="1"><ChannelsModal action={'delete'} id={id} socket={socket} /></Dropdown.Item>
-            <Dropdown.Item eventKey="2"><ChannelsModal action={'rename'} id={id} socket={socket} channels={channels} /></Dropdown.Item>
-            <Dropdown.Item eventKey="1">123</Dropdown.Item>
-            <Dropdown.Item eventKey="2">321</Dropdown.Item>
+            <Dropdown.Item onClick={() => openModal('delete')} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
+            <Dropdown.Item onClick={() => openModal('rename')} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
           </DropdownButton>
-        </ButtonGroup>
+        </ButtonGroup><MyModal socket={socket} id={id} showModal={showModal} closeModal={closeModal} /></>
       )}
     </>
   );
