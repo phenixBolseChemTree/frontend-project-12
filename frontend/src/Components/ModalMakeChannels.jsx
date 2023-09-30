@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 const CustomModal = ({ socket }) => {
   const channels = useSelector(state => state.app.channels);
   const channelNames = channels.map(channel => channel.name);
-  console.log('channelNames!!!', channelNames);
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
 

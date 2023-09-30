@@ -2,11 +2,14 @@ import { Modal, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 
-function MyModal({action, socket, id, showModal, closeModal }) {
+function MyModal({ action, socket, id, showModal, closeModal }) {
   const { t } = useTranslation()
+  const channels = useSelector(state => state.app.channels);
+  const channelNames = channels.map(channel => channel.name);
 
   const notify = (textAction) => {
     const texti18 = `toast.${textAction}`;
@@ -19,6 +22,7 @@ function MyModal({action, socket, id, showModal, closeModal }) {
     channelName: Yup.string()
       .min(3, t('error.minWord3AndmaxWord20'))
       .max(20, t('error.minWord3AndmaxWord20'))
+      .test('is-unique', t('modal.mustBeUnique'), (value) => !channelNames.includes(value))
       .required(''),
   });
 
@@ -75,7 +79,6 @@ function MyModal({action, socket, id, showModal, closeModal }) {
                       id="channelName"
                       name="channelName"
                       className="form-control"
-                      autoFocus
                       onChange={handleChange} value={values.channelName} />
                     <ErrorMessage name="channelName" component="div" className="text-danger" />
                   </div>
