@@ -4,9 +4,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
 
 const CustomModal = ({ socket }) => {
+  const channels = useSelector(state => state.app.channels);
+  const channelNames = channels.map(channel => channel.name);
+  console.log('channelNames!!!', channelNames);
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
 
@@ -22,6 +25,7 @@ const CustomModal = ({ socket }) => {
     channelName: Yup.string()
       .min(3, t('error.minWord3AndmaxWord20'))
       .max(20, t('error.minWord3AndmaxWord20'))
+      .test('is-unique', t('modal.mustBeUnique'), (value) => !channelNames.includes(value))
       .required(''),
   });
 
