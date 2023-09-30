@@ -43,10 +43,10 @@ const ButtonChannel = ({ socket, id, name, removable }) => {
       {removable && (
         <><ButtonGroup className="d-flex justify-content-start">
           <Button
-            style={{ color: 'black', background: 'white' }}
+            style={{ color: 'black', background: '#f8f9fa' }}
             className={btnClassesPart1} // нужно привязать событие к кнопке Dropdown а не той что в ChannelsModal
             onClick={() => handleSetChannet(id)}><span className="me-1">#</span>{name}</Button>
-          <DropdownButton title="" style={{ color: 'black', background: 'white' }} as={ButtonGroup} id="bg-nested-dropdown">
+          <DropdownButton variant={isSelected ? 'secondary' : ''} title="" style={{ color: 'black', background: '#f8f9fa' }} as={ButtonGroup} id="bg-nested-dropdown">
             <Dropdown.Item onClick={() => openModal('delete')} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
             <Dropdown.Item onClick={() => openModal('rename')} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
           </DropdownButton>
