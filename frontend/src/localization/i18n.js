@@ -81,6 +81,7 @@ i18n
             renameChannel: 'Переименовать канал',
             btnCreate: 'Cоздать',
             btnCancel: 'Отменить',
+            btnSend: 'Отправить',
             btnDelete: 'Удалить',
             shure: 'Уверены?',
             formPlaceholder: 'Введите имя канала...',

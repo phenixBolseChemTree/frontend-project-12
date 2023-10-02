@@ -71,10 +71,10 @@ const CustomModal = ({ socket }) => {
                   <ErrorMessage name="channelName" component="div" className="text-danger" />
                 </div>
                 <Modal.Footer>
-                  <button type="submit" onClick={() => notify('addChannel')} className="btn btn-primary">{t('modal.btnCreate')}</button>
                   <Button variant="secondary" onClick={handleClose}>
                     {t('modal.btnCancel')}
                   </Button>
+                  <Button type="submit" onClick={() => notify('addChannel')} className="btn btn-primary">{t('modal.btnSend')}</Button>
                 </Modal.Footer>
               </Form>
             )}
