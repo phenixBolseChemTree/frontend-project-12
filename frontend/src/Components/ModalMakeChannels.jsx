@@ -11,6 +11,8 @@ const CustomModal = ({ socket }) => {
   const channelNames = channels.map(channel => channel.name);
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
 
   const notify = (textAction) => {
     const texti18 = `toast.${textAction}`;
@@ -50,7 +52,8 @@ const CustomModal = ({ socket }) => {
             initialValues={{ channelName: '' }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              socket.emit('newChannel', { name: values.channelName })
+              setIsButtonDisabled(true); // Блокируем кнопку
+              socket.emit('newChannel', { name: values.channelName });
               handleClose();
             }}
           >
