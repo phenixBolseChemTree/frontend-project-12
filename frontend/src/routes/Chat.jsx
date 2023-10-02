@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice'
-import Channels from '../Components/Сhannels'
-import ChatView from "../Components/ChatView";
+import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../redux/chatSlice'
+import Channels from "../components/Сhannels"
+import ChatView from "../components/ChatView";
 import { ToastContainer } from 'react-toastify';
 import io from 'socket.io-client';
 import { useTranslation } from "react-i18next";
@@ -62,9 +62,9 @@ const Chat = () => {
       dispatch(addChatData(response.data));
     }).catch((e) => {
       navigate('/login');
-    //   toast(t('toast.networkError'), { // выводить если долгий запрос
-    //     type: 'danger', position: 'top-right'
-    //   });
+      //   toast(t('toast.networkError'), { // выводить если долгий запрос
+      //     type: 'danger', position: 'top-right'
+      //   });
     })
 
   }, [dispatch, token, t, navigate]);

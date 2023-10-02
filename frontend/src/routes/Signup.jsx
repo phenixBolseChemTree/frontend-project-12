@@ -7,7 +7,7 @@ import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../Components/AuthContext';
+import { AuthContext } from '../components/AuthContext';
 
 const Signup = () => {
   const { t } = useTranslation();
@@ -71,12 +71,13 @@ const Signup = () => {
                 onSubmit={onSubmit}
               >
                 <Form>
-                <h1 className="text-center mb-4">{t('login.registration')}</h1>
+                  <h1 className="text-center mb-4">{t('login.registration')}</h1>
 
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">{t('signup.userName')}</label>
                     <Field type="text" id="name" name="name" className="form-control" />
                     <ErrorMessage name="name" component="div" className="text-danger" />
+
                   </div>
 
                   <div className="mb-3">

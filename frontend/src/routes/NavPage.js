@@ -1,7 +1,7 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useContext, useEffect } from 'react';
-import { AuthContext } from '../Components/AuthContext';
+import { AuthContext } from '../components/AuthContext';
 
 
 

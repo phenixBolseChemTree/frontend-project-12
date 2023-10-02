@@ -4,7 +4,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { Provider, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
-import { AuthProvider } from './Components/AuthContext';
+import { AuthProvider } from './components/AuthContext';
 import { NavPage, Chat, Login, Signup, Page404 } from './routes/pages';
 
 const REACT_APP_ROLLBAR_ACCESS_TOKEN = process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN
