@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const ChatView = ({ socket }) => {
-  const {messages, channels, currentChannelId} = useSelector(state => state.app);
+  const { messages, channels, currentChannelId } = useSelector(state => state.app);
 
   const { t } = useTranslation();
   const nameChanel = currentNameChannel(channels, currentChannelId);

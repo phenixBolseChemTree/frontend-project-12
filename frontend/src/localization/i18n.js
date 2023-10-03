@@ -26,9 +26,9 @@ i18n
           chat: {
             channels: 'Каналы',
             messages: {
-              "key_one": "{{count}} сообщение",
-              "key_few": "{{count}} сообщения",
-              "key_many": "{{count}} сообщений"
+              key_one: '{{count}} сообщение',
+              key_few: '{{count}} сообщения',
+              key_many: '{{count}} сообщений',
             },
             formPlaceholder: 'Введите сообщение...',
             send: 'Отправить',
@@ -40,27 +40,27 @@ i18n
             password: 'Пароль',
             noAccount: 'Нет аккаунта?',
             registration: 'Регистрация',
-            btnSend: 'Отправить'
+            btnSend: 'Отправить',
           },
           signup: {
             registration: 'Регистрация',
             userName: 'Имя пользователя',
             password: 'Пароль',
             resPassword: 'Подтвердите пароль',
-            btnRegistration: 'Зарегестрироваться'
+            btnRegistration: 'Зарегестрироваться',
           },
           error404Page: {
             pageIsNotFound: 'Страница не найдена',
             ButYouCanMoveOn: 'Но вы можете перейти',
             onMainPage: 'на главную страницу',
             resPassword: 'Подтвердите пароль',
-            btnRegistration: 'Зарегестрироваться'
+            btnRegistration: 'Зарегестрироваться',
           },
           toast: {
             addChannel: 'Канал создан',
             removeChannel: 'Канал удалён',
             renameChannel: 'Канал переименован',
-            'networkError': 'Ошибка сети'
+            networkError: 'Ошибка сети',
           },
           error: {
             errorText: 'Ошибка',
@@ -73,7 +73,7 @@ i18n
             maxCharacters50: 'Максимум 50 символов',
             requiredField: 'Обязательное поле',
             samePasswords: 'Пароли должны совпадать',
-            invalidNameOrPassword : 'Неверные имя пользователя или пароль'
+            invalidNameOrPassword: 'Неверные имя пользователя или пароль',
           },
           modal: {
             addChannel: 'Добавить канал',
@@ -89,11 +89,11 @@ i18n
           },
           dropdownBar: {
             delete: 'Удалить',
-            rename: 'Переименовать'
+            rename: 'Переименовать',
           },
-        }
-      }
-    }
+        },
+      },
+    },
   });
 
 export default i18n;
