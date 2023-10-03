@@ -43,7 +43,6 @@ const Signup = () => {
       console.log('response!!!', response);
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
-      // dispath(setData(token))
       navigate('/');
       login()
     })
