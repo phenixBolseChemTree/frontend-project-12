@@ -7,7 +7,7 @@ import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../components/AuthContext';
+import { AuthContext } from '../сomponents/AuthContext';
 
 const Signup = () => {
   const { t } = useTranslation();

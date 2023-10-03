@@ -8,7 +8,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 // import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../components/AuthContext';
+import { AuthContext } from '../сomponents/AuthContext';
 
 // const SignupSchema = Yup.object().shape({
 //   name: Yup.string()

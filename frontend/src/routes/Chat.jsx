@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice'
-import Channels from "../components/Сhannels"
-import ChatView from "../components/ChatView";
+import Channels from "../сomponents/Сhannels"
+import ChatView from "../сomponents/ChatView";
 import { ToastContainer } from 'react-toastify';
 import io from 'socket.io-client';
 import { useTranslation } from "react-i18next";
