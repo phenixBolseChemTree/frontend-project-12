@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from 'react-i18next';
@@ -33,16 +33,6 @@ const ChatView = ({ socket }) => {
   const messageKey = messageCount === 1 ? 'key_one' : messageCount >= 2 && messageCount <= 4 ? 'key_few' : 'key_many';
   const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
 
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleEnterKeyPress);
-
-    return () => {
-      window.removeEventListener('keydown', handleEnterKeyPress);
-    };
-  }, []);
-
-
   const formik = useFormik({
     initialValues: {
       textInputForm: "",
@@ -64,11 +54,21 @@ const ChatView = ({ socket }) => {
     },
   });
 
-  const handleEnterKeyPress = (event) => {
+  const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      formik.submitForm()
+      // Reset the form values when Enter key is pressed
+      formik.resetForm();
     }
   };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []); // Empty dependency array ensures this effect runs once on mount
 
 
   return (
