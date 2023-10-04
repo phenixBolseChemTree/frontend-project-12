@@ -39,11 +39,10 @@ const ChatView = ({ socket }) => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-
-      resetForm()
+      console.log('values!!!', values);
 
       filter.loadDictionary('ru');
-      const validatedText = filter.clean(values.textInputForm);
+      const validatedText = filter.clean(values.textInputForm); // фильтруем текст
 
       socket.emit("newMessage", {
         body: validatedText,
@@ -51,15 +50,10 @@ const ChatView = ({ socket }) => {
         channelId: currentChannelId,
       });
       setSubmitting(false); // Разблокировка кнопки отправки
+
+      resetForm()
     },
   });
-
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      // Reset the form values when Enter key is pressed
-      formik.resetForm();
-    }
-  };
 
   return (
     <div className="col p-0 h-100">
@@ -67,7 +61,6 @@ const ChatView = ({ socket }) => {
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
             <b># {nameChanel}</b>
-            <a>hello</a>
           </p>
           <span className="text-muted">{messageText}</span>
         </div>
