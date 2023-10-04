@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import filter from 'leo-profanity';
+// import filter from 'leo-profanity';
 import { useSelector } from 'react-redux';
 // import {
 //   setNewMessage,
@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
   textInputForm: Yup.string().required('Введите сообщение...'),
 });
 
-const ChatView = ({ socket }) => {
+const ChatView = () => {
   const { messages, channels, currentChannelId } = useSelector((state) => state.app);
 
   const { t } = useTranslation();
@@ -51,36 +51,38 @@ const ChatView = ({ socket }) => {
 
   // const dispatch = useDispatch();
 
-  const [isEnterSubmitted, setIsEnterSubmitted] = useState();
+  const [isEnterSubmitted] = useState();
 
   const formik = useFormik({
     initialValues: {
       textInputForm: '',
     },
     validationSchema,
-    onSubmit: async (values, { resetForm, setSubmitting }) => {
-      console.log('values!!!', values);
+    onSubmit: async () => {
 
-      setIsEnterSubmitted(values);
+      // values, { resetForm, setSubmitting }
+      // console.log('values!!!', values);
 
-      filter.loadDictionary('ru');
-      const validatedText = filter.clean(values.textInputForm); // фильтруем текст
+      // setIsEnterSubmitted(values);
 
-      socket.emit('newMessage', {
-        body: validatedText,
-        username: localStorage.username,
-        channelId: currentChannelId,
-      });
+      // filter.loadDictionary('ru');
+      // const validatedText = filter.clean(values.textInputForm); // фильтруем текст
 
-      // dispatch(setNewMessage({
+      // socket.emit('newMessage', {
       //   body: validatedText,
       //   username: localStorage.username,
       //   channelId: currentChannelId,
-      // }));
+      // });
 
-      setSubmitting(false); // Разблокировка кнопки отправки
+      // // dispatch(setNewMessage({
+      // //   body: validatedText,
+      // //   username: localStorage.username,
+      // //   channelId: currentChannelId,
+      // // }));
 
-      resetForm();
+      // setSubmitting(false); // Разблокировка кнопки отправки
+
+      // resetForm();
     },
   });
 
