@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 
 const CustomModal = ({ socket }) => {
-  const channels = useSelector(state => state.app.channels);
-  const channelNames = channels.map(channel => channel.name);
+  const channels = useSelector((state) => state.app.channels);
+  const channelNames = channels.map((channel) => channel.name);
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
+  // const [__, setIsButtonDisabled] = useState(false);
 
   const notify = (textAction) => {
     const texti18 = `toast.${textAction}`;
     toast(t(texti18), {
-      type: 'success', position: 'top-right'
+      type: 'success', position: 'top-right',
     });
-  }
-
+  };
 
   const SignupSchema = Yup.object().shape({
     channelName: Yup.string()
@@ -37,11 +37,12 @@ const CustomModal = ({ socket }) => {
     <>
       <button type="button" className="p-0 text-primary btn btn-group-vertical" onClick={handleShow}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
-          <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"></path>
-          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path></svg>
+          <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+
+        </svg>
         <span className="visually-hidden">+</span>
       </button>
-
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -52,7 +53,6 @@ const CustomModal = ({ socket }) => {
             initialValues={{ channelName: '' }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              setIsButtonDisabled(true); // Блокируем кнопку
               socket.emit('newChannel', { name: values.channelName });
               handleClose();
             }}
@@ -67,7 +67,9 @@ const CustomModal = ({ socket }) => {
                     className="form-control"
                     autoFocus
                     placeholder={t('modal.formPlaceholder')}
-                    onChange={handleChange} value={values.channelName} />
+                    onChange={handleChange}
+                    value={values.channelName}
+                  />
                   <ErrorMessage name="channelName" component="div" className="text-danger" />
                 </div>
                 <Modal.Footer>
@@ -82,6 +84,6 @@ const CustomModal = ({ socket }) => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 export default CustomModal;

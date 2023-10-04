@@ -1,13 +1,17 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import img from '../assets/happy_man.jpg';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
+import {
+  Container, Row, Col, Card,
+} from 'react-bootstrap';
 
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import img from '../assets/happy_man.jpg';
 import { AuthContext } from '../сomponents/AuthContext';
 
 const Signup = () => {
@@ -40,17 +44,17 @@ const Signup = () => {
     console.log(name);
     console.log(password);
     axios.post('/api/v1/signup', { username: String(name), password: String(password) }).then((response) => {
-      const { token } = response.data
+      const { token } = response.data;
       console.log('response!!!', response);
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
       navigate('/');
-      login()
+      login();
     })
       .catch((e) => {
         console.log('отлавливаем ошибку!!!', e);
-        setShow(true)
-      })
+        setShow(true);
+      });
   };
   return (
     <Container className="mt-5">
@@ -92,15 +96,16 @@ const Signup = () => {
                     <ErrorMessage name="passwordRes" component="div" className="text-danger" />
                   </div>
 
-                  {show &&
-                    <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-                      <Alert.Heading>Ошибка!</Alert.Heading>
-                      <p>
-                        Такой пользователь уже существует
-                        {t('error.errorText')}
-                      </p>
-                    </Alert>
-                  }
+                  {show
+                    && (
+                      <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                        <Alert.Heading>Ошибка!</Alert.Heading>
+                        <p>
+                          Такой пользователь уже существует
+                          {t('error.errorText')}
+                        </p>
+                      </Alert>
+                    )}
                   <button type="submit" className="btn btn-primary">Отправить</button>
                 </Form>
               </Formik>

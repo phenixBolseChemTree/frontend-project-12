@@ -1,30 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import img from '../assets/red_flag.jpeg'
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
+import {
+  Container, Row, Col, Card,
+} from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
-// import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import img from '../assets/red_flag.jpeg';
 import { AuthContext } from '../сomponents/AuthContext';
 
-// const SignupSchema = Yup.object().shape({
-//   name: Yup.string()
-//     .min(3, t('error.minWord3'))
-//     .max(20, t('error.maxWord20'))
-//     .required('Обязательное поле'),
-//   password: Yup.string()
-//     .min(3, t('error.minСharacters2'))
-//     .max(50, 'Максимум 50 символов')
-//     .required('Обязательное поле'),
-// });
-
 const Login = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [show, setShow] = useState(false);
   const { login } = useContext(AuthContext);
-
 
   const initialValues = {
     name: '',
@@ -36,17 +27,16 @@ const Login = () => {
     console.log(name);
     console.log(password);
     axios.post('/api/v1/login', { username: String(name), password: String(password) }).then((response) => {
-      const { token } = response.data
+      const { token } = response.data;
       localStorage.setItem('username', name);
       localStorage.setItem('token', token);
       navigate('/');
       login();
-    }
-    )
+    })
       .catch((e) => {
         console.log('отлавливаем ошибку!!!', e);
-        setShow(true)
-      })
+        setShow(true);
+      });
   };
   return (
     <Container className="mt-5">
@@ -81,14 +71,15 @@ const Login = () => {
                       <ErrorMessage name="password" component="div" className="text-danger" />
                     </div>
 
-                    {show &&
-                      <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-                        <Alert.Heading>{t('error.errorText')}</Alert.Heading>
-                        <p>
-                          {t('error.AlertUserAlreadyExists')}
-                        </p>
-                      </Alert>
-                    }
+                    {show
+                      && (
+                        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                          <Alert.Heading>{t('error.errorText')}</Alert.Heading>
+                          <p>
+                            {t('error.AlertUserAlreadyExists')}
+                          </p>
+                        </Alert>
+                      )}
 
                     <button type="submit" className="btn btn-primary">{t('login.btnSend')}</button>
                   </Form>
@@ -97,7 +88,9 @@ const Login = () => {
             </Card.Body>
             <Card.Footer className="p-4">
               <div className="text-center">
-                <span>{t('login.noAccount')}</span> <a href="/signup">{t('login.registration')}</a>
+                <span>{t('login.noAccount')}</span>
+                {' '}
+                <a href="/signup">{t('login.registration')}</a>
               </div>
             </Card.Footer>
           </Card>

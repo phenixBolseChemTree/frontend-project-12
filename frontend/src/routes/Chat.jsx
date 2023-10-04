@@ -1,24 +1,25 @@
-import axios from "axios";
-import React, { useEffect } from "react";
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData } from '../Redux/chatSlice'
-import Channels from "../сomponents/Сhannels"
-import ChatView from "../сomponents/ChatView";
 import { ToastContainer } from 'react-toastify';
 import io from 'socket.io-client';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
+import {
+  setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData,
+} from '../Redux/chatSlice';
+import Channels from '../сomponents/Сhannels';
+import ChatView from '../сomponents/ChatView';
 // import { toast } from 'react-toastify';
 
-
-const socket = io.connect("http://localhost:3000/");
+const socket = io.connect('http://localhost:3000/');
 
 const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const chatData = useSelector(state => state.app);
+  const chatData = useSelector((state) => state.app);
   const { t } = useTranslation();
-  const token = localStorage.token;
+  const { token } = localStorage;
 
   useEffect(() => {
     const getData = (action) => {
@@ -41,7 +42,6 @@ const Chat = () => {
             dispatch(setRenameChannel(payload));
             break;
           default:
-            return;
         }
       });
     };
@@ -52,7 +52,6 @@ const Chat = () => {
     getData('renameChannel');
   }, [dispatch]);
 
-
   useEffect(() => {
     axios.get('/api/v1/data', {
       headers: {
@@ -60,13 +59,12 @@ const Chat = () => {
       },
     }).then((response) => {
       dispatch(addChatData(response.data));
-    }).catch((e) => {
+    }).catch(() => {
       navigate('/login');
       //   toast(t('toast.networkError'), { // выводить если долгий запрос
       //     type: 'danger', position: 'top-right'
       //   });
-    })
-
+    });
   }, [dispatch, token, t, navigate]);
 
   const { channels, messages } = chatData;
@@ -79,6 +77,6 @@ const Chat = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Chat
+export default Chat;
