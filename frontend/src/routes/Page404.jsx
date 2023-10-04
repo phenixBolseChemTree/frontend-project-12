@@ -1,14 +1,10 @@
 
-import img from '../img/error_404/404_1.jpeg';
-// import img from '../img/hexlet_human/error_404.jsx'
+import img from '../assets/error_404.jpeg';
 
 import { useTranslation } from "react-i18next";
 
 const Page404 = () => {
   const { t } = useTranslation();
-  // const images = [img1, img2, img3, img4, img5, img6];
-  // const randIndx = Math.floor(Math.random() * images.length)
-
   return (
     <>
       <div className='text-center'>

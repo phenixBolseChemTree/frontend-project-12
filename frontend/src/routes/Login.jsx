@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import img from '../img/hexlet_human/red_flag.jpeg'
+import img from '../assets/red_flag.jpeg'
 import Alert from 'react-bootstrap/Alert';
 import { useState, useContext } from 'react';
 import axios from 'axios';
