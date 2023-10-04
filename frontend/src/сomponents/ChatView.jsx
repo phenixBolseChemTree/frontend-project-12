@@ -67,6 +67,7 @@ const ChatView = ({ socket }) => {
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
             <b># {nameChanel}</b>
+            <a>hello</a>
           </p>
           <span className="text-muted">{messageText}</span>
         </div>
