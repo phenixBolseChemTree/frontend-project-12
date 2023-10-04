@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 import { useSelector } from 'react-redux';
+// import {
+//   setNewMessage,
+// } from '../Redux/chatSlice';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
@@ -46,6 +49,10 @@ const ChatView = ({ socket }) => {
 
   const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
 
+  // const dispatch = useDispatch();
+
+  const [isEnterSubmitted, setIsEnterSubmitted] = useState();
+
   const formik = useFormik({
     initialValues: {
       textInputForm: '',
@@ -53,6 +60,8 @@ const ChatView = ({ socket }) => {
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       console.log('values!!!', values);
+
+      setIsEnterSubmitted(values);
 
       filter.loadDictionary('ru');
       const validatedText = filter.clean(values.textInputForm); // фильтруем текст
@@ -62,6 +71,13 @@ const ChatView = ({ socket }) => {
         username: localStorage.username,
         channelId: currentChannelId,
       });
+
+      // dispatch(setNewMessage({
+      //   body: validatedText,
+      //   username: localStorage.username,
+      //   channelId: currentChannelId,
+      // }));
+
       setSubmitting(false); // Разблокировка кнопки отправки
 
       resetForm();
@@ -93,7 +109,9 @@ const ChatView = ({ socket }) => {
                 :
                 {' '}
                 {body}
+                {JSON.stringify(isEnterSubmitted)}
               </div>
+
             ))}
         </div>
         <div className="mt-auto px-5 py-3">
