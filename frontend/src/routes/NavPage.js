@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useContext, useEffect } from 'react';
 import { AuthContext } from '../сomponents/AuthContext';
-
-
 
 const NavPage = () => {
   const { t } = useTranslation();
@@ -22,20 +19,22 @@ const NavPage = () => {
     }
   }, [login, navigate]);
 
-
   const handleLogout = () => {
-    logout()
+    logout();
 
     localStorage.clear();
     navigate('/login');
-  }
+  };
 
   return (
     <>
-      <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white" style={{
-        position: 'fixed',
-        width: '100%',
-      }}>
+      <nav
+        className="shadow-sm navbar navbar-expand-lg navbar-light bg-white"
+        style={{
+          position: 'fixed',
+          width: '100%',
+        }}
+      >
         <div className="container">
           <Link to="/" className="navbar-brand">{t('nav.chatName')}</Link>
           {/* <Link to="/login" className="navbar-brand">Login</Link>
@@ -46,12 +45,13 @@ const NavPage = () => {
       </nav>
       <div style={{
         paddingTop: 50,
-        height: '100%'
-      }}>
+        height: '100%',
+      }}
+      >
         <Outlet />
       </div>
     </>
-  )
-}
+  );
+};
 
 export default NavPage;

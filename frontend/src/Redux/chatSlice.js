@@ -10,37 +10,39 @@ const chatSlice = createSlice({
   reducers: {
     setCurrentChannelId: (state, action) => {
       console.log('action!!! этот id выбран', action.payload);
-      return { ...state, currentChannelId: action.payload }
+      return { ...state, currentChannelId: action.payload };
     },
-    addChatData: (state, action) => {
-      return action.payload;
-    },
+    addChatData: (state, action) => action.payload,
     setNewMessage: (state, action) => {
       console.log('action!!!', action.payload);
-      return { ...state, messages: [...state.messages, action.payload] }
+      return { ...state, messages: [...state.messages, action.payload] };
     },
     setNewChannel: (state, action) => {
       console.log('action!!!', action.payload);
-      return { ...state, channels: [...state.channels, action.payload], currentChannelId: action.payload.id };
+      return {
+        ...state,
+        channels: [...state.channels, action.payload],
+        currentChannelId: action.payload.id,
+      };
     },
     setRemoveChannel: (state, action) => {
       console.log('action!!!', action.payload);
-      const newChannels = state.channels.filter((channel) => {
-        return channel.id !== action.payload.id; // Возвращаем true для сохранения элемента, false для удаления
-      });
+      const newChannels = state.channels.filter(
+        (channel) => channel.id !== action.payload.id
+        , // Возвращаем true для сохранения элемента, false для удаления
+      );
 
       if (state.currentChannelId !== action.payload.id) {
         return { ...state, channels: [...newChannels] };
-      } else {
-        return { ...state, channels: [...newChannels], currentChannelId: 1 };
       }
+      return { ...state, channels: [...newChannels], currentChannelId: 1 };
     },
     setRenameChannel: (state, action) => {
       const { id, name } = action.payload;
       const updatedChannels = state.channels.map((channel) => {
         if (channel.id === id) {
-          return { ...channel, name: name };
-        } else { return channel }
+          return { ...channel, name };
+        } return channel;
       });
 
       return { ...state, channels: [...updatedChannels] };
@@ -48,5 +50,12 @@ const chatSlice = createSlice({
   },
 });
 
-export const { addChatData, setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, setCurrentChannelId } = chatSlice.actions;
+export const {
+  addChatData,
+  setNewMessage,
+  setNewChannel,
+  setRemoveChannel,
+  setRenameChannel,
+  setCurrentChannelId,
+} = chatSlice.actions;
 export default chatSlice.reducer;

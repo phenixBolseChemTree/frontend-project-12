@@ -1,4 +1,5 @@
 
+import React from 'react'
 import img from '../assets/error_404.jpeg';
 
 import { useTranslation } from "react-i18next";
