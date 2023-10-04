@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from 'react-i18next';
@@ -60,16 +60,6 @@ const ChatView = ({ socket }) => {
       formik.resetForm();
     }
   };
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyPress);
-
-    // Remove the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress);
-    };
-  }, []); // Empty dependency array ensures this effect runs once on mount
-
 
   return (
     <div className="col p-0 h-100">
