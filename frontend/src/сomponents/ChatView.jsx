@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from 'react-i18next';
@@ -33,12 +33,23 @@ const ChatView = ({ socket }) => {
   const messageKey = messageCount === 1 ? 'key_one' : messageCount >= 2 && messageCount <= 4 ? 'key_few' : 'key_many';
   const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
 
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleEnterKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleEnterKeyPress);
+    };
+  }, []);
+
+
   const formik = useFormik({
     initialValues: {
       textInputForm: "",
     },
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
+
       resetForm()
 
       filter.loadDictionary('ru');
@@ -52,6 +63,13 @@ const ChatView = ({ socket }) => {
       setSubmitting(false); // Разблокировка кнопки отправки
     },
   });
+
+  const handleEnterKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      formik.submitForm()
+    }
+  };
+
 
   return (
     <div className="col p-0 h-100">
