@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-// import filter from 'leo-profanity';
-import { useSelector } from 'react-redux';
-// import {
-//   setNewMessage,
-// } from '../Redux/chatSlice';
+import filter from 'leo-profanity';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setNewMessage,
+} from '../Redux/chatSlice';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
   textInputForm: Yup.string().required('Введите сообщение...'),
 });
 
-const ChatView = () => {
+const ChatView = ({ socket }) => {
   const { messages, channels, currentChannelId } = useSelector((state) => state.app);
 
   const { t } = useTranslation();
@@ -49,40 +49,35 @@ const ChatView = () => {
 
   const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
 
-  // const dispatch = useDispatch();
-
-  const [isEnterSubmitted] = useState();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
       textInputForm: '',
     },
     validationSchema,
-    onSubmit: async () => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      console.log('values!!!', values);
 
-      // values, { resetForm, setSubmitting }
-      // console.log('values!!!', values);
+      filter.loadDictionary('ru');
+      const validatedText = filter.clean(values.textInputForm); // фильтруем текст
 
-      // setIsEnterSubmitted(values);
+      socket.emit('newMessage', {
+        body: validatedText,
+        username: localStorage.username,
+        channelId: currentChannelId,
+      });
 
-      // filter.loadDictionary('ru');
-      // const validatedText = filter.clean(values.textInputForm); // фильтруем текст
+      dispatch(setNewMessage({
+        body: validatedText,
+        username: localStorage.username,
+        channelId: currentChannelId,
+        id: messages.length,
+      }));
 
-      // socket.emit('newMessage', {
-      //   body: validatedText,
-      //   username: localStorage.username,
-      //   channelId: currentChannelId,
-      // });
+      setSubmitting(false); // Разблокировка кнопки отправки
 
-      // // dispatch(setNewMessage({
-      // //   body: validatedText,
-      // //   username: localStorage.username,
-      // //   channelId: currentChannelId,
-      // // }));
-
-      // setSubmitting(false); // Разблокировка кнопки отправки
-
-      // resetForm();
+      resetForm();
     },
   });
 
@@ -111,7 +106,6 @@ const ChatView = () => {
                 :
                 {' '}
                 {body}
-                {JSON.stringify(isEnterSubmitted)}
               </div>
 
             ))}

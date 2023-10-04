@@ -9,7 +9,7 @@ import {
   setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData,
 } from '../Redux/chatSlice';
 import Channels from '../сomponents/Сhannels';
-import ChatView from '../сomponents/ChatView';
+import ChatView from '../сomponents/Chat';
 // import { toast } from 'react-toastify';
 
 const socket = io.connect('http://localhost:3000/');
@@ -27,7 +27,7 @@ const Chat = () => {
         switch (action) {
           case 'newMessage':
             console.log('newMessage', payload);
-            if (localStorage.username === payload.username) {
+            if (localStorage.username !== payload.username) {
               dispatch(setNewMessage(payload));
             }
 
