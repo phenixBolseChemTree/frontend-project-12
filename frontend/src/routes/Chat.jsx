@@ -6,15 +6,15 @@ import { ToastContainer } from 'react-toastify';
 import io from 'socket.io-client';
 import { useTranslation } from 'react-i18next';
 import {
-  setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, addChatData,
+  addChatData, setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
 } from '../Redux/chatSlice';
 import Channels from '../сomponents/Сhannels';
 import ChatView from '../сomponents/Chat';
-// import { toast } from 'react-toastify';
 
 const socket = io.connect('http://localhost:3000/');
 
 const Chat = () => {
+  console.log('!!!rerenderChat');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.app);
