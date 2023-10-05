@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import io from 'socket.io-client';
 import { useTranslation } from 'react-i18next';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   addChatData, setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
 } from '../Redux/chatSlice';

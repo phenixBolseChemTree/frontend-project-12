@@ -21,6 +21,7 @@ const CustomModal = ({ socket }) => {
     toast(t(texti18), {
       type: 'success', position: 'top-right',
     });
+    console.log('POPUP-POPUP-POPUP-POPUP-POPUP');
   };
 
   const SignupSchema = Yup.object().shape({
