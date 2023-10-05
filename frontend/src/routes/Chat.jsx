@@ -35,7 +35,11 @@ const Chat = () => {
             break;
           case 'newChannel':
             console.log('newChannel');
-            dispatch(setNewChannel(payload));
+            // dispatch(setNewChannel(payload));
+
+            if (localStorage.username !== payload.username) {
+              dispatch(setNewChannel(payload));
+            }
             break;
           case 'removeChannel':
             console.log('removeChannel');
