@@ -9,7 +9,7 @@ import {
   addChatData, setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
 } from '../Redux/chatSlice';
 import Channels from '../сomponents/Сhannels';
-import ChatView from '../сomponents/Chat';
+import ChatView from '../сomponents/ChatView';
 
 const socket = io.connect('http://localhost:3000/');
 
