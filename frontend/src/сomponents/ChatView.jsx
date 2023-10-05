@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 // import filter from 'leo-profanity';
-import leoProfanity from 'leo-profanity';
+import leoFilter from 'leo-profanity';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setNewMessage,
@@ -61,10 +61,10 @@ const ChatView = ({ socket }) => {
       console.log('values!!!', values);
 
       // const detectedLanguage = detectLanguage.detect(values.textInputForm);
-      leoProfanity.add(leoProfanity.getDictionary('ru'), leoProfanity.getDictionary('en'), leoProfanity.getDictionary('fr'));
+      leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
       // filter.loadDictionary('ru');
       // filter.loadDictionary('en');
-      const validatedText = leoProfanity.clean(values.textInputForm); // фильтруем текст
+      const validatedText = leoFilter.clean(values.textInputForm); // фильтруем текст
       socket.emit('newMessage', {
         body: validatedText,
         username: localStorage.username,
