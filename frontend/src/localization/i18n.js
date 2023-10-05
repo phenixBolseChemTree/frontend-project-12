@@ -85,6 +85,7 @@ i18n
             btnDelete: 'Удалить',
             shure: 'Уверены?',
             formPlaceholder: 'Введите имя канала...',
+            formLabelName: 'Имя канала...',
             mustBeUnique: 'Должно быть уникальным',
           },
           dropdownBar: {
