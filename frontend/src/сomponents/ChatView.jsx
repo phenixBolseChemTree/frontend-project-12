@@ -75,7 +75,7 @@ const ChatView = ({ socket }) => {
         body: validatedText,
         username: localStorage.username,
         channelId: currentChannelId,
-        id: messages.length, // эта строка пиздец
+        id: messages.length,
       }));
 
       setSubmitting(false); // Разблокировка кнопки отправки
