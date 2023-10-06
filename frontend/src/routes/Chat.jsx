@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import {
-  addChatData, setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
+  addChatData,
 } from '../Redux/chatSlice';
 import Channels from '../сomponents/Сhannels';
 import ChatView from '../сomponents/ChatView';
@@ -21,37 +21,6 @@ const Chat = () => {
   const chatData = useSelector((state) => state.app);
   const { t } = useTranslation();
   const { token } = localStorage;
-
-  useEffect(() => {
-    const getData = (action) => {
-      socket.on(action, (payload) => {
-        switch (action) {
-          case 'newMessage':
-            console.log('newMessage', payload);
-            dispatch(setNewMessage(payload));
-            break;
-          case 'newChannel':
-            console.log('newChannel');
-            dispatch(setNewChannel(payload));
-            break;
-          case 'removeChannel':
-            console.log('removeChannel');
-            dispatch(setRemoveChannel(payload));
-            break;
-          case 'renameChannel':
-            console.log('renameChannel');
-            dispatch(setRenameChannel(payload));
-            break;
-          default:
-        }
-      });
-    };
-
-    getData('newMessage');
-    getData('newChannel');
-    getData('removeChannel');
-    getData('renameChannel');
-  }, [dispatch]);
 
   useEffect(() => {
     axios.get('/api/v1/data', {
