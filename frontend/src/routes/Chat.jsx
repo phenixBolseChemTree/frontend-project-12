@@ -28,18 +28,11 @@ const Chat = () => {
         switch (action) {
           case 'newMessage':
             console.log('newMessage', payload);
-            if (localStorage.username !== payload.username) {
-              dispatch(setNewMessage(payload));
-            }
-
+            dispatch(setNewMessage(payload));
             break;
           case 'newChannel':
             console.log('newChannel');
-            // dispatch(setNewChannel(payload));
-
-            if (localStorage.username !== payload.username) {
-              dispatch(setNewChannel(payload));
-            }
+            dispatch(setNewChannel(payload));
             break;
           case 'removeChannel':
             console.log('removeChannel');

@@ -2,12 +2,8 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-// import filter from 'leo-profanity';
 import leoFilter from 'leo-profanity';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  setNewMessage,
-} from '../Redux/chatSlice';
+import { useSelector } from 'react-redux';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
@@ -50,8 +46,6 @@ const ChatView = ({ socket }) => {
 
   const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
 
-  const dispatch = useDispatch();
-
   const formik = useFormik({
     initialValues: {
       textInputForm: '',
@@ -65,18 +59,12 @@ const ChatView = ({ socket }) => {
       // filter.loadDictionary('ru');
       // filter.loadDictionary('en');
       const validatedText = leoFilter.clean(values.textInputForm); // фильтруем текст
+
       socket.emit('newMessage', {
         body: validatedText,
         username: localStorage.username,
         channelId: currentChannelId,
       });
-
-      dispatch(setNewMessage({
-        body: validatedText,
-        username: localStorage.username,
-        channelId: currentChannelId,
-        id: messages.length,
-      }));
 
       setSubmitting(false); // Разблокировка кнопки отправки
 

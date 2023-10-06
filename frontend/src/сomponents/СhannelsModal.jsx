@@ -34,9 +34,13 @@ const MyModal = ({
     notify('removeChannel');
     closeModal();
   };
-  const handleRename = (_id, value) => {
-    socket.emit('renameChannel', { _id, name: value });
+
+  const handleRename = (value) => {
+    console.log('id', id);
+    console.log('writeName', value);
+    socket.emit('renameChannel', { id, name: value });
     notify('renameChannel');
+    console.log('Функция handleRename выполнилась!!!');
   };
 
   return (
@@ -91,7 +95,7 @@ const MyModal = ({
                     <Modal.Footer>
                       <button
                         type="button"
-                        onClick={() => handleRename(id, values.channelName)}
+                        onClick={() => handleRename(values.channelName)}
                         className="btn btn-primary"
                       >
                         {t('modal.btnCreate')}

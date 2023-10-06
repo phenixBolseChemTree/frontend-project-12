@@ -7,13 +7,11 @@ import {
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
-import { setNewChannel } from '../Redux/chatSlice';
+import { useSelector } from 'react-redux';
 
 const CustomModal = ({ socket }) => {
   const channels = useSelector((state) => state.app.channels);
   const channelNames = channels.map((channel) => channel.name);
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
   // const [__, setIsButtonDisabled] = useState(false);
@@ -23,7 +21,6 @@ const CustomModal = ({ socket }) => {
     toast(t(texti18), {
       type: 'success', position: 'top-right',
     });
-    console.log('POPUP-POPUP-POPUP-POPUP-POPUP');
   };
 
   const SignupSchema = Yup.object().shape({
@@ -57,17 +54,6 @@ const CustomModal = ({ socket }) => {
             validationSchema={SignupSchema}
             onSubmit={(values) => {
               socket.emit('newChannel', { name: values.channelName });
-
-              //         socket.emit('newMessage', {
-              //   body: validatedText,
-              //   username: localStorage.username,
-              //   channelId: currentChannelId,
-              // });
-
-              dispatch(setNewChannel({
-                name: values.channelName,
-                id: channels.length,
-              }));
 
               handleClose();
             }}
