@@ -52,12 +52,7 @@ const ChatView = ({ socket }) => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-      console.log('values!!!', values);
-
-      // const detectedLanguage = detectLanguage.detect(values.textInputForm);
       leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
-      // filter.loadDictionary('ru');
-      // filter.loadDictionary('en');
       const validatedText = leoFilter.clean(values.textInputForm); // фильтруем текст
 
       socket.emit('newMessage', {

@@ -62,9 +62,6 @@ const Chat = () => {
       dispatch(addChatData(response.data));
     }).catch(() => {
       navigate('/login');
-      //   toast(t('toast.networkError'), { // выводить если долгий запрос
-      //     type: 'danger', position: 'top-right'
-      //   });
     });
   }, [dispatch, token, t, navigate]);
 

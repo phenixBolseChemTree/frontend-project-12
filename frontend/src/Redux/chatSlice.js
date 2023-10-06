@@ -28,8 +28,7 @@ const chatSlice = createSlice({
     setRemoveChannel: (state, action) => {
       console.log('action!!!', action.payload);
       const newChannels = state.channels.filter(
-        (channel) => channel.id !== action.payload.id
-        , // Возвращаем true для сохранения элемента, false для удаления
+        (channel) => channel.id !== action.payload.id,
       );
 
       if (state.currentChannelId !== action.payload.id) {
