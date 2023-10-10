@@ -1,23 +1,22 @@
-import React, { useState, createContext, useMemo } from 'react';
+import React, {
+  useState, createContext, useMemo, useCallback,
+} from 'react';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const login = () => {
-    setIsLoggedIn(true);
-  };
-
-  const logout = () => {
+  const logout = useCallback(() => {
     setIsLoggedIn(false);
-  };
+  }, []);
 
-  const authContextValue = useMemo(() => ({ isLoggedIn, login, logout }), [
-    isLoggedIn,
-    login,
-    logout,
-  ]);
+  const authContextValue = useMemo(() => {
+    const login = () => {
+      setIsLoggedIn(true);
+    };
+    return { isLoggedIn, login, logout };
+  }, [isLoggedIn, logout]);
 
   return (
     <AuthContext.Provider value={authContextValue}>
