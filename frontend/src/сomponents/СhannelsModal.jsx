@@ -36,11 +36,8 @@ const MyModal = ({
   };
 
   const handleRename = (value) => {
-    console.log('id', id);
-    console.log('writeName', value);
     socket.emit('renameChannel', { id, name: value });
     notify('renameChannel');
-    console.log('Функция handleRename выполнилась!!!');
   };
 
   return (
@@ -89,6 +86,13 @@ const MyModal = ({
                         className="form-control"
                         onChange={handleChange}
                         value={values.channelName}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleRename(values.channelName);
+                            closeModal();
+                          }
+                        }}
                       />
                       <ErrorMessage name="channelName" component="div" className="text-danger" />
                     </div>
