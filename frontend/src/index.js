@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import store from './Redux/store';
 import './localization/i18n';
-import SocketConnect from './сomponents/SocetConnect';
+import SocketConnect from './сomponents/SocketConnect';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
