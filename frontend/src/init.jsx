@@ -1,6 +1,5 @@
 import React from 'react';
 import i18next from 'i18next';
-// import LanguageDetector from 'i18next-browser-languagedetector';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
@@ -16,7 +15,7 @@ const init = async () => {
       resources,
       fallbackLng: 'ru',
       interpolation: {
-        escapeValue: false, // экранирование уже есть в React, поэтому отключаем
+        escapeValue: false,
       },
     });
 

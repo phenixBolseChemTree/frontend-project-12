@@ -14,7 +14,6 @@ const CustomModal = ({ socket }) => {
   const channelNames = channels.map((channel) => channel.name);
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
-  // const [__, setIsButtonDisabled] = useState(false);
 
   const notify = (textAction) => {
     const texti18 = `toast.${textAction}`;

@@ -61,7 +61,7 @@ const ChatView = ({ socket }) => {
         channelId: currentChannelId,
       });
 
-      setSubmitting(false); // Разблокировка кнопки отправки
+      setSubmitting(false);
 
       resetForm();
     },

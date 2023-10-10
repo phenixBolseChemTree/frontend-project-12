@@ -36,6 +36,7 @@ const MyModal = ({
   };
 
   const handleRename = (value) => {
+    console.log('handleRename ВЫПОЛНЯЕТСЯ!!!');
     socket.emit('renameChannel', { id, name: value });
     notify('renameChannel');
   };
