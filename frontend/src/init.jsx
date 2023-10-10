@@ -4,7 +4,7 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 import resources from './localization/index';
-import App from './App';
+import App from './сomponents/App';
 import SocketConnect from './сomponents/SocketConnect';
 
 const init = async () => {

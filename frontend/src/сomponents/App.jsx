@@ -3,12 +3,12 @@ import {
   BrowserRouter, Routes, Route,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import '../App.css';
 import { Provider, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
-import { AuthProvider } from './сomponents/AuthContext';
+import { AuthProvider } from './AuthContext';
 import {
   NavPage, Chat, Login, Signup, Page404,
-} from './routes/pages';
+} from '../routes/pages';
 
 const { REACT_APP_ROLLBAR_ACCESS_TOKEN } = process.env;
 const { REACT_APP_ENV } = process.env;
