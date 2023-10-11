@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import img from '../assets/happy_man.jpg';
 import { AuthContext } from '../сomponents/AuthContext';
+import routes from '../routes';
 
 const Signup = () => {
   const { t } = useTranslation();
@@ -43,14 +44,15 @@ const Signup = () => {
   const onSubmit = ({ name, password }) => {
     console.log(name);
     console.log(password);
-    axios.post('/api/v1/signup', { username: String(name), password: String(password) }).then((response) => {
-      const { token } = response.data;
-      console.log('response!!!', response);
-      localStorage.setItem('username', name);
-      localStorage.setItem('token', token);
-      navigate('/');
-      login();
-    })
+    axios.post(routes.signup, { username: String(name), password: String(password) })
+      .then((response) => {
+        const { token } = response.data;
+        console.log('response!!!', response);
+        localStorage.setItem('username', name);
+        localStorage.setItem('token', token);
+        navigate('/');
+        login();
+      })
       .catch((e) => {
         console.log('отлавливаем ошибку!!!', e);
         setShow(true);

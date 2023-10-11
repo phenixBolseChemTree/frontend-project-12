@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-// import io from 'socket.io-client';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -11,6 +10,7 @@ import {
 } from '../Redux/chatSlice';
 import Channels from '../сomponents/Сhannels';
 import ChatView from '../сomponents/ChatView';
+import routes from '../routes';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Chat = () => {
 
   // сначала берем данные из useContent и вставляем их
   useEffect(() => {
-    axios.get('/api/v1/data', {
+    axios.get(routes.data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

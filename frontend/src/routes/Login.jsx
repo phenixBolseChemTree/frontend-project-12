@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import img from '../assets/red_flag.jpeg';
 import { AuthContext } from '../сomponents/AuthContext';
+import routes from '../routes';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -26,13 +27,14 @@ const Login = () => {
   const onSubmit = ({ name, password }) => {
     console.log(name);
     console.log(password);
-    axios.post('/api/v1/login', { username: String(name), password: String(password) }).then((response) => {
-      const { token } = response.data;
-      localStorage.setItem('username', name);
-      localStorage.setItem('token', token);
-      navigate('/');
-      login();
-    })
+    axios.post(routes.login, { username: String(name), password: String(password) })
+      .then((response) => {
+        const { token } = response.data;
+        localStorage.setItem('username', name);
+        localStorage.setItem('token', token);
+        navigate('/');
+        login();
+      })
       .catch((e) => {
         console.log('отлавливаем ошибку!!!', e);
         setShow(true);
