@@ -6,6 +6,7 @@ import store from './Redux/store';
 import resources from './localization/index';
 import App from './сomponents/App';
 import SocketConnect from './сomponents/SocketConnect';
+import { SocketProvider } from './сomponents/SocketContext';
 
 const init = async () => {
   const i18n = i18next.createInstance();
@@ -22,8 +23,10 @@ const init = async () => {
   return (
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
-        <SocketConnect />
-        <App />
+        <SocketProvider>
+          <SocketConnect />
+          <App />
+        </SocketProvider>
       </I18nextProvider>
     </Provider>
   );

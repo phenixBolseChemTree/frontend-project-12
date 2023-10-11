@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -11,11 +11,13 @@ import {
 } from '../Redux/chatSlice';
 import Channels from '../сomponents/Сhannels';
 import ChatView from '../сomponents/ChatView';
+import { useSocket } from '../сomponents/SocketContext';
 
-const socket = io.connect('http://localhost:3000/');
+// const socket = io.connect('http://localhost:3000/');
 
 const Chat = () => {
   // console.log('!!!rerenderChat');
+  const socket = useSocket();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.app);

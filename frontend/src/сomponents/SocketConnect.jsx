@@ -1,15 +1,17 @@
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import {
   setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
 } from '../Redux/chatSlice';
+import { useSocket } from './SocketContext';
 
-const socket = io.connect('http://localhost:3000/');
-
+// const socket = io.connect('http://localhost:3000/');
 const SocketConnect = () => {
   console.log('!!!SocketConnect');
   const dispatch = useDispatch();
+  const socket = useSocket();
+  console.log('сокет выиден!!!', socket);
 
   useEffect(() => {
     const getData = (action) => {
