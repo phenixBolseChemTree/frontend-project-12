@@ -1,7 +1,6 @@
 ### Hexlet tests and linter status:
 
-[![Actions Status](https://github.com/phenixBolseChemTree/frontend-project-12/workflows/hexlet-check/badge.svg?branch=master)](https://github.com/phenixBolseChemTree/frontend-project-12/actions)
-
+[![Actions Status](https://github.com/phenixBolseChemTree/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/phenixBolseChemTree/frontend-project-12/actions)
 
 ### Результат проверки codeclimate
 
