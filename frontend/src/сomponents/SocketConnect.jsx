@@ -8,7 +8,7 @@ import {
 const socket = io.connect('http://localhost:3000/');
 
 const SocketConnect = () => {
-  console.log('!!!rerenderChat');
+  console.log('!!!SocketConnect');
   const dispatch = useDispatch();
 
   useEffect(() => {

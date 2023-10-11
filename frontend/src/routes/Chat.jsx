@@ -15,13 +15,15 @@ import ChatView from '../сomponents/ChatView';
 const socket = io.connect('http://localhost:3000/');
 
 const Chat = () => {
-  console.log('!!!rerenderChat');
+  // console.log('!!!rerenderChat');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.app);
+  console.log('!!!rerenderChat - chatData ===', chatData);
   const { t } = useTranslation();
   const { token } = localStorage;
 
+  // сначала берем данные из useContent и вставляем их
   useEffect(() => {
     axios.get('/api/v1/data', {
       headers: {
