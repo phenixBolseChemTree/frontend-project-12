@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import leoFilter from 'leo-profanity';
 import { useSelector } from 'react-redux';
+import { useSocket } from './SocketContext';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
@@ -21,7 +22,8 @@ const validationSchema = Yup.object().shape({
   textInputForm: Yup.string().required('Введите сообщение...'),
 });
 
-const ChatView = ({ socket }) => {
+const ChatView = () => {
+  const socket = useSocket();
   const { messages, channels, currentChannelId } = useSelector((state) => state.app);
 
   const { t } = useTranslation();

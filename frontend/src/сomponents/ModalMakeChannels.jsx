@@ -8,12 +8,14 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+import { useSocket } from './SocketContext';
 
-const CustomModal = ({ socket }) => {
+const CustomModal = () => {
   const channels = useSelector((state) => state.app.channels);
   const channelNames = channels.map((channel) => channel.name);
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
+  const socket = useSocket();
 
   const notify = (textAction) => {
     const texti18 = `toast.${textAction}`;

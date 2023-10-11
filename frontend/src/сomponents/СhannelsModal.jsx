@@ -6,10 +6,12 @@ import {
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
+import { useSocket } from './SocketContext';
 
 const MyModal = ({
-  socket, id, showModal, closeModal,
+  id, showModal, closeModal,
 }) => {
+  const socket = useSocket();
   const { t } = useTranslation();
   const channels = useSelector((state) => state.app.channels);
   const channelNames = channels.map((channel) => channel.name);

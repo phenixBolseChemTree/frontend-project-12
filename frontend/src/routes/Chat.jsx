@@ -11,13 +11,8 @@ import {
 } from '../Redux/chatSlice';
 import Channels from '../сomponents/Сhannels';
 import ChatView from '../сomponents/ChatView';
-import { useSocket } from '../сomponents/SocketContext';
-
-// const socket = io.connect('http://localhost:3000/');
 
 const Chat = () => {
-  // console.log('!!!rerenderChat');
-  const socket = useSocket();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.app);
@@ -42,8 +37,8 @@ const Chat = () => {
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        <Channels channels={channels} socket={socket} />
-        <ChatView messages={messages} socket={socket} channels={channels} />
+        <Channels channels={channels} />
+        <ChatView messages={messages} channels={channels} />
         <ToastContainer />
       </div>
     </div>

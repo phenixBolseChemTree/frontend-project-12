@@ -50,7 +50,7 @@ const SocketConnect = () => {
     getData('newChannel');
     getData('removeChannel');
     getData('renameChannel');
-  }, [dispatch]);
+  }, [dispatch, socket]);
 
   return null;
 };

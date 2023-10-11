@@ -8,9 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { setCurrentChannelId } from '../Redux/chatSlice';
 import MyModal from './СhannelsModal';
 
-const ButtonChannel = ({
-  socket, id, name, removable,
-}) => {
+const ButtonChannel = ({ id, name, removable }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
@@ -63,7 +61,7 @@ const ButtonChannel = ({
               <Dropdown.Item onClick={() => openModal('rename')} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
             </DropdownButton>
           </ButtonGroup>
-          <MyModal socket={socket} id={id} showModal={showModal} closeModal={closeModal} />
+          <MyModal id={id} showModal={showModal} closeModal={closeModal} />
 
         </>
       )}
