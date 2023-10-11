@@ -53,7 +53,7 @@ const ChatView = () => {
       textInputForm: '',
     },
     validationSchema,
-    onSubmit: async (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting }) => {
       leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
       const validatedText = leoFilter.clean(values.textInputForm); // фильтруем текст
 
@@ -65,7 +65,7 @@ const ChatView = () => {
 
       setSubmitting(false);
 
-      resetForm();
+      // resetForm();
     },
   });
 
