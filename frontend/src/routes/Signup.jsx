@@ -42,12 +42,9 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const onSubmit = ({ name, password }) => {
-    console.log(name);
-    console.log(password);
     axios.post(routes.signup, { username: String(name), password: String(password) })
       .then((response) => {
         const { token } = response.data;
-        console.log('response!!!', response);
         localStorage.setItem('username', name);
         localStorage.setItem('token', token);
         navigate('/');

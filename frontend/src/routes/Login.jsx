@@ -25,8 +25,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = ({ name, password }) => {
-    console.log(name);
-    console.log(password);
     axios.post(routes.login, { username: String(name), password: String(password) })
       .then((response) => {
         const { token } = response.data;

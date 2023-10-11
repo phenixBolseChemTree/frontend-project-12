@@ -8,25 +8,15 @@ const chatSlice = createSlice({
     currentChannelId: null,
   },
   reducers: {
-    setCurrentChannelId: (state, action) => {
-      console.log('action!!! этот id выбран', action.payload);
-      return { ...state, currentChannelId: action.payload };
-    },
+    setCurrentChannelId: (state, action) => ({ ...state, currentChannelId: action.payload }),
     addChatData: (state, action) => action.payload,
-    setNewMessage: (state, action) => {
-      console.log('action!!!', action.payload);
-      return { ...state, messages: [...state.messages, action.payload] };
-    },
-    setNewChannel: (state, action) => {
-      console.log('action!!!', action.payload);
-      return {
-        ...state,
-        channels: [...state.channels, action.payload],
-        currentChannelId: action.payload.id,
-      };
-    },
+    setNewMessage: (state, action) => ({ ...state, messages: [...state.messages, action.payload] }),
+    setNewChannel: (state, action) => ({
+      ...state,
+      channels: [...state.channels, action.payload],
+      currentChannelId: action.payload.id,
+    }),
     setRemoveChannel: (state, action) => {
-      console.log('action!!!', action.payload);
       const newChannels = state.channels.filter(
         (channel) => channel.id !== action.payload.id,
       );

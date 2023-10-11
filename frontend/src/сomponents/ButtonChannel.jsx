@@ -24,12 +24,10 @@ const ButtonChannel = ({ id, name, removable }) => {
   };
 
   const closeModal = () => {
-    console.log('состояние закрылось');
     setShowModal(false);
   };
 
   const openModal = (action) => {
-    console.log('состояние открылось');
     setShowModal(action);
   };
 
