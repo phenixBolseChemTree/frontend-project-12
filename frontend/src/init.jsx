@@ -2,11 +2,13 @@ import React from 'react';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
-import store from './Redux/store';
+import { configureStore } from '@reduxjs/toolkit';
 import resources from './localization/index';
 import App from './сomponents/App';
 import SocketConnect from './сomponents/SocketConnect';
 import { SocketProvider } from './сomponents/SocketContext';
+import 'react-toastify/dist/ReactToastify.css';
+import chatSlice from './slice/chatSlice';
 
 const init = async () => {
   const i18n = i18next.createInstance();
@@ -19,6 +21,12 @@ const init = async () => {
         escapeValue: false,
       },
     });
+
+  const store = configureStore({
+    reducer: {
+      app: chatSlice,
+    },
+  });
 
   return (
     <Provider store={store}>

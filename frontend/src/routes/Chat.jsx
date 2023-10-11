@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import 'react-toastify/dist/ReactToastify.css';
 import {
   addChatData,
-} from '../Redux/chatSlice';
+} from '../slice/chatSlice';
 import Channels from '../сomponents/Сhannels';
 import ChatView from '../сomponents/ChatView';
 import routes from '../routes';
