@@ -2,4 +2,6 @@
 
 [![Actions Status](https://github.com/phenixBolseChemTree/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/phenixBolseChemTree/frontend-project-12/actions)
 
-![example workflow](https://github.com/github/docs/actions/workflows/hexlet-check.yml/badge.svg)
+### Результат проверки codeclimate
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/6b92ec95611401ee8a69/maintainability)](https://codeclimate.com/github/phenixBolseChemTree/frontend-project-12/maintainability)
