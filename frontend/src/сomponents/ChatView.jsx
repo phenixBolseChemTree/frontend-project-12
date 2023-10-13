@@ -24,7 +24,6 @@ const validationSchema = Yup.object().shape({
 
 const ChatView = () => {
   const socket = useSocket();
-  console.log('socket.connected', socket.connected);
   const { messages, channels, currentChannelId } = useSelector((state) => state.app);
 
   const { t } = useTranslation();
@@ -78,7 +77,6 @@ const ChatView = () => {
     <div className="col p-0 h-100">
       <div className="chat d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
-          {socket.connected ? <b>СОКЕТ ПОДКЛЮЧЕН!!! - </b> : <b>СОКЕТ НЕ ПОДКЛЮЧЕН!!! - </b>}
           <p className="m-0">
             <b>
               #
