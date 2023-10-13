@@ -53,6 +53,7 @@ const ButtonChannel = ({ id, name, removable }) => {
             >
               <span className="me-1">#</span>
               {name}
+              <span className="visually-hidden">Управление каналом</span>
             </Button>
             <DropdownButton variant={isSelected ? 'secondary' : ''} title="" style={{ color: 'black', background: '#f8f9fa' }} as={ButtonGroup} id="bg-nested-dropdown">
               <Dropdown.Item onClick={() => openModal('delete')} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
@@ -60,7 +61,6 @@ const ButtonChannel = ({ id, name, removable }) => {
             </DropdownButton>
           </ButtonGroup>
           <MyModal id={id} showModal={showModal} closeModal={closeModal} />
-
         </>
       )}
     </>
