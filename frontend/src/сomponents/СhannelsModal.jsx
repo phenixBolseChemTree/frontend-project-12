@@ -13,7 +13,7 @@ const MyModal = ({
 }) => {
   const socket = useSocket();
   const { t } = useTranslation();
-  const channels = useSelector((state) => state.app.channels);
+  const channels = useSelector((state) => state.chat.channels);
   const channelNames = channels.map((channel) => channel.name);
 
   const notify = (textAction) => {

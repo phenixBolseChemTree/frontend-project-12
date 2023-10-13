@@ -8,7 +8,8 @@ import App from './сomponents/App';
 import SocketConnect from './сomponents/SocketConnect';
 import { SocketProvider } from './сomponents/SocketContext';
 import 'react-toastify/dist/ReactToastify.css';
-import chatSlice from './slice/chatSlice';
+// import chatSlice from './slice/chatSlice';
+import reducer from './slice';
 
 const init = async () => {
   const i18n = i18next.createInstance();
@@ -23,9 +24,7 @@ const init = async () => {
     });
 
   const store = configureStore({
-    reducer: {
-      app: chatSlice,
-    },
+    reducer,
   });
 
   return (

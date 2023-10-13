@@ -13,7 +13,7 @@ const ButtonChannel = ({ id, name, removable }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
-  const currentChannelId = useSelector((state) => state.app.currentChannelId);
+  const currentChannelId = useSelector((state) => state.chat.currentChannelId);
   const isSelected = currentChannelId === id;
   const btnClassesPart1 = cn('w-100 rounded-0 text-start btn border-0', {
     'bg-secondary text-white': isSelected, // Если selectedChannel === id, добавьте классы для серой кнопки и белого текста
