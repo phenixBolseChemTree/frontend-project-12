@@ -7,14 +7,16 @@ const modalSlice = createSlice({
     isShow: false,
   },
   reducers: {
-    openModal: (state, payload) => {
-      const typeModal = payload.type; // тип окна которое нужно открыть
-      return { typeModal: payload.type, isShow: true };
-    },
-    closeModal: (state) => {
-      const isShow = false;
-      return { typeModal: null, isShow };
-    },
+    openModal: (state, { payload }) => ({
+      ...state,
+      isShow: true,
+      typeModal: payload.type,
+    }),
+    closeModal: (state) => ({
+      ...state,
+      isShow: false,
+      typeModal: null,
+    }),
   },
 });
 
