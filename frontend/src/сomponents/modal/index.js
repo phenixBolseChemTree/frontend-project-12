@@ -2,4 +2,8 @@ import RemoveChannel from './RemoveChannel';
 import RenameChannel from './RenameChannel';
 import MakeChannel from './MakeChannel';
 
-export { RemoveChannel, RenameChannel, MakeChannel };
+export default {
+  add: MakeChannel,
+  remove: RemoveChannel,
+  rename: RenameChannel,
+};

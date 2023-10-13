@@ -1,9 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-// модалка будет появляться с определенным контентом внутри.
-// контент определяется от переданных данных
-const RenameChannel = ({ handleClose }) => { // typeModal
+const RenameChannel = ({ handleClose }) => {
   console.log(123);
   return (
     <Modal.Dialog>

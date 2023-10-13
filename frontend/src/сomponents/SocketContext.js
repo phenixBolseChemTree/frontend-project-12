@@ -6,7 +6,7 @@ const SocketContext = createContext();
 const useSocket = () => useContext(SocketContext);
 
 const SocketProvider = ({ children }) => {
-  const socket = io.connect('http://localhost:3000');
+  const socket = io();
   return (
     <SocketContext.Provider value={socket}>
       {children}

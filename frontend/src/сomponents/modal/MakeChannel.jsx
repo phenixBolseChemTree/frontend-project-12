@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const MakeChannel = ({ handleClose }) => { // typeModal
+const MakeChannel = ({ handleClose }) => {
   console.log(123);
 
   return (
