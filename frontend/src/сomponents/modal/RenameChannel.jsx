@@ -1,8 +1,33 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { useFormik } from 'formik';
+import yup from 'yup';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const RenameChannel = ({ handleClose }) => {
-  console.log(123);
+  const channelNames = useSelector((state) => state.chat.channels); // тут не имена а обьекты
+  console.log('channelNames', channelNames);
+  const { t } = useTranslation();
+
+  const SignupSchema = yup.object().shape({
+    firstInput: yup.string()
+      .min(3, t('error.minWord3AndmaxWord20'))
+      .max(20, t('error.minWord3AndmaxWord20'))
+      .test('is-unique', t('modal.mustBeUnique'), (value) => !channelNames.includes(value))
+      .required(''),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      nameChannal: '',
+    },
+    validationSchema: SignupSchema,
+    onSubmit: (values) => {
+
+    },
+  });
+
   return (
     <Modal.Dialog>
       <Modal.Header closeButton>
