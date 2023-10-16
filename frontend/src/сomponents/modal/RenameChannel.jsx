@@ -67,7 +67,7 @@ const RenameChannel = ({ handleClose, id }) => {
               autoFocus
               ref={controlRef}
             />
-            <Form.Label htmlFor="name">Имя канала</Form.Label>
+            <Form.Label htmlFor="name">Переименовать</Form.Label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
             </Form.Control.Feedback>
