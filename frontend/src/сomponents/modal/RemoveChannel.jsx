@@ -31,7 +31,7 @@ const RemoveChannel = ({ handleClose, id }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button variant="primary" className="btn-danger" onClick={handleSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>
