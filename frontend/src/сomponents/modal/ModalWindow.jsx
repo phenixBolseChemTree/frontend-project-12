@@ -12,15 +12,17 @@ const ModalWindow = () => {
   const { modalStatus, typeModal } = modal;
   const dispatch = useDispatch();
 
-  const modalComponents = {
-    add: <MakeChannel />,
-    remove: <RemoveChannel />,
-    rename: <RenameChannel />,
-  };
-
   console.log('type!!!!!', typeModal);
   const handleClose = () => {
     dispatch(closeModal());
+  };
+
+  // нужно определять id на этом этапе в зависимости от того какое это модальное окно
+
+  const modalComponents = {
+    add: <MakeChannel handleClose={handleClose} />,
+    remove: <RemoveChannel handleClose={handleClose} />,
+    rename: <RenameChannel handleClose={handleClose} />,
   };
 
   const ModalComponent = modalComponents[typeModal] || null;

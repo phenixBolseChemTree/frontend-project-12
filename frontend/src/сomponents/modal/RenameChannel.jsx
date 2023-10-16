@@ -1,29 +1,22 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import yup from 'yup';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useSocket } from '../SocketContext';
 
 const RenameChannel = ({ handleClose }) => {
-  const channels = useSelector((state) => state.chat.channels);
-  const { t } = useTranslation();
-
-  const SignupSchema = yup.object().shape({
-    firstInput: yup.string()
-      .min(3, t('error.minWord3AndmaxWord20'))
-      .max(20, t('error.minWord3AndmaxWord20'))
-      .test('is-unique', t('modal.mustBeUnique'), (value) => !channels.map((channel) => channel.name).includes(value))
-      .required(''),
-  });
+  console.log('handleClose!!!', handleClose);
+  const chat = useSelector((state) => state.chat);
+  const { currentChannelId } = chat;
+  const socket = useSocket();
 
   const formik = useFormik({
     initialValues: {
-      nameChannal: '',
+      name: '',
     },
-    validationSchema: SignupSchema,
     onSubmit: (values) => {
-
+      const { name } = values;
+      socket.emit('renameChannel', { id: currentChannelId, name });
     },
   });
 
@@ -33,14 +26,32 @@ const RenameChannel = ({ handleClose }) => {
         <Modal.Title>RenameChannel</Modal.Title>
       </Modal.Header>
       <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={handleClose}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
+      <Form onSubmit={formik.handleSubmit}>
+        <Form.Group>
+          <Form.Control
+            required
+            type="text"
+            placeholder="новое имя канала"
+            name="name"
+            id="name"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            isInvalid={!!formik.errors.name}
+          />
+          <Form.Label htmlFor="name">LOCATOR</Form.Label>
+          <Form.Control.Feedback>
+            {formik.errors.name}
+          </Form.Control.Feedback>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={formik.handleSubmit}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Form.Group>
+      </Form>
     </Modal.Dialog>
   );
 };
