@@ -3,7 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useSocket } from '../SocketContext';
 
-const MakeChannel = ({ handleClose }) => {
+const AddChannel = ({ handleClose }) => {
   const socket = useSocket();
 
   const formik = useFormik({

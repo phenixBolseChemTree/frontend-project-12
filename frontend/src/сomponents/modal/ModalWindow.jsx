@@ -2,8 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../slice/modalSlice';
-// import modalComponents from './index';
-import MakeChannel from './MakeChannel';
+import AddChannel from './AddChannel';
 import RemoveChannel from './RemoveChannel';
 import RenameChannel from './RenameChannel';
 
@@ -18,7 +17,7 @@ const ModalWindow = () => {
   };
 
   const modalComponents = {
-    add: <MakeChannel handleClose={handleClose} />,
+    add: <AddChannel handleClose={handleClose} />,
     remove: <RemoveChannel handleClose={handleClose} id={modalId} />,
     rename: <RenameChannel handleClose={handleClose} id={modalId} />,
   };
