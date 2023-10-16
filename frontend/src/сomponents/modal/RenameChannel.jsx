@@ -6,15 +6,14 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 const RenameChannel = ({ handleClose }) => {
-  const channelNames = useSelector((state) => state.chat.channels); // тут не имена а обьекты
-  console.log('channelNames', channelNames);
+  const channels = useSelector((state) => state.chat.channels);
   const { t } = useTranslation();
 
   const SignupSchema = yup.object().shape({
     firstInput: yup.string()
       .min(3, t('error.minWord3AndmaxWord20'))
       .max(20, t('error.minWord3AndmaxWord20'))
-      .test('is-unique', t('modal.mustBeUnique'), (value) => !channelNames.includes(value))
+      .test('is-unique', t('modal.mustBeUnique'), (value) => !channels.map((channel) => channel.name).includes(value))
       .required(''),
   });
 
