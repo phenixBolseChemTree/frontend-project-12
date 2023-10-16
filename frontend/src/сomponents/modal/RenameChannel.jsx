@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -9,9 +9,16 @@ import { useSocket } from '../SocketContext';
 
 const RenameChannel = ({ handleClose, id }) => {
   const { t } = useTranslation();
+  const controlRef = useRef(null);
   console.log('handleClose!!!', handleClose);
   const socket = useSocket();
   const channels = useSelector((state) => state.chat.channels);
+
+  useEffect(() => {
+    if (controlRef.current) {
+      controlRef.current.focus();
+    }
+  }, []);
 
   const notify = (textAction) => {
     const texti18 = `toast.${textAction}`;
@@ -58,6 +65,7 @@ const RenameChannel = ({ handleClose, id }) => {
               value={formik.values.name}
               isInvalid={!!formik.errors.name}
               autoFocus
+              ref={controlRef}
             />
             <Form.Label htmlFor="name">Имя канала</Form.Label>
             <Form.Control.Feedback type="invalid">
