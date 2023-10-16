@@ -14,6 +14,7 @@ const RenameChannel = ({ handleClose, id }) => {
     onSubmit: (values) => {
       const { name } = values;
       socket.emit('renameChannel', { id, name });
+      handleClose();
     },
   });
 

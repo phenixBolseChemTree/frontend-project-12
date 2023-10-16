@@ -13,6 +13,7 @@ const MakeChannel = ({ handleClose }) => {
     onSubmit: (values) => {
       const { name } = values;
       socket.emit('newChannel', { name });
+      handleClose();
     },
   });
 

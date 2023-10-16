@@ -9,6 +9,7 @@ const RemoveChannel = ({ handleClose, id }) => {
 
   const handleSubmit = () => {
     socket.emit('removeChannel', { id });
+    handleClose();
   };
 
   return (
