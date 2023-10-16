@@ -56,6 +56,7 @@ const AddChannel = ({ handleClose }) => {
               onChange={formik.handleChange}
               value={formik.values.name}
               isInvalid={!!formik.errors.name}
+              autoFocus
             />
             <Form.Label>Имя канала</Form.Label>
             <Form.Control.Feedback type="invalid">
