@@ -53,4 +53,4 @@ const AddChannel = ({ handleClose }) => {
 
   );
 };
-export default MakeChannel;
+export default AddChannel;
