@@ -17,8 +17,6 @@ const ModalWindow = () => {
     dispatch(closeModal());
   };
 
-  // нужно определять id на этом этапе id не по выбранному каналу а по button
-
   const modalComponents = {
     add: <MakeChannel handleClose={handleClose} />,
     remove: <RemoveChannel handleClose={handleClose} id={modalId} />,
@@ -30,7 +28,6 @@ const ModalWindow = () => {
   return (
     <Modal show={modalStatus} onHide={handleClose}>
       {ModalComponent}
-      {/* <MakeChannel /> */}
     </Modal>
   );
 };
