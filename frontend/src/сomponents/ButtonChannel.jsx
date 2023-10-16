@@ -21,6 +21,8 @@ const ButtonChannel = ({ id, name, removable }) => {
     dispatch(setCurrentChannelId(_id));
   };
 
+  // в этом компоненте нужно устанавливать id и передавать его через пропсы
+
   return (
     <>
       {!removable && (
@@ -45,8 +47,8 @@ const ButtonChannel = ({ id, name, removable }) => {
             <span className="visually-hidden">Управление каналом</span>
           </Button>
           <DropdownButton variant={isSelected ? 'secondary' : ''} title="" style={{ color: 'black', background: '#f8f9fa' }} as={ButtonGroup} id="bg-nested-dropdown">
-            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'remove' }))} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
-            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'rename' }))} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
+            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'remove', id }))} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
+            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'rename', id }))} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
           </DropdownButton>
         </ButtonGroup>
       )}

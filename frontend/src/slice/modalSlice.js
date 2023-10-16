@@ -5,17 +5,21 @@ const modalSlice = createSlice({
   initialState: {
     typeModal: null,
     modalStatus: false,
+    modalId: '1',
   },
   reducers: {
     openModal: (state, { payload }) => ({
       ...state,
       modalStatus: true,
       typeModal: payload.type,
+      modalId: payload.id,
+
     }),
     closeModal: (state) => ({
       ...state,
       modalStatus: false,
       typeModal: null,
+      modalId: null,
     }),
   },
 });

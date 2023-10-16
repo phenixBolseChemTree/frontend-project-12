@@ -1,13 +1,10 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { useSelector } from 'react-redux';
 import { useSocket } from '../SocketContext';
 
-const RenameChannel = ({ handleClose }) => {
+const RenameChannel = ({ handleClose, id }) => {
   console.log('handleClose!!!', handleClose);
-  const chat = useSelector((state) => state.chat);
-  const { currentChannelId } = chat;
   const socket = useSocket();
 
   const formik = useFormik({
@@ -16,7 +13,7 @@ const RenameChannel = ({ handleClose }) => {
     },
     onSubmit: (values) => {
       const { name } = values;
-      socket.emit('renameChannel', { id: currentChannelId, name });
+      socket.emit('renameChannel', { id, name });
     },
   });
 

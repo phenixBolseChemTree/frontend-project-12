@@ -9,7 +9,7 @@ import RenameChannel from './RenameChannel';
 
 const ModalWindow = () => {
   const modal = useSelector((state) => state.modal);
-  const { modalStatus, typeModal } = modal;
+  const { modalStatus, typeModal, modalId } = modal;
   const dispatch = useDispatch();
 
   console.log('type!!!!!', typeModal);
@@ -17,12 +17,12 @@ const ModalWindow = () => {
     dispatch(closeModal());
   };
 
-  // нужно определять id на этом этапе в зависимости от того какое это модальное окно
+  // нужно определять id на этом этапе id не по выбранному каналу а по button
 
   const modalComponents = {
     add: <MakeChannel handleClose={handleClose} />,
-    remove: <RemoveChannel handleClose={handleClose} />,
-    rename: <RenameChannel handleClose={handleClose} />,
+    remove: <RemoveChannel handleClose={handleClose} id={modalId} />,
+    rename: <RenameChannel handleClose={handleClose} id={modalId} />,
   };
 
   const ModalComponent = modalComponents[typeModal] || null;
