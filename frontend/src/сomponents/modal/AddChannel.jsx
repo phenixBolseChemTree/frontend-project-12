@@ -4,12 +4,20 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { useSocket } from '../SocketContext';
 
 const AddChannel = ({ handleClose }) => {
   const socket = useSocket();
   const channels = useSelector((state) => state.chat.channels);
   const { t } = useTranslation();
+
+  const notify = (textAction) => {
+    const texti18 = `toast.${textAction}`;
+    toast(t(texti18), {
+      type: 'success', position: 'top-right',
+    });
+  };
 
   const validationSchema = yup.object().shape({
     name: yup.string()
@@ -28,6 +36,7 @@ const AddChannel = ({ handleClose }) => {
       const { name } = values;
       socket.emit('newChannel', { name });
       handleClose();
+      notify('addChannel');
     },
   });
 

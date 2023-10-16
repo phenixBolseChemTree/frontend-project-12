@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { useSocket } from '../SocketContext';
 
 const RenameChannel = ({ handleClose, id }) => {
@@ -11,6 +12,13 @@ const RenameChannel = ({ handleClose, id }) => {
   console.log('handleClose!!!', handleClose);
   const socket = useSocket();
   const channels = useSelector((state) => state.chat.channels);
+
+  const notify = (textAction) => {
+    const texti18 = `toast.${textAction}`;
+    toast(t(texti18), {
+      type: 'success', position: 'top-right',
+    });
+  };
 
   const validationSchema = yup.object().shape({
     name: yup.string()
@@ -29,6 +37,7 @@ const RenameChannel = ({ handleClose, id }) => {
       const { name } = values;
       socket.emit('renameChannel', { id, name });
       handleClose();
+      notify('renameChannel');
     },
   });
 
@@ -49,7 +58,7 @@ const RenameChannel = ({ handleClose, id }) => {
               value={formik.values.name}
               isInvalid={!!formik.errors.name}
             />
-            <Form.Label htmlFor="name">Переименовать</Form.Label>
+            <Form.Label htmlFor="name">Имя канала</Form.Label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
             </Form.Control.Feedback>
