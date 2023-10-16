@@ -1,16 +1,14 @@
-import { useState } from 'react';
 import {
   Button, Dropdown, ButtonGroup, DropdownButton,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { openModal } from '../slice/modalSlice';
 import { setCurrentChannelId } from '../slice/chatSlice';
-import MyModal from './СhannelsModal';
 
 const ButtonChannel = ({ id, name, removable }) => {
   const { t } = useTranslation();
-  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
   const currentChannelId = useSelector((state) => state.chat.currentChannelId);
@@ -21,14 +19,6 @@ const ButtonChannel = ({ id, name, removable }) => {
 
   const handleSetChannet = (_id) => {
     dispatch(setCurrentChannelId(_id));
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
-  const openModal = (action) => {
-    setShowModal(action);
   };
 
   return (
@@ -44,24 +34,21 @@ const ButtonChannel = ({ id, name, removable }) => {
         </button>
       )}
       {removable && (
-        <>
-          <ButtonGroup className="d-flex justify-content-start">
-            <Button
-              style={{ color: 'black', background: '#f8f9fa' }}
-              className={btnClassesPart1}
-              onClick={() => handleSetChannet(id)}
-            >
-              <span className="me-1">#</span>
-              {name}
-              <span className="visually-hidden">Управление каналом</span>
-            </Button>
-            <DropdownButton variant={isSelected ? 'secondary' : ''} title="" style={{ color: 'black', background: '#f8f9fa' }} as={ButtonGroup} id="bg-nested-dropdown">
-              <Dropdown.Item onClick={() => openModal('delete')} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
-              <Dropdown.Item onClick={() => openModal('rename')} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
-            </DropdownButton>
-          </ButtonGroup>
-          <MyModal id={id} showModal={showModal} closeModal={closeModal} />
-        </>
+        <ButtonGroup className="d-flex justify-content-start">
+          <Button
+            style={{ color: 'black', background: '#f8f9fa' }}
+            className={btnClassesPart1}
+            onClick={() => handleSetChannet(id)}
+          >
+            <span className="me-1">#</span>
+            {name}
+            <span className="visually-hidden">Управление каналом</span>
+          </Button>
+          <DropdownButton variant={isSelected ? 'secondary' : ''} title="" style={{ color: 'black', background: '#f8f9fa' }} as={ButtonGroup} id="bg-nested-dropdown">
+            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'delete' }))} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
+            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'rename' }))} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
+          </DropdownButton>
+        </ButtonGroup>
       )}
     </>
   );

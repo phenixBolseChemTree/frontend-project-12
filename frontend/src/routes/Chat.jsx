@@ -10,7 +10,7 @@ import {
 import Channels from '../сomponents/Сhannels';
 import ChatView from '../сomponents/ChatView';
 import routes from '../routes';
-// import ModalWindow from '../сomponents/modal/ModalWindow';
+import ModalWindow from '../сomponents/modal/ModalWindow';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -20,7 +20,6 @@ const Chat = () => {
   const { t } = useTranslation();
   const { token } = localStorage;
 
-  // сначала берем данные из useContent и вставляем их
   useEffect(() => {
     axios.get(routes.data, {
       headers: {
@@ -40,7 +39,7 @@ const Chat = () => {
         <Channels channels={channels} />
         <ChatView messages={messages} channels={channels} />
         <ToastContainer />
-        {/* <ModalWindow /> */}
+        <ModalWindow />
       </div>
     </div>
   );
