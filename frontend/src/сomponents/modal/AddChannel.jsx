@@ -57,7 +57,7 @@ const AddChannel = ({ handleClose }) => {
               value={formik.values.name}
               isInvalid={!!formik.errors.name}
             />
-            <Form.Label>random text</Form.Label>
+            <Form.Label>Имя канала</Form.Label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
             </Form.Control.Feedback>
