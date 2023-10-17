@@ -21,8 +21,6 @@ const ButtonChannel = ({ id, name, removable }) => {
     dispatch(setCurrentChannelId(_id));
   };
 
-  // в этом компоненте нужно устанавливать id и передавать его через пропсы
-
   return (
     <>
       {!removable && (
@@ -44,7 +42,6 @@ const ButtonChannel = ({ id, name, removable }) => {
           >
             <span className="me-1">#</span>
             {name}
-            {/* <span className="visually-hidden">Управление каналом</span> */}
           </Button>
           <DropdownButton
             variant={isSelected ? 'secondary' : ''}

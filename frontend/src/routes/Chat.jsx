@@ -16,7 +16,6 @@ const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.chat);
-  console.log('!!!rerenderChat - chatData ===', chatData);
   const { t } = useTranslation();
   const { token } = localStorage;
 

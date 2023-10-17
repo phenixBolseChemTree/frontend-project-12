@@ -27,7 +27,7 @@ const Signup = () => {
       .required(t('error.requiredField')),
     password: Yup.string()
       .min(6, t('error.minCharacters6'))
-      // .max(50, 'Максимум 50 символов')
+      .max(50, 'Максимум 50 символов')
       .required(t('error.requiredField')),
     passwordRes: Yup.string()
       .oneOf([Yup.ref('password'), null], t('error.samePasswords'))
