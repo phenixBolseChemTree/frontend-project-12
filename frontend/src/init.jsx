@@ -3,12 +3,11 @@ import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import resources from './localization/index';
+import resources from './locales/index';
 import App from './сomponents/App';
 import SocketConnect from './сomponents/SocketConnect';
 import { SocketProvider } from './сomponents/SocketContext';
 import 'react-toastify/dist/ReactToastify.css';
-// import chatSlice from './slice/chatSlice';
 import reducer from './slice';
 
 const init = async () => {

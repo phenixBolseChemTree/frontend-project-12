@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import {
   addChatData,
 } from '../slice/chatSlice';
-import Channels from '../сomponents/Сhannels';
-import ChatView from '../сomponents/ChatView';
+import Channels from '../сomponents/messenger/Сhannels';
+import ChatView from '../сomponents/messenger/ChatView';
 import routes from '../routes';
 import ModalWindow from '../сomponents/modal/ModalWindow';
 
