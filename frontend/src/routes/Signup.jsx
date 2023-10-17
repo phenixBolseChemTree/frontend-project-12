@@ -14,7 +14,7 @@ import routes from '../routes';
 const Signup = () => {
   // const errorNetwork = useRef(null);
   const [networkError, setNetworkError] = useState(false);
-  const usernameRef = useRef(null);
+  const passwordResRef = useRef(null);
   const { t } = useTranslation();
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -29,7 +29,6 @@ const Signup = () => {
       .max(50, 'Максимум 50 символов')
       .required(t('error.requiredField')),
     passwordRes: yup.string()
-      .min(6, t('error.minCharacters6'))
       .oneOf([yup.ref('password'), null], t('error.samePasswords'))
       .required(t('error.requiredField')),
   });
@@ -53,7 +52,7 @@ const Signup = () => {
       } catch (error) {
         if (error.response.status === 409) {
           setNetworkError(true);
-          usernameRef.current.select();
+          passwordResRef.current.classList.add('is-invalid');
         }
         // Обработка ошибки, например, вывод сообщения или запись в логи.
         console.error('Произошла ошибка при отправке запроса:', error);
@@ -120,13 +119,14 @@ const Signup = () => {
                     onChange={formik.handleChange}
                     value={formik.values.passwordRes}
                     isInvalid={!!formik.errors.passwordRes}
-                    className={`${networkError ? 'is-invalid' : ''}`}
+                    ref={passwordResRef}
+                  // className={`${networkError ? 'is-invalid' : ''}`}
                   />
                   <Form.Label htmlFor="passwordRes">Подтвердите пароль</Form.Label>
 
                   <Form.Control.Feedback type="invalid" tooltip>
                     {/* {formik.errors.passwordRes} */}
-                    {networkError ? 'Такой пользователь уже существует' : formik.errors.name}
+                    {networkError ? 'Такой пользователь уже существует' : formik.errors.passwordRes}
 
                   </Form.Control.Feedback>
                 </Form.Group>
