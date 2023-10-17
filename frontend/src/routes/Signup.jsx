@@ -1,60 +1,66 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import {
-  Formik, Form, Field, ErrorMessage,
-} from 'formik';
-import {
-  Container, Row, Col, Card,
+  Container, Row, Col, Card, Form, Button,
 } from 'react-bootstrap';
-
 import axios from 'axios';
-import Alert from 'react-bootstrap/Alert';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import img from '../assets/happy_man.jpg';
 import { AuthContext } from '../сomponents/AuthContext';
 import routes from '../routes';
 
 const Signup = () => {
+  // const errorNetwork = useRef(null);
+  const [networkError, setNetworkError] = useState(false);
+  const usernameRef = useRef(null);
   const { t } = useTranslation();
   const { login } = useContext(AuthContext);
-  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
-  const SignupSchema = Yup.object().shape({
-    name: Yup.string()
+  const SignupSchema = yup.object().shape({
+    name: yup.string()
       .min(3, t('error.minWord3AndmaxWord20'))
       .max(20, t('error.minWord3AndmaxWord20'))
       .required(t('error.requiredField')),
-    password: Yup.string()
+    password: yup.string()
       .min(6, t('error.minCharacters6'))
       .max(50, 'Максимум 50 символов')
       .required(t('error.requiredField')),
-    passwordRes: Yup.string()
-      .oneOf([Yup.ref('password'), null], t('error.samePasswords'))
+    passwordRes: yup.string()
+      .min(6, t('error.minCharacters6'))
+      .oneOf([yup.ref('password'), null], t('error.samePasswords'))
       .required(t('error.requiredField')),
   });
 
-  const initialValues = {
-    name: '',
-    password: '',
-    passwordRes: '',
-  };
-  const navigate = useNavigate();
-
-  const onSubmit = ({ name, password }) => {
-    axios.post(routes.signup, { username: String(name), password: String(password) })
-      .then((response) => {
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      password: '',
+      passwordRes: '',
+    },
+    validationSchema: SignupSchema,
+    onSubmit: async (values) => {
+      const { name, password } = values;
+      try {
+        const response = await axios.post(routes.signup, { username: name, password });
         const { token } = response.data;
         localStorage.setItem('username', name);
         localStorage.setItem('token', token);
-        navigate('/');
         login();
-      })
-      .catch((e) => {
-        console.log('отлавливаем ошибку!!!', e);
-        setShow(true);
-      });
-  };
+        navigate('/');
+      } catch (error) {
+        if (error.response.status === 409) {
+          setNetworkError(true);
+          usernameRef.current.select();
+        }
+        // Обработка ошибки, например, вывод сообщения или запись в логи.
+        console.error('Произошла ошибка при отправке запроса:', error);
+      }
+    },
+  });
+
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
@@ -68,46 +74,65 @@ const Signup = () => {
                   alt={t('signup.registration')}
                 />
               </div>
-              <Formik
-                initialValues={initialValues}
-                validationSchema={SignupSchema}
-                onSubmit={onSubmit}
-              >
-                <Form>
-                  <h1 className="text-center mb-4">{t('login.registration')}</h1>
+              <Form onSubmit={formik.handleSubmit}>
+                <h1 className="text-center mb-4">{t('login.registration')}</h1>
+                <Form.Group className="form-floating mb-3">
+                  {/* <Form.Floating> */}
+                  <Form.Control
+                    required
+                    type="text"
+                    name="name"
+                    id="name"
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                    isInvalid={!!formik.errors.name}
+                  />
+                  <Form.Label htmlFor="floatinamengInputCustom">Имя пользователя</Form.Label>
+                  {/* </Form.Floating> */}
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {formik.errors.name}
+                  </Form.Control.Feedback>
+                </Form.Group>
 
-                  <div className="mb-3">
-                    <label htmlFor="name" className="form-label">{t('signup.userName')}</label>
-                    <Field type="text" id="name" name="name" className="form-control" />
-                    <ErrorMessage name="name" component="div" className="text-danger" />
+                <Form.Group className="form-floating mb-3">
+                  <Form.Control
+                    required
+                    type="text"
+                    name="password"
+                    id="password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    isInvalid={!!formik.errors.password}
+                  />
+                  <Form.Label htmlFor="password">Пароль</Form.Label>
 
-                  </div>
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {formik.errors.password}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className="form-floating mb-3">
 
-                  <div className="mb-3">
-                    <label htmlFor="password" className="form-label">{t('signup.password')}</label>
-                    <Field type="text" id="password" name="password" className="form-control" />
-                    <ErrorMessage name="password" component="div" className="text-danger" />
-                  </div>
+                  <Form.Control
+                    required
+                    type="text"
+                    name="passwordRes"
+                    id="passwordRes"
+                    onChange={formik.handleChange}
+                    value={formik.values.passwordRes}
+                    isInvalid={!!formik.errors.passwordRes}
+                    className={`${networkError ? 'is-invalid' : ''}`}
+                  />
+                  <Form.Label htmlFor="passwordRes">Повторите пароль</Form.Label>
 
-                  <div className="mb-3">
-                    <label htmlFor="passwordRes" className="form-label">{t('signup.resPassword')}</label>
-                    <Field type="passwordRes" id="passwordRes" name="passwordRes" className="form-control" />
-                    <ErrorMessage name="passwordRes" component="div" className="text-danger" />
-                  </div>
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {/* {formik.errors.passwordRes} */}
+                    {networkError ? 'Имя уже занято' : formik.errors.name}
 
-                  {show
-                    && (
-                      <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-                        <Alert.Heading>Ошибка!</Alert.Heading>
-                        <p>
-                          Такой пользователь уже существует
-                          {t('error.errorText')}
-                        </p>
-                      </Alert>
-                    )}
-                  <button type="submit" className="btn btn-primary">Отправить</button>
-                </Form>
-              </Formik>
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Button variant="primary" onClick={formik.handleSubmit}>Отправить</Button>
+
+              </Form>
             </Card.Body>
           </Card>
         </Col>
