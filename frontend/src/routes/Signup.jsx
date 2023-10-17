@@ -87,7 +87,7 @@ const Signup = () => {
                     value={formik.values.name}
                     isInvalid={!!formik.errors.name}
                   />
-                  <Form.Label htmlFor="floatinamengInputCustom">Имя пользователя</Form.Label>
+                  <Form.Label htmlFor="name">Имя пользователя</Form.Label>
                   {/* </Form.Floating> */}
                   <Form.Control.Feedback type="invalid" tooltip>
                     {formik.errors.name}
@@ -122,7 +122,7 @@ const Signup = () => {
                     isInvalid={!!formik.errors.passwordRes}
                     className={`${networkError ? 'is-invalid' : ''}`}
                   />
-                  <Form.Label htmlFor="passwordRes">Повторите пароль</Form.Label>
+                  <Form.Label htmlFor="passwordRes">Подтвердите пароль</Form.Label>
 
                   <Form.Control.Feedback type="invalid" tooltip>
                     {/* {formik.errors.passwordRes} */}
