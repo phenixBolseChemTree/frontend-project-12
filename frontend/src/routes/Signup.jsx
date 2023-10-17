@@ -130,7 +130,7 @@ const Signup = () => {
 
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Button variant="primary" onClick={formik.handleSubmit}>Отправить</Button>
+                <Button variant="primary" type="submit" onClick={formik.handleSubmit}>Отправить</Button>
 
               </Form>
             </Card.Body>
