@@ -126,7 +126,7 @@ const Signup = () => {
 
                   <Form.Control.Feedback type="invalid" tooltip>
                     {/* {formik.errors.passwordRes} */}
-                    {networkError ? 'Имя уже занято' : formik.errors.name}
+                    {networkError ? 'Такой пользователь уже существует' : formik.errors.name}
 
                   </Form.Control.Feedback>
                 </Form.Group>
