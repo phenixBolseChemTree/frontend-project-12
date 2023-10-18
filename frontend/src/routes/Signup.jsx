@@ -121,7 +121,6 @@ const Signup = () => {
                   <Form.Label htmlFor="passwordRes">Подтвердите пароль</Form.Label>
 
                   <Form.Control.Feedback type="invalid" tooltip>
-                    {/* {formik.errors.passwordRes} */}
                     {signupError ? 'Такой пользователь уже существует' : formik.errors.passwordRes}
 
                   </Form.Control.Feedback>

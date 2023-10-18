@@ -107,7 +107,6 @@ const ChatView = () => {
                 value={formik.values.textInputForm}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                // aria-label={t('chat.newMessage')}
                 aria-label="Новое сообщение"
                 className={inputClassName}
                 placeholder={t('chat.formPlaceholder')}
