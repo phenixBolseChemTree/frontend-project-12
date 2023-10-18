@@ -27,7 +27,7 @@ const Chat = () => {
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch(() => {
-      navigate('/login');
+      // navigate('/login'); // на всякий случай
     });
   }, [dispatch, token, t, navigate]);
 

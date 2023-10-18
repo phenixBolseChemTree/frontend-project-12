@@ -1,23 +1,31 @@
 import React, { useContext, useEffect } from 'react';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import {
+  Outlet, Link, useNavigate, useLocation,
+} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../сomponents/AuthContext';
 
 const NavPage = () => {
+  console.log('!nav!');
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { isLoggedIn, logout, login } = useContext(AuthContext);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
 
     if (token) {
+      console.log(!!token);
       login();
     } else {
-      // тут будет редирект на login
-      // navigate('/login');
+      console.log('нет пользователя!!!');
+      console.log('location', location.pathname);
+      if (location.pathname === '/') {
+        navigate('/login');
+      }
     }
-  }, [login, navigate]);
+  }, [login, navigate, location]);
 
   const handleLogout = () => {
     logout();

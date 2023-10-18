@@ -9,6 +9,7 @@ import SocketConnect from './сomponents/SocketConnect';
 import { SocketProvider } from './сomponents/SocketContext';
 import 'react-toastify/dist/ReactToastify.css';
 import reducer from './slice';
+import { AuthProvider } from './сomponents/AuthContext';
 
 const init = async () => {
   const i18n = i18next.createInstance();
@@ -29,10 +30,12 @@ const init = async () => {
   return (
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
-        <SocketProvider>
-          <SocketConnect />
-          <App />
-        </SocketProvider>
+        <AuthProvider>
+          <SocketProvider>
+            <SocketConnect />
+            <App />
+          </SocketProvider>
+        </AuthProvider>
       </I18nextProvider>
     </Provider>
   );

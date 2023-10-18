@@ -11,7 +11,6 @@ const ModalWindow = () => {
   const { modalStatus, typeModal, modalId } = modal;
   const dispatch = useDispatch();
 
-  console.log('type!!!!!', typeModal);
   const handleClose = () => {
     dispatch(closeModal());
   };
