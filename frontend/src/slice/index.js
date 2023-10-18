@@ -1,6 +1,13 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import chatReducer from './chatSlice';
-import modalSlice from './modalSlice';
+import chatReducer, {
+  addChatData,
+  setNewMessage,
+  setNewChannel,
+  setRemoveChannel,
+  setRenameChannel,
+  setCurrentChannelId,
+} from './chatSlice';
+import modalSlice, { openModal, closeModal } from './modalSlice';
 
 const reducer = combineReducers({
   chat: chatReducer,
@@ -8,3 +15,14 @@ const reducer = combineReducers({
 });
 
 export default reducer;
+
+export {
+  addChatData,
+  setNewMessage,
+  setNewChannel,
+  setRemoveChannel,
+  setRenameChannel,
+  setCurrentChannelId,
+  openModal,
+  closeModal,
+};

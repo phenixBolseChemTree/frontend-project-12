@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import {
   setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
-} from '../slice/chatSlice';
+} from '../slice/index';
 import { useSocket } from './SocketContext';
 
 const SocketConnect = () => {

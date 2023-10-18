@@ -4,7 +4,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { openModal } from '../../slice/modalSlice';
+import { openModal } from '../../slice/index';
 import { setCurrentChannelId } from '../../slice/chatSlice';
 
 const ButtonChannel = ({ id, name, removable }) => {

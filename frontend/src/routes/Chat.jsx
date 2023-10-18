@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import {
   addChatData,
-} from '../slice/chatSlice';
+} from '../slice/index';
 import Channels from '../сomponents/messenger/Сhannels';
 import ChatView from '../сomponents/messenger/ChatView';
 import routes from '../routes';
