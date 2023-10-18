@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import {
   setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
 } from '../slice/index';
-import { useSocket } from './SocketContext';
+import { useSocket } from './SocketProvider';
 
 const SocketConnect = () => {
   const dispatch = useDispatch();

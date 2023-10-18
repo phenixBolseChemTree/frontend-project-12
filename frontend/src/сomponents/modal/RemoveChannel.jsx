@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useSocket } from '../SocketContext';
+import { useSocket } from '../SocketProvider';
 
 const RemoveChannel = ({ handleClose, id }) => {
   const { t } = useTranslation();

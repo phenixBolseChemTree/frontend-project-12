@@ -35,9 +35,7 @@ const Login = () => {
         navigate('/');
         login();
       } catch (error) {
-        console.log('111');
         if (error.message === 'Network Error') {
-          console.log('222');
           toast('Ошибка соединения', { type: 'error' });
         }
         setLoginError(true);

@@ -22,14 +22,13 @@ const modalSlice = createSlice({
       typeModal: null,
       modalId: null,
     }),
-    loadingOff: (state) => ({
-      ...state,
-      isLoading: false,
-    }),
     loadingOn: (state) => ({
       ...state,
       isLoading: true,
-
+    }),
+    loadingOff: (state) => ({
+      ...state,
+      isLoading: false,
     }),
   },
 });

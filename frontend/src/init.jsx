@@ -6,7 +6,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import resources from './locales/index';
 import App from './сomponents/App';
 import SocketConnect from './сomponents/SocketConnect';
-import { SocketProvider } from './сomponents/SocketContext';
+import { SocketProvider } from './сomponents/SocketProvider';
 import 'react-toastify/dist/ReactToastify.css';
 import reducer from './slice';
 import { AuthProvider } from './сomponents/AuthContext';

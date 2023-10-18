@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useSocket } from '../SocketContext';
+import { useSocket } from '../SocketProvider';
 
 const RenameChannel = ({ handleClose, id }) => {
   const { t } = useTranslation();
