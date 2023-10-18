@@ -8,17 +8,10 @@ const RemoveChannel = ({ handleClose, id }) => {
   const { t } = useTranslation();
   const socket = useSocket();
 
-  const notify = (textAction) => {
-    const texti18 = `toast.${textAction}`;
-    toast(t(texti18), {
-      type: 'success', position: 'top-right',
-    });
-  };
-
   const handleSubmit = () => {
     socket.emit('removeChannel', { id });
     handleClose();
-    notify('removeChannel');
+    toast(t('toast.removeChannel'), { type: 'success' });
   };
 
   return (

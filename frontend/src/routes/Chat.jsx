@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+
 import {
   addChatData,
 } from '../slice/index';
@@ -27,7 +28,7 @@ const Chat = () => {
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch(() => {
-      // navigate('/login'); // на всякий случай
+      toast(t('toast.networkError'), { type: 'error' });
     });
   }, [dispatch, token, t, navigate]);
 

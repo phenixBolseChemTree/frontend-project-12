@@ -15,15 +15,10 @@ const NavPage = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    if (token) {
-      console.log(!!token);
+    if (token || location.pathname !== '/') {
       login();
     } else {
-      console.log('нет пользователя!!!');
-      console.log('location', location.pathname);
-      if (location.pathname === '/') {
-        navigate('/login');
-      }
+      navigate('/login');
     }
   }, [login, navigate, location]);
 

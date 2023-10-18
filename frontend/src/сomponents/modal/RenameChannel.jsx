@@ -20,13 +20,6 @@ const RenameChannel = ({ handleClose, id }) => {
     }
   }, []);
 
-  const notify = (textAction) => {
-    const texti18 = `toast.${textAction}`;
-    toast(t(texti18), {
-      type: 'success', position: 'top-right',
-    });
-  };
-
   const validationSchema = yup.object().shape({
     name: yup.string()
       .min(3, t('error.minWord3AndmaxWord20'))
@@ -44,7 +37,7 @@ const RenameChannel = ({ handleClose, id }) => {
       const { name } = values;
       socket.emit('renameChannel', { id, name });
       handleClose();
-      notify('renameChannel');
+      toast(t('toast.renameChannel'), { type: 'success' });
     },
   });
 

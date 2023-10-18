@@ -12,13 +12,6 @@ const AddChannel = ({ handleClose }) => {
   const channels = useSelector((state) => state.chat.channels);
   const { t } = useTranslation();
 
-  const notify = (textAction) => {
-    const texti18 = `toast.${textAction}`;
-    toast(t(texti18), {
-      type: 'success', position: 'top-right',
-    });
-  };
-
   const validationSchema = yup.object().shape({
     name: yup.string()
       .min(3, t('error.minWord3AndmaxWord20'))
@@ -36,7 +29,7 @@ const AddChannel = ({ handleClose }) => {
       const { name } = values;
       socket.emit('newChannel', { name });
       handleClose();
-      notify('addChannel');
+      toast(t('toast.addChannel'), { type: 'success' });
     },
   });
 
