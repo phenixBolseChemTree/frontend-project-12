@@ -5,10 +5,12 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { Provider, ErrorBoundary } from '@rollbar/react';
+import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from './AuthContext';
 import {
   NavPage, Chat, Login, Signup, Page404,
 } from '../routes/pages';
+import ModalWindow from './modal/ModalWindow';
 
 const { REACT_APP_ROLLBAR_ACCESS_TOKEN } = process.env;
 const { REACT_APP_ENV } = process.env;
@@ -32,6 +34,8 @@ const App = () => (
             </Route>
           </Routes>
         </BrowserRouter>
+        <ToastContainer />
+        <ModalWindow />
       </AuthProvider>
     </ErrorBoundary>
   </Provider>

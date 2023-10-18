@@ -11,7 +11,6 @@ import {
 import Channels from '../сomponents/messenger/Сhannels';
 import ChatView from '../сomponents/messenger/ChatView';
 import routes from '../routes';
-import ModalWindow from '../сomponents/modal/ModalWindow';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -39,7 +38,6 @@ const Chat = () => {
         <Channels channels={channels} />
         <ChatView messages={messages} channels={channels} />
         <ToastContainer />
-        <ModalWindow />
       </div>
     </div>
   );

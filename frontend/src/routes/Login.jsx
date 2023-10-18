@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import img from '../assets/red_flag.jpeg';
 import { AuthContext } from '../сomponents/AuthContext';
 import routes from '../routes';
@@ -16,8 +17,6 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
-
-  // const loginError = useRef(null);
   const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
 
@@ -37,6 +36,10 @@ const Login = () => {
         login();
       } catch (error) {
         console.log('111');
+        if (error.message === 'Network Error') {
+          console.log('222');
+          toast('Ошибка соединения', { type: 'error' });
+        }
         setLoginError(true);
         passwordRef.current.classList.add('is-invalid');
         usernameRef.current.classList.add('is-invalid');
@@ -74,7 +77,7 @@ const Login = () => {
 
                   </Form.Group>
 
-                  <Form.Group className="form-floating mb-4">
+                  <Form.Group className="form-floating mb-5">
                     <Form.Control
                       required
                       type="text"

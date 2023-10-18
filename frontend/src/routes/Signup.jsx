@@ -7,6 +7,7 @@ import {
 import axios from 'axios';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import img from '../assets/happy_man.jpg';
 import { AuthContext } from '../сomponents/AuthContext';
 import routes from '../routes';
@@ -49,12 +50,13 @@ const Signup = () => {
         login();
         navigate('/');
       } catch (error) {
+        if (error.message === 'Network Error') {
+          toast('Ошибка соединения', { type: 'error' });
+        }
         if (error.response.status === 409) {
           setSignupError(true);
           passwordResRef.current.classList.add('is-invalid');
         }
-        // Обработка ошибки, например, вывод сообщения или запись в логи.
-        console.error('Произошла ошибка при отправке запроса:', error);
       }
     },
   });
@@ -106,7 +108,7 @@ const Signup = () => {
                     {formik.errors.password}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className="form-floating mb-4">
+                <Form.Group className="form-floating mb-5">
 
                   <Form.Control
                     required
