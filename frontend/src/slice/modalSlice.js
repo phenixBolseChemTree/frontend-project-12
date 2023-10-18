@@ -6,6 +6,7 @@ const modalSlice = createSlice({
     typeModal: null,
     modalStatus: false,
     modalId: '1',
+    isLoading: false,
   },
   reducers: {
     openModal: (state, { payload }) => ({
@@ -21,8 +22,19 @@ const modalSlice = createSlice({
       typeModal: null,
       modalId: null,
     }),
+    loadingOff: (state) => ({
+      ...state,
+      isLoading: false,
+    }),
+    loadingOn: (state) => ({
+      ...state,
+      isLoading: true,
+
+    }),
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const {
+  openModal, closeModal, loadingOff, loadingOn,
+} = modalSlice.actions;
 export default modalSlice.reducer;

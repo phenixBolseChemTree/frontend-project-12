@@ -7,7 +7,9 @@ import chatReducer, {
   setRenameChannel,
   setCurrentChannelId,
 } from './chatSlice';
-import modalSlice, { openModal, closeModal } from './modalSlice';
+import modalSlice, {
+  openModal, closeModal, loadingOff, loadingOn,
+} from './modalSlice';
 
 const reducer = combineReducers({
   chat: chatReducer,
@@ -25,4 +27,6 @@ export {
   setCurrentChannelId,
   openModal,
   closeModal,
+  loadingOff,
+  loadingOn,
 };
