@@ -12,8 +12,7 @@ import { AuthContext } from '../сomponents/AuthContext';
 import routes from '../routes';
 
 const Signup = () => {
-  // const errorNetwork = useRef(null);
-  const [networkError, setNetworkError] = useState(false);
+  const [signupError, setSignupError] = useState(false);
   const passwordResRef = useRef(null);
   const { t } = useTranslation();
   const { login } = useContext(AuthContext);
@@ -51,7 +50,7 @@ const Signup = () => {
         navigate('/');
       } catch (error) {
         if (error.response.status === 409) {
-          setNetworkError(true);
+          setSignupError(true);
           passwordResRef.current.classList.add('is-invalid');
         }
         // Обработка ошибки, например, вывод сообщения или запись в логи.
@@ -76,7 +75,6 @@ const Signup = () => {
               <Form onSubmit={formik.handleSubmit}>
                 <h1 className="text-center mb-4">{t('login.registration')}</h1>
                 <Form.Group className="form-floating mb-3">
-                  {/* <Form.Floating> */}
                   <Form.Control
                     required
                     type="text"
@@ -87,7 +85,6 @@ const Signup = () => {
                     isInvalid={!!formik.errors.name}
                   />
                   <Form.Label htmlFor="name">Имя пользователя</Form.Label>
-                  {/* </Form.Floating> */}
                   <Form.Control.Feedback type="invalid" tooltip>
                     {formik.errors.name}
                   </Form.Control.Feedback>
@@ -109,7 +106,7 @@ const Signup = () => {
                     {formik.errors.password}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className="form-floating mb-3">
+                <Form.Group className="form-floating mb-4">
 
                   <Form.Control
                     required
@@ -120,17 +117,16 @@ const Signup = () => {
                     value={formik.values.passwordRes}
                     isInvalid={!!formik.errors.passwordRes}
                     ref={passwordResRef}
-                  // className={`${networkError ? 'is-invalid' : ''}`}
                   />
                   <Form.Label htmlFor="passwordRes">Подтвердите пароль</Form.Label>
 
                   <Form.Control.Feedback type="invalid" tooltip>
                     {/* {formik.errors.passwordRes} */}
-                    {networkError ? 'Такой пользователь уже существует' : formik.errors.passwordRes}
+                    {signupError ? 'Такой пользователь уже существует' : formik.errors.passwordRes}
 
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={formik.handleSubmit}>Отправить</Button>
+                <Button variant="outline-primary" className="w-100 btn btn-outline-primary" type="submit" onClick={formik.handleSubmit}>Зарегистрироваться</Button>
 
               </Form>
             </Card.Body>

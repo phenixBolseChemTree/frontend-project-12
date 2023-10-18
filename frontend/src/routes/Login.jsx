@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import {
-  Formik, Form, Field, ErrorMessage,
-} from 'formik';
-import {
-  Container, Row, Col, Card,
+  Container, Row, Col, Card, Button,
+  Form,
 } from 'react-bootstrap';
-import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import img from '../assets/red_flag.jpeg';
@@ -15,29 +13,37 @@ import routes from '../routes';
 
 const Login = () => {
   const { t } = useTranslation();
-  const [show, setShow] = useState(false);
   const { login } = useContext(AuthContext);
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
 
-  const initialValues = {
-    name: '',
-    password: '',
-  };
+  // const loginError = useRef(null);
+  const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
 
-  const onSubmit = ({ name, password }) => {
-    axios.post(routes.login, { username: String(name), password: String(password) })
-      .then((response) => {
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      password: '',
+    },
+    onSubmit: async (values) => {
+      const { name, password } = values;
+      try {
+        const response = await axios.post(routes.login, { username: name, password });
         const { token } = response.data;
         localStorage.setItem('username', name);
         localStorage.setItem('token', token);
         navigate('/');
         login();
-      })
-      .catch((e) => {
-        console.log('отлавливаем ошибку!!!', e);
-        setShow(true);
-      });
-  };
+      } catch (error) {
+        console.log('111');
+        setLoginError(true);
+        passwordRef.current.classList.add('is-invalid');
+        usernameRef.current.classList.add('is-invalid');
+      }
+    },
+  });
+
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
@@ -53,37 +59,40 @@ const Login = () => {
               </Col>
               <Col md={6} className="mt-3 mt-md-0">
                 <h1 className="text-center mb-4">{t('login.come')}</h1>
-                <Formik
-                  initialValues={initialValues}
-                  // validationSchema={SignupSchema}
-                  onSubmit={onSubmit}
-                >
-                  <Form>
-                    <div className="mb-3">
-                      <label htmlFor="name" className="form-label">{t('login.yourName')}</label>
-                      <Field type="text" id="name" name="name" className="form-control" />
-                      <ErrorMessage name="name" component="div" className="text-danger" />
-                    </div>
+                <Form onSubmit={formik.handleSubmit}>
+                  <Form.Group className="form-floating mb-3">
+                    <Form.Control
+                      required
+                      type="text"
+                      name="name"
+                      id="name"
+                      onChange={formik.handleChange}
+                      value={formik.values.name}
+                      ref={usernameRef}
+                    />
+                    <Form.Label htmlFor="name">{t('login.yourName')}</Form.Label>
 
-                    <div className="mb-3">
-                      <label htmlFor="password" className="form-label">{t('login.password')}</label>
-                      <Field type="text" id="password" name="password" className="form-control" />
-                      <ErrorMessage name="password" component="div" className="text-danger" />
-                    </div>
+                  </Form.Group>
 
-                    {show
-                      && (
-                        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-                          <Alert.Heading>{t('error.errorText')}</Alert.Heading>
-                          <p>
-                            {t('error.AlertUserAlreadyExists')}
-                          </p>
-                        </Alert>
-                      )}
+                  <Form.Group className="form-floating mb-4">
+                    <Form.Control
+                      required
+                      type="text"
+                      name="password"
+                      id="password"
+                      onChange={formik.handleChange}
+                      value={formik.values.password}
+                      ref={passwordRef}
+                    />
+                    <Form.Label htmlFor="password">{t('login.password')}</Form.Label>
 
-                    <button type="submit" className="btn btn-primary">{t('login.btnSend')}</button>
-                  </Form>
-                </Formik>
+                    <Form.Control.Feedback type="invalid" tooltip>
+                      {loginError && 'Неверные имя пользователя или пароль'}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form>
+                <Button onClick={formik.handleSubmit} type="submit" variant="outline-primary" className="w-100 mb-3 btn btn-outline-primary">Войти</Button>
+
               </Col>
             </Card.Body>
             <Card.Footer className="p-4">
