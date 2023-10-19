@@ -29,7 +29,7 @@ export default {
       userName: 'Имя пользователя',
       password: 'Пароль',
       resPassword: 'Подтвердите пароль',
-      btnRegistration: 'Зарегестрироваться',
+      btnRegistration: 'Зарегистрироваться',
       error409: 'Такой пользователь уже существует',
     },
     error404Page: {

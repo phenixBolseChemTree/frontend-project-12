@@ -63,7 +63,7 @@ const RenameChannel = ({ handleClose, id }) => {
               autoFocus
               ref={controlRef}
             />
-            <Form.Label className="visually-hidden" htmlFor="name">Имя канала</Form.Label>
+            <Form.Label className="visually-hidden" htmlFor="name">{t('modal.formLabelName')}</Form.Label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
             </Form.Control.Feedback>
