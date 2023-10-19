@@ -34,9 +34,12 @@ const AddChannel = ({ handleClose }) => {
   });
 
   return (
-    <Modal.Dialog>
+    <div
+      className="modal show"
+      style={{ display: 'block', position: 'initial' }}
+    >
       <Modal.Header closeButton>
-        <Modal.Title>MakeChannel</Modal.Title>
+        <Modal.Title>{t('modal.addChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -57,17 +60,16 @@ const AddChannel = ({ handleClose }) => {
             </Form.Control.Feedback>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Close
+                {t('modal.btnCancel')}
               </Button>
               <Button variant="primary" onClick={formik.handleSubmit}>
-                Save Changes
+                {t('modal.btnSend')}
               </Button>
             </Modal.Footer>
           </Form.Group>
         </Form>
       </Modal.Body>
-    </Modal.Dialog>
-
+    </div>
   );
 };
 export default AddChannel;

@@ -42,9 +42,12 @@ const RenameChannel = ({ handleClose, id }) => {
   });
 
   return (
-    <Modal.Dialog>
+    <div
+      className="modal show"
+      style={{ display: 'block', position: 'initial' }}
+    >
       <Modal.Header closeButton>
-        <Modal.Title>RenameChannel</Modal.Title>
+        <Modal.Title>{t('modal.renameChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -66,16 +69,16 @@ const RenameChannel = ({ handleClose, id }) => {
             </Form.Control.Feedback>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Close
+                {t('modal.btnCancel')}
               </Button>
               <Button variant="primary" onClick={formik.handleSubmit}>
-                Save Changes
+                {t('modal.btnSend')}
               </Button>
             </Modal.Footer>
           </Form.Group>
         </Form>
       </Modal.Body>
-    </Modal.Dialog>
+    </div>
   );
 };
 export default RenameChannel;
