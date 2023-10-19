@@ -3,12 +3,15 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSocket } from '../SocketProvider';
+import { loadingOn, loadingOff } from '../../slice';
 
 const AddChannel = ({ handleClose }) => {
   const socket = useSocket();
+  const dispatch = useDispatch();
   const channels = useSelector((state) => state.chat.channels);
+  const isLoading = useSelector((state) => state.modal.isLoading);
   const { t } = useTranslation();
 
   const validationSchema = yup.object().shape({
@@ -25,9 +28,17 @@ const AddChannel = ({ handleClose }) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      const { name } = values;
-      socket.emit('newChannel', { name });
-      handleClose();
+      // const { name } = values;
+      // socket.emit('newChannel', { name });
+      // handleClose();
+      if (!isLoading) {
+        const { name } = values;
+        dispatch(loadingOn());
+        socket.emit('newChannel', { name });
+        setTimeout(() => {
+          dispatch(loadingOff());
+        }, 3000);
+      }
     },
   });
 
@@ -60,7 +71,7 @@ const AddChannel = ({ handleClose }) => {
               <Button variant="secondary" onClick={handleClose}>
                 {t('modal.btnCancel')}
               </Button>
-              <Button variant="primary" onClick={formik.handleSubmit}>
+              <Button variant="primary" onClick={formik.handleSubmit} disabled={isLoading}>
                 {t('modal.btnSend')}
               </Button>
             </Modal.Footer>

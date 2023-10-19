@@ -3,15 +3,17 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSocket } from '../SocketProvider';
+import { loadingOn, loadingOff } from '../../slice';
 
 const RenameChannel = ({ handleClose, id }) => {
   const { t } = useTranslation();
   const controlRef = useRef(null);
-  console.log('handleClose!!!', handleClose);
   const socket = useSocket();
   const channels = useSelector((state) => state.chat.channels);
+  const isLoading = useSelector((state) => state.modal.isLoading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (controlRef.current) {
@@ -33,12 +35,16 @@ const RenameChannel = ({ handleClose, id }) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      const { name } = values;
-      socket.emit('renameChannel', { id, name });
-      handleClose();
+      if (!isLoading) {
+        const { name } = values;
+        dispatch(loadingOn());
+        socket.emit('renameChannel', { id, name });
+        setTimeout(() => {
+          dispatch(loadingOff());
+        }, 3000);
+      }
     },
   });
-
   return (
     <div
       className="modal show"
@@ -69,7 +75,7 @@ const RenameChannel = ({ handleClose, id }) => {
               <Button variant="secondary" onClick={handleClose}>
                 {t('modal.btnCancel')}
               </Button>
-              <Button variant="primary" onClick={formik.handleSubmit}>
+              <Button variant="primary" onClick={formik.handleSubmit} disabled={isLoading}>
                 {t('modal.btnSend')}
               </Button>
             </Modal.Footer>
