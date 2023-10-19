@@ -11,27 +11,12 @@ const NavPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isLoggedIn, logout, login } = useContext(AuthContext);
-  console.log('location.pathname', location.pathname);
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log('token', !!token);
-    // if (token) {
-    //   login();
-    //   if (location.pathname === '/') {
-    //     // navigate('/login');
-    //   }
-    // } else {
-    //   navigate('/login');
-    // }
     if (token) {
-      console.log(!!token);
       login();
-    } else {
-      console.log('нет пользователя!!!');
-      console.log('location', location.pathname);
-      if (location.pathname === '/') {
-        navigate('/login');
-      }
+    } else if (location.pathname === '/') {
+      navigate('/login');
     }
   }, [login, navigate, location]);
 

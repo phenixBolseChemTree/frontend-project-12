@@ -51,7 +51,7 @@ const Signup = () => {
         navigate('/');
       } catch (error) {
         if (error.message === 'Network Error') {
-          toast('Ошибка соединения', { type: 'error' });
+          toast(t('toast.connectError'), { type: 'error' });
         }
         if (error.response.status === 409) {
           setSignupError(true);
@@ -86,7 +86,7 @@ const Signup = () => {
                     value={formik.values.name}
                     isInvalid={!!formik.errors.name}
                   />
-                  <Form.Label htmlFor="name">Имя пользователя</Form.Label>
+                  <Form.Label htmlFor="name">{t('signup.userName')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip>
                     {formik.errors.name}
                   </Form.Control.Feedback>
@@ -102,7 +102,7 @@ const Signup = () => {
                     value={formik.values.password}
                     isInvalid={!!formik.errors.password}
                   />
-                  <Form.Label htmlFor="password">Пароль</Form.Label>
+                  <Form.Label htmlFor="password">{t('signup.password')}</Form.Label>
 
                   <Form.Control.Feedback type="invalid" tooltip>
                     {formik.errors.password}
@@ -120,14 +120,14 @@ const Signup = () => {
                     isInvalid={!!formik.errors.passwordRes}
                     ref={passwordResRef}
                   />
-                  <Form.Label htmlFor="passwordRes">Подтвердите пароль</Form.Label>
+                  <Form.Label htmlFor="passwordRes">{t('signup.password')}</Form.Label>
 
                   <Form.Control.Feedback type="invalid" tooltip>
-                    {signupError ? 'Такой пользователь уже существует' : formik.errors.passwordRes}
+                    {signupError ? t('signup.error409') : formik.errors.passwordRes}
 
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Button variant="outline-primary" className="w-100 btn btn-outline-primary" type="submit" onClick={formik.handleSubmit}>Зарегистрироваться</Button>
+                <Button variant="outline-primary" className="w-100 btn btn-outline-primary" type="submit" onClick={formik.handleSubmit}>{t('signup.btnRegistration')}</Button>
 
               </Form>
             </Card.Body>

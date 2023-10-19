@@ -24,11 +24,9 @@ const ModalWindow = () => {
   const ModalComponent = modalComponents[typeModal] || null;
 
   return (
-    // <div className="modal-dialog modal-dialog-centered">
     <Modal centered show={modalStatus} onHide={handleClose}>
       {ModalComponent}
     </Modal>
-    // </div>
   );
 };
 export default ModalWindow;

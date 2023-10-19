@@ -22,6 +22,7 @@ export default {
       noAccount: 'Нет аккаунта?',
       registration: 'Регистрация',
       btnSend: 'Отправить',
+      customeError: 'Неверные имя пользователя или пароль',
     },
     signup: {
       registration: 'Регистрация',
@@ -29,6 +30,7 @@ export default {
       password: 'Пароль',
       resPassword: 'Подтвердите пароль',
       btnRegistration: 'Зарегестрироваться',
+      error409: 'Такой пользователь уже существует',
     },
     error404Page: {
       pageIsNotFound: 'Страница не найдена',
@@ -42,6 +44,7 @@ export default {
       removeChannel: 'Канал удалён',
       renameChannel: 'Канал переименован',
       networkError: 'Ошибка загрузки данных',
+      connectError: 'Ошибка соединения',
     },
     error: {
       errorText: 'Ошибка',
@@ -66,7 +69,7 @@ export default {
       btnDelete: 'Удалить',
       shure: 'Уверены?',
       formPlaceholder: 'Введите имя канала...',
-      formLabelName: 'Имя канала...',
+      formLabelName: 'Имя канала',
       mustBeUnique: 'Должно быть уникальным',
     },
     dropdownBar: {

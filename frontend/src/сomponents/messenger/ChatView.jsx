@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import leoFilter from 'leo-profanity';
 import { useSelector } from 'react-redux';
@@ -18,10 +18,6 @@ const getCurrentMessages = (messages, selectedChannel) => messages.filter(
   ({ channelId }) => channelId === selectedChannel,
 );
 
-const validationSchema = Yup.object().shape({
-  textInputForm: Yup.string().required('Введите сообщение...'),
-});
-
 const ChatView = () => {
   const socket = useSocket();
   const { messages, channels, currentChannelId } = useSelector((state) => state.chat);
@@ -31,6 +27,10 @@ const ChatView = () => {
   const currentMessages = getCurrentMessages(messages, currentChannelId);
 
   const messageCount = currentMessages.length;
+
+  const validationSchema = yup.object().shape({
+    textInputForm: yup.string().required(t('chat.formPlaceholder')),
+  });
 
   const generateMessageKey = () => {
     if (messageCount === 1) {
@@ -107,7 +107,7 @@ const ChatView = () => {
                 value={formik.values.textInputForm}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                aria-label="Новое сообщение"
+                aria-label={t('chat.newMessage')}
                 className={inputClassName}
                 placeholder={t('chat.formPlaceholder')}
               />
