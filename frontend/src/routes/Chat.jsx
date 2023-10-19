@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -37,7 +37,6 @@ const Chat = () => {
       <div className="row h-100 bg-white flex-md-row">
         <Channels channels={channels} />
         <ChatView messages={messages} channels={channels} />
-        <ToastContainer />
       </div>
     </div>
   );
