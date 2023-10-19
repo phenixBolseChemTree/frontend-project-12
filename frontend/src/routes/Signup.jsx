@@ -51,7 +51,7 @@ const Signup = () => {
         navigate('/');
       } catch (error) {
         if (error.message === 'Network Error') {
-          toast('Ошибка соединения', { type: 'error' });
+          toast(t('signup.connectError'), { type: 'error' });
         }
         if (error.response.status === 409) {
           setSignupError(true);
