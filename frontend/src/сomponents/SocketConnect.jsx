@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import {
-  setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
+  loadingOff,
+  setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, closeModal,
 } from '../slice/index';
 import { useSocket } from './SocketProvider';
 
@@ -13,7 +14,11 @@ const SocketConnect = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const notify = (type) => toast(t(`toast.${type}`), { type: 'success' });
+    const notify = (type) => {
+      toast(t(`toast.${type}`), { type: 'success' });
+      dispatch(loadingOff());
+      dispatch(closeModal());
+    };
 
     const getData = (action) => {
       const eventHandler = (payload) => {
