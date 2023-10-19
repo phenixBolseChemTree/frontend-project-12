@@ -36,7 +36,7 @@ const Login = () => {
         login();
       } catch (error) {
         if (error.message === 'Network Error') {
-          toast(t('toast.connectError'), { type: 'error' });
+          toast('Ошибка соединения', { type: 'error' });
         }
         setLoginError(true);
         passwordRef.current.classList.add('is-invalid');
@@ -88,11 +88,11 @@ const Login = () => {
                     <Form.Label htmlFor="password">{t('login.password')}</Form.Label>
 
                     <Form.Control.Feedback type="invalid" tooltip>
-                      {loginError && t('login.customeError')}
+                      {loginError && 'Неверные имя пользователя или пароль'}
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Form>
-                <Button onClick={formik.handleSubmit} type="submit" variant="outline-primary" className="w-100 mb-3 btn btn-outline-primary">{t('login.come')}</Button>
+                <Button onClick={formik.handleSubmit} type="submit" variant="outline-primary" className="w-100 mb-3 btn btn-outline-primary">Войти</Button>
 
               </Col>
             </Card.Body>
