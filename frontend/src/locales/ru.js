@@ -14,6 +14,7 @@ export default {
       formPlaceholder: 'Введите сообщение...',
       send: 'Отправить',
       newMessage: 'Новое сообщение',
+      controlChannel: 'Управление каналом',
     },
     login: {
       come: 'Войти',

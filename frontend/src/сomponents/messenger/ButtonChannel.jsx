@@ -44,7 +44,7 @@ const ButtonChannel = ({ id, name, removable }) => {
           </Button>
           <DropdownButton
             variant={isSelected ? 'secondary' : ''}
-            title={<span><span className="visually-hidden">Управление каналом</span></span>}
+            title={<span><span className="visually-hidden">{t('chat.controlChannel')}</span></span>}
             style={{ color: 'black', background: '#f8f9fa' }}
             as={ButtonGroup}
             id="bg-nested-dropdown"

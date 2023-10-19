@@ -28,9 +28,6 @@ const AddChannel = ({ handleClose }) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      // const { name } = values;
-      // socket.emit('newChannel', { name });
-      // handleClose();
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());

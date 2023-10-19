@@ -55,7 +55,7 @@ const ChatView = () => {
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
-      const validatedText = leoFilter.clean(values.textInputForm); // фильтруем текст
+      const validatedText = leoFilter.clean(values.textInputForm);
 
       socket.emit('newMessage', {
         body: validatedText,
