@@ -48,7 +48,6 @@ export default {
     },
     error: {
       errorText: 'Ошибка',
-      AlertUserAlreadyExists: 'Неверные имя пользователя или пароль',
       minWord3: 'Минимум 3 буквы',
       maxWord20: 'Максимум 20 букв',
       minWord3AndmaxWord20: 'От 3 до 20 символов',
