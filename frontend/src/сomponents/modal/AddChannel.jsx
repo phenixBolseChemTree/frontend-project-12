@@ -4,7 +4,6 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import { useSocket } from '../SocketProvider';
 
 const AddChannel = ({ handleClose }) => {
@@ -29,7 +28,6 @@ const AddChannel = ({ handleClose }) => {
       const { name } = values;
       socket.emit('newChannel', { name });
       handleClose();
-      toast(t('toast.addChannel'), { type: 'success' });
     },
   });
 

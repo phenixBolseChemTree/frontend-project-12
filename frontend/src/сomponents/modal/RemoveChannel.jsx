@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import { useSocket } from '../SocketProvider';
 
 const RemoveChannel = ({ handleClose, id }) => {
@@ -11,7 +10,6 @@ const RemoveChannel = ({ handleClose, id }) => {
   const handleSubmit = () => {
     socket.emit('removeChannel', { id });
     handleClose();
-    toast(t('toast.removeChannel'), { type: 'success' });
   };
 
   return (

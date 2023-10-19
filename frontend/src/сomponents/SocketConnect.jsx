@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import {
   setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel,
 } from '../slice/index';
@@ -8,8 +10,11 @@ import { useSocket } from './SocketProvider';
 const SocketConnect = () => {
   const dispatch = useDispatch();
   const socket = useSocket();
+  const { t } = useTranslation();
 
   useEffect(() => {
+    const notify = (type) => toast(t(`toast.${type}`), { type: 'success' });
+
     const getData = (action) => {
       const eventHandler = (payload) => {
         switch (action) {
@@ -18,12 +23,15 @@ const SocketConnect = () => {
             break;
           case 'newChannel':
             dispatch(setNewChannel(payload));
+            notify('addChannel');
             break;
           case 'removeChannel':
             dispatch(setRemoveChannel(payload));
+            notify('removeChannel');
             break;
           case 'renameChannel':
             dispatch(setRenameChannel(payload));
+            notify('renameChannel');
             break;
           default:
         }
@@ -39,7 +47,7 @@ const SocketConnect = () => {
     getData('newChannel');
     getData('removeChannel');
     getData('renameChannel');
-  }, [dispatch, socket]);
+  }, [dispatch, socket, t]);
 
   return null;
 };
