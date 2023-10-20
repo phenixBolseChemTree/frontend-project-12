@@ -46,43 +46,35 @@ const RenameChannel = ({ handleClose, id }) => {
     },
   });
   return (
-    <div
-      className="modal show"
-      style={{ display: 'block', position: 'initial' }}
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>{t('modal.renameChannel')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={formik.handleSubmit}>
-          <Form.Group>
-            <Form.Control
-              required
-              type="text"
-              name="name"
-              id="name"
-              onChange={formik.handleChange}
-              value={formik.values.name}
-              isInvalid={!!formik.errors.name}
-              autoFocus
-              ref={controlRef}
-            />
-            <Form.Label className="visually-hidden" htmlFor="name">{t('modal.formLabelName')}</Form.Label>
-            <Form.Control.Feedback type="invalid">
-              {formik.errors.name}
-            </Form.Control.Feedback>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                {t('modal.btnCancel')}
-              </Button>
-              <Button variant="primary" onClick={formik.handleSubmit} disabled={isLoading}>
-                {t('modal.btnSend')}
-              </Button>
-            </Modal.Footer>
-          </Form.Group>
-        </Form>
-      </Modal.Body>
-    </div>
+    <Modal.Body>
+      <Form onSubmit={formik.handleSubmit}>
+        <Form.Group>
+          <Form.Control
+            required
+            type="text"
+            name="name"
+            id="name"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            isInvalid={!!formik.errors.name}
+            autoFocus
+            ref={controlRef}
+          />
+          <Form.Label className="visually-hidden" htmlFor="name">{t('modal.formLabelName')}</Form.Label>
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.name}
+          </Form.Control.Feedback>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              {t('modal.btnCancel')}
+            </Button>
+            <Button variant="primary" onClick={formik.handleSubmit} disabled={isLoading}>
+              {t('modal.btnSend')}
+            </Button>
+          </Modal.Footer>
+        </Form.Group>
+      </Form>
+    </Modal.Body>
   );
 };
 export default RenameChannel;

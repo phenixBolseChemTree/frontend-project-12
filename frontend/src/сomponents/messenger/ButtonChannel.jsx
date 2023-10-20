@@ -49,8 +49,8 @@ const ButtonChannel = ({ id, name, removable }) => {
             as={ButtonGroup}
             id="bg-nested-dropdown"
           >
-            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'remove', id }))} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
-            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'rename', id }))} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
+            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'removeChannel', id }))} eventKey="1">{t('dropdownBar.delete')}</Dropdown.Item>
+            <Dropdown.Item onClick={() => dispatch(openModal({ type: 'renameChannel', id }))} eventKey="2">{t('dropdownBar.rename')}</Dropdown.Item>
           </DropdownButton>
         </ButtonGroup>
       )}
