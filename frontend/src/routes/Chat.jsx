@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-
 import {
   addChatData,
 } from '../slice/index';
@@ -27,7 +26,9 @@ const Chat = () => {
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch(() => {
-      toast(t('toast.networkError'), { type: 'error' });
+      if (token) {
+        toast(t('toast.networkError'), { type: 'error' });
+      }
     });
   }, [dispatch, token, t, navigate]);
 
