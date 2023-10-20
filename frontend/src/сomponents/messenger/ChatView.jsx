@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +19,8 @@ const getCurrentMessages = (messages, selectedChannel) => messages.filter(
 );
 
 const ChatView = () => {
+  const inputRef = useRef(null);
+
   const socket = useSocket();
   const { messages, channels, currentChannelId } = useSelector((state) => state.chat);
 
@@ -27,6 +29,12 @@ const ChatView = () => {
   const currentMessages = getCurrentMessages(messages, currentChannelId);
 
   const messageCount = currentMessages.length;
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const validationSchema = yup.object().shape({
     textInputForm: yup.string().required(t('chat.formPlaceholder')),
@@ -110,6 +118,7 @@ const ChatView = () => {
                 aria-label={t('chat.newMessage')}
                 className={inputClassName}
                 placeholder={t('chat.formPlaceholder')}
+                ref={inputRef}
               />
               <button
                 type="submit"

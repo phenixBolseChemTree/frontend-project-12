@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../сomponents/AuthContext';
 
 const NavPage = () => {
-  console.log('!nav!');
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
