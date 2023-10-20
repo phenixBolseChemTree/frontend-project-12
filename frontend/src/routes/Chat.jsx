@@ -28,6 +28,9 @@ const Chat = () => {
     }).catch(() => {
       if (token) {
         toast(t('toast.networkError'), { type: 'error' });
+        navigate('/login');
+      } else {
+        navigate('/login');
       }
     });
   }, [dispatch, token, t, navigate]);

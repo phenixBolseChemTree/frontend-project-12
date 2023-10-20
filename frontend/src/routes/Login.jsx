@@ -30,10 +30,12 @@ const Login = () => {
       try {
         const response = await axios.post(routes.login, { username: name, password });
         const { token } = response.data;
-        localStorage.setItem('username', name);
-        localStorage.setItem('token', token);
-        navigate('/');
-        login();
+        if (token !== undefined) {
+          localStorage.setItem('username', name);
+          localStorage.setItem('token', token);
+          navigate('/');
+          login();
+        }
       } catch (error) {
         if (error.message === 'Network Error') {
           toast(t('toast.connectError'), { type: 'error' });
