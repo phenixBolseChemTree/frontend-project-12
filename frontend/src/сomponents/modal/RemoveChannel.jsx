@@ -22,22 +22,30 @@ const RemoveChannel = ({ handleClose, id }) => {
   };
 
   return (
-    <Modal.Body>
-      <p className="lead">{t('modal.shure')}</p>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          {t('modal.btnCancel')}
-        </Button>
-        <Button
-          variant="primary"
-          className="btn-danger"
-          onClick={handleSubmit}
-          disabled={isLoading}
-        >
-          {t('modal.btnDelete')}
-        </Button>
-      </Modal.Footer>
-    </Modal.Body>
+    <div
+      className="modal show"
+      style={{ display: 'block', position: 'initial' }}
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>{t('modal.removeChannel')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p className="lead">{t('modal.shure')}</p>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            {t('modal.btnCancel')}
+          </Button>
+          <Button
+            variant="primary"
+            className="btn-danger"
+            onClick={handleSubmit}
+            disabled={isLoading}
+          >
+            {t('modal.btnDelete')}
+          </Button>
+        </Modal.Footer>
+      </Modal.Body>
+    </div>
   );
 };
 export default RemoveChannel;
