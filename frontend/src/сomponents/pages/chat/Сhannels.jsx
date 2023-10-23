@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import ButtonChannel from './ButtonChannel';
-import { openModal } from '../../slice/index';
+import { openModal } from '../../../slice/index';
 
 const Chanells = ({ channels }) => {
   const { t } = useTranslation();

@@ -38,7 +38,6 @@ const NavPage = () => {
         <div className="container">
           <Link to={isLoggedIn ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
           {isLoggedIn && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
-
         </div>
       </nav>
       <div style={{

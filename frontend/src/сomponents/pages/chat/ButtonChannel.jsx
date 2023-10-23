@@ -4,7 +4,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { openModal, setCurrentChannelId } from '../../slice/index';
+import { openModal, setCurrentChannelId } from '../../../slice/index';
 
 const ButtonChannel = ({ id, name, removable }) => {
   const { t } = useTranslation();

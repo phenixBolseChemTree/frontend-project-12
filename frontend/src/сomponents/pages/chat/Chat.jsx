@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import {
   addChatData,
 } from '../../../slice/index';
-import Channels from '../../messenger/Сhannels';
-import ChatView from '../../messenger/ChatView';
+import Channels from './Сhannels';
+import ChatView from './ChatView';
 import routes from '../../../routes';
 
 const Chat = () => {
