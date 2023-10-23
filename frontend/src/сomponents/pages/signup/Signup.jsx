@@ -9,9 +9,9 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-import img from '../../assets/happy_man.jpg';
-import { AuthContext } from '../AuthContext';
-import routes from '../../routes';
+import img from '../../../assets/happy_man.jpg';
+import { AuthContext } from '../../AuthContext';
+import routes from '../../../routes';
 
 const Signup = () => {
   const [signupError, setSignupError] = useState(false);

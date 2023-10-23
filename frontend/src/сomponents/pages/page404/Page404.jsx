@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import img from '../../assets/error_404.jpeg';
+import img from '../../../assets/error_404.jpeg';
 
 const Page404 = () => {
   const { t } = useTranslation();
