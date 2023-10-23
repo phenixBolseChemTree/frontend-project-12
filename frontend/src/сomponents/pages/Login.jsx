@@ -8,9 +8,9 @@ import {
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import img from '../assets/red_flag.jpeg';
-import { AuthContext } from '../сomponents/AuthContext';
-import routes from '../routes';
+import img from '../../assets/red_flag.jpeg';
+import { AuthContext } from '../AuthContext';
+import routes from '../../routes';
 
 const Login = () => {
   const { t } = useTranslation();

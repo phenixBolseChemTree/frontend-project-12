@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from './AuthContext';
 import {
   NavPage, Chat, Login, Signup, Page404,
-} from '../routes/pages';
+} from './pages/pages';
 import ModalWindow from './modal/ModalWindow';
 
 const { REACT_APP_ROLLBAR_ACCESS_TOKEN } = process.env;
