@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
-  Outlet, Link, useNavigate, useLocation,
+  Outlet, Link, useNavigate,
 } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../../AuthContext';
@@ -8,16 +8,7 @@ import { AuthContext } from '../../AuthContext';
 const NavPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const location = useLocation();
-  const { isLoggedIn, logout, login } = useContext(AuthContext);
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      login();
-    } else if (location.pathname === '/') {
-      navigate('/login');
-    }
-  }, [login, navigate, location]);
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   const handleLogout = () => {
     logout();

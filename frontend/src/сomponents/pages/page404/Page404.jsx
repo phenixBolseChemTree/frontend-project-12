@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import img from '../../../assets/error_404.jpeg';
 
 const Page404 = () => {
@@ -11,7 +12,7 @@ const Page404 = () => {
       <p className="text-muted">
         {t('error404Page.ButYouCanMoveOn')}
         {' '}
-        <a href="/">{t('error404Page.onMainPage')}</a>
+        <Link to="/">{t('error404Page.onMainPage')}</Link>
         {' '}
       </p>
     </div>

@@ -2,6 +2,7 @@ import {
   Container, Row, Col, Card,
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import img from '../../../assets/red_flag.jpeg';
 import LoginForm from './LoginForm';
 
@@ -30,7 +31,7 @@ const Login = () => {
               <div className="text-center">
                 <span>{t('login.noAccount')}</span>
                 {' '}
-                <a href="/signup">{t('login.registration')}</a>
+                <Link to="/signup">{t('login.registration')}</Link>
               </div>
             </Card.Footer>
           </Card>

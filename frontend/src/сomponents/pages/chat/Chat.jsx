@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -17,6 +17,7 @@ const Chat = () => {
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
   const { token } = localStorage;
+  const [isPageLoading, setIsPageLoading] = useState(false);
 
   useEffect(() => {
     axios.get(routes.data, {
@@ -32,10 +33,17 @@ const Chat = () => {
       } else {
         navigate('/login');
       }
+    }).finally(() => {
+      setIsPageLoading(true);
     });
   }, [dispatch, token, t, navigate]);
 
   const { channels, messages } = chatData;
+
+  if (!isPageLoading) {
+    return null;
+  }
+
   return (
     <div className=" h-100 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
