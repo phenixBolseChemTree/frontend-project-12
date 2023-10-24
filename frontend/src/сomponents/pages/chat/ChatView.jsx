@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useTranslation } from 'react-i18next';
+import { Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
-import { useSelector } from 'react-redux';
 import { useSocket } from '../../SocketProvider';
 
 const currentNameChannel = (channels, id) => {
@@ -19,9 +20,10 @@ const getCurrentMessages = (messages, selectedChannel) => messages.filter(
 );
 
 const ChatView = () => {
+  const socket = useSocket();
+
   const inputRef = useRef(null);
 
-  const socket = useSocket();
   const { messages, channels, currentChannelId } = useSelector((state) => state.chat);
 
   const { t } = useTranslation();
@@ -30,31 +32,9 @@ const ChatView = () => {
 
   const messageCount = currentMessages.length;
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
   const validationSchema = yup.object().shape({
     textInputForm: yup.string().required(t('chat.formPlaceholder')),
   });
-
-  const generateMessageKey = () => {
-    if (messageCount === 1) {
-      return 'key_one';
-    }
-
-    if (messageCount >= 2 && messageCount <= 4) {
-      return 'key_few';
-    }
-
-    return 'key_many';
-  };
-
-  const messageKey = generateMessageKey();
-
-  const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
 
   const formik = useFormik({
     initialValues: {
@@ -77,9 +57,25 @@ const ChatView = () => {
     },
   });
 
-  const isInputInvalid = formik.touched.textInputForm && formik.errors.textInputForm;
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [nameChanel]);
 
-  const inputClassName = `border-0 p-0 ps-2 form-control ${isInputInvalid ? 'is-invalid' : ''}`;
+  const generateMessageKey = () => {
+    if (messageCount === 1) {
+      return 'key_one';
+    }
+
+    if (messageCount >= 2 && messageCount <= 4) {
+      return 'key_few';
+    }
+
+    return 'key_many';
+  };
+
+  const messageKey = generateMessageKey();
+
+  const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
 
   return (
     <div className="col p-0 h-100">
@@ -106,18 +102,19 @@ const ChatView = () => {
 
             ))}
         </div>
+        {/* <ChatForm /> */}
         <div className="mt-auto px-5 py-3">
-          <form onSubmit={formik.handleSubmit} className="py-1 border rounded-2">
-            <div className="input-group has-validation">
-              <input
+          <Form className="py-1 border rounded-2" onSubmit={formik.handleSubmit}>
+            <Form.Group className="input-group has-validation">
+              <Form.Control
                 type="text"
                 name="textInputForm"
-                value={formik.values.textInputForm}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 aria-label={t('chat.newMessage')}
-                className={inputClassName}
+                className="border-0 p-0 ps-2 form-control"
+                value={formik.values.textInputForm}
                 placeholder={t('chat.formPlaceholder')}
+                onChange={formik.handleChange}
+                autoFocus
                 ref={inputRef}
               />
               <button
@@ -127,18 +124,11 @@ const ChatView = () => {
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
                   <path fillRule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-
                 </svg>
                 <span className="visually-hidden">{t('chat.send')}</span>
               </button>
-
-            </div>
-            {formik.touched.textInputForm && formik.errors.textInputForm && (
-              <div className="invalid-feedback">
-                {formik.errors.textInputForm}
-              </div>
-            )}
-          </form>
+            </Form.Group>
+          </Form>
         </div>
       </div>
     </div>
