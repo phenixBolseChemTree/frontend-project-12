@@ -6,4 +6,6 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/6b92ec95611401ee8a69/maintainability)](https://codeclimate.com/github/phenixBolseChemTree/frontend-project-12/maintainability)
 
-## Упрощенный аналог чата slack
+## Упрощенный аналог чата slack с регистацией, авторизацией. Возможностью отправлять сообщения в каналах. Добавлять, изменять и удалять каналы.
+
+## Мой проект на render.com https://hexlet-chat-2-mtxj.onrender.com
