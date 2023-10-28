@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -8,10 +8,15 @@ import { Form } from 'react-bootstrap';
 import { useSocket } from '../../SocketProvider';
 
 const ChatForm = () => {
+  const input = useRef(null);
   const socket = useSocket();
   const { currentChannelId } = useSelector((state) => state.chat);
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    input.current.focus();
+  }, []);
 
   const validationSchema = yup.object().shape({
     textInputForm: yup.string().required(t('chat.formPlaceholder')),
@@ -49,7 +54,7 @@ const ChatForm = () => {
             value={formik.values.textInputForm}
             placeholder={t('chat.formPlaceholder')}
             onChange={formik.handleChange}
-            autoFocus
+            ref={input}
           />
           <button
             type="submit"
