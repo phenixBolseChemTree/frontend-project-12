@@ -3,6 +3,7 @@ import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import io from 'socket.io-client';
 import resources from './locales/index';
 import App from './components/App';
 import SocketConnect from './components/SocketConnect';
@@ -11,7 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import reducer from './slice';
 import { AuthProvider } from './components/AuthContext';
 
-const init = async () => {
+const Init = async () => {
+  const socket = io();
   const i18n = i18next.createInstance();
   await i18n
     .use(initReactI18next)
@@ -32,7 +34,7 @@ const init = async () => {
       <I18nextProvider i18n={i18n}>
         <AuthProvider>
           <ApiProvider>
-            <SocketConnect />
+            <SocketConnect socket={socket} />
             <App />
           </ApiProvider>
         </AuthProvider>
@@ -41,4 +43,4 @@ const init = async () => {
   );
 };
 
-export default init;
+export default Init;
