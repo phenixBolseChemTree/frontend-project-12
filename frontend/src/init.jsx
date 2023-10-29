@@ -4,12 +4,12 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import resources from './locales/index';
-import App from './сomponents/App';
-import SocketConnect from './сomponents/SocketConnect';
-import { SocketProvider } from './сomponents/SocketProvider';
+import App from './components/App';
+import SocketConnect from './components/SocketConnect';
+import { SocketProvider } from './components/SocketProvider';
 import 'react-toastify/dist/ReactToastify.css';
 import reducer from './slice';
-import { AuthProvider } from './сomponents/AuthContext';
+import { AuthProvider } from './components/AuthContext';
 
 const init = async () => {
   const i18n = i18next.createInstance();
