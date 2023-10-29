@@ -6,7 +6,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import resources from './locales/index';
 import App from './components/App';
-import SocketConnect from './components/SocketConnect';
+// import SocketConnect from './components/SocketConnect';
 import { ApiProvider } from './components/ApiProvider';
 import 'react-toastify/dist/ReactToastify.css';
 import reducer from './slice';
@@ -33,8 +33,7 @@ const init = async () => {
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
         <AuthProvider>
-          <ApiProvider>
-            <SocketConnect socket={socket} />
+          <ApiProvider socket={socket}>
             <App />
           </ApiProvider>
         </AuthProvider>

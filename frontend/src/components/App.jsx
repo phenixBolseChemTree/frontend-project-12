@@ -7,6 +7,7 @@ import '../App.css';
 import { Provider, ErrorBoundary } from '@rollbar/react';
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from './AuthContext';
+import SocketConnect from './SocketConnect';
 import {
   NavPage, Chat, Login, Signup, Page404,
 } from './pages/pages';
@@ -36,6 +37,7 @@ const App = () => (
         </BrowserRouter>
         <ToastContainer />
         <ModalWindow />
+        <SocketConnect />
       </AuthProvider>
     </ErrorBoundary>
   </Provider>
