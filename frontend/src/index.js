@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Init from './Init';
+import init from './init1';
 
 const app = async () => {
   const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(await Init());
+  root.render(await init());
 };
 
 app();

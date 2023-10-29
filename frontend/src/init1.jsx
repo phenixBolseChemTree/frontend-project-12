@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import reducer from './slice';
 import { AuthProvider } from './components/AuthContext';
 
-const Init = async () => {
+const init = async () => {
   const socket = io();
   const i18n = i18next.createInstance();
   await i18n
@@ -43,4 +43,4 @@ const Init = async () => {
   );
 };
 
-export default Init;
+export default init;
