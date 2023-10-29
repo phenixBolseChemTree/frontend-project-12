@@ -6,11 +6,11 @@ import {
   loadingOff,
   setNewMessage, setNewChannel, setRemoveChannel, setRenameChannel, closeModal,
 } from '../slice/index';
-import { useSocket } from './SocketProvider';
+import { useApi } from './ApiProvider';
 
 const SocketConnect = () => {
   const dispatch = useDispatch();
-  const socket = useSocket();
+  const socket = useApi();
   const { t } = useTranslation();
 
   useEffect(() => {

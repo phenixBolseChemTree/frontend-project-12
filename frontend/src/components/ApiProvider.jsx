@@ -3,9 +3,9 @@ import io from 'socket.io-client';
 
 const SocketContext = createContext();
 
-const useSocket = () => useContext(SocketContext);
+const useApi = () => useContext(SocketContext);
 
-const SocketProvider = ({ children }) => {
+const ApiProvider = ({ children }) => {
   const socket = io();
   return (
     <SocketContext.Provider value={socket}>
@@ -14,4 +14,4 @@ const SocketProvider = ({ children }) => {
   );
 };
 
-export { useSocket, SocketProvider };
+export { useApi, ApiProvider };

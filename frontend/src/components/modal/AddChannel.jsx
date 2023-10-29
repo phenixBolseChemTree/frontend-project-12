@@ -4,11 +4,11 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSocket } from '../SocketProvider';
+import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff } from '../../slice';
 
 const AddChannel = ({ handleClose }) => {
-  const socket = useSocket();
+  const socket = useApi();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.chat.channels);
   const isLoading = useSelector((state) => state.modal.isLoading);

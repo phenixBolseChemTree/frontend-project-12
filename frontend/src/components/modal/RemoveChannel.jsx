@@ -2,14 +2,14 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSocket } from '../SocketProvider';
+import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff } from '../../slice';
 
 const RemoveChannel = ({ handleClose, id }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.modal.isLoading);
   const { t } = useTranslation();
-  const socket = useSocket();
+  const socket = useApi();
 
   const handleSubmit = () => {
     if (!isLoading) {

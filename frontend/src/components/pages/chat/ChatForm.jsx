@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 import leoFilter from 'leo-profanity';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
-import { useSocket } from '../../SocketProvider';
+import { useApi } from '../../ApiProvider';
 
 const ChatForm = () => {
   const input = useRef(null);
-  const socket = useSocket();
+  const socket = useApi();
   const { currentChannelId } = useSelector((state) => state.chat);
 
   const { t } = useTranslation();

@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
-import { useSocket } from '../../SocketProvider';
+import { useApi } from '../../ApiProvider';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
@@ -20,7 +20,7 @@ const getCurrentMessages = (messages, selectedChannel) => messages.filter(
 );
 
 const ChatView = () => {
-  const socket = useSocket();
+  const socket = useApi();
 
   const inputRef = useRef(null);
 
