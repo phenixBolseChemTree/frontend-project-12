@@ -4,10 +4,10 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
+import { toast } from 'react-toastify';
 import resources from './locales/index';
 import App from './components/App';
-// import SocketConnect from './components/SocketConnect';
-// import { ApiProvider } from './components/ApiProvider';
+
 import 'react-toastify/dist/ReactToastify.css';
 import reducer, {
   closeModal,
@@ -33,7 +33,8 @@ const init = async () => {
     reducer,
   });
 
-  const notify = () => {
+  const notify = (type) => {
+    toast(i18n.t(`toast.${type}`), { type: 'success' });
     store.dispatch(loadingOff());
     store.dispatch(closeModal());
   };
@@ -46,18 +47,18 @@ const init = async () => {
           break;
         case 'newChannel':
           store.dispatch(setNewChannel(payload));
-          // notify('addChannel');
-          notify();
+          notify('addChannel');
+          // notify();
           break;
         case 'removeChannel':
           store.dispatch(setRemoveChannel(payload));
-          // notify('removeChannel');
-          notify();
+          notify('removeChannel');
+          // notify();
           break;
         case 'renameChannel':
           store.dispatch(setRenameChannel(payload));
-          // notify('renameChannel');
-          notify();
+          notify('renameChannel');
+          // notify();
           break;
         default:
       }
