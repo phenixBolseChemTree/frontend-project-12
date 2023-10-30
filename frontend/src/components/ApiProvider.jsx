@@ -1,13 +1,26 @@
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 const SocketContext = createContext();
 
 const useApi = () => useContext(SocketContext);
 
-const ApiProvider = ({ children, socket }) => (
-  <SocketContext.Provider value={socket}>
-    {children}
-  </SocketContext.Provider>
-);
+// const actions = {
+//   newMessage: (data) => {
+//     socket.emit('newMessage', {
+//       body: data.validatedText,
+//       username: data.localStorage.username,
+//       channelId: data.currentChannelId,
+//     });
+//   },
+//   newChannel: (data) => {
+//     socket.emit('newChannel', { name: data.name });
+//   },
+//   removeChannel: (data) => {
+//     socket.emit('removeChannel', { id: data.id });
+//   },
+//   renameChannel: (data) => {
+//     socket.emit('renameChannel', { id: data.id, name: data.name });
+//   },
+// };
 
-export { useApi, ApiProvider };
+export { useApi, SocketContext };

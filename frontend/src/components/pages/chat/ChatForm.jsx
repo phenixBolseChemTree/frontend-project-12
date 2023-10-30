@@ -6,6 +6,7 @@ import leoFilter from 'leo-profanity';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
 import { useApi } from '../../ApiProvider';
+import apiActions from '../../apiActions';
 
 const ChatForm = () => {
   const input = useRef(null);
@@ -31,10 +32,16 @@ const ChatForm = () => {
       leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
       const validatedText = leoFilter.clean(values.textInputForm);
 
-      socket.emit('newMessage', {
+      // socket.emit('newMessage', {
+      //   body: validatedText,
+      //   username: localStorage.username,
+      //   channelId: currentChannelId,
+      // });
+      apiActions.newMessage({
         body: validatedText,
         username: localStorage.username,
         channelId: currentChannelId,
+        socket,
       });
 
       setSubmitting(false);

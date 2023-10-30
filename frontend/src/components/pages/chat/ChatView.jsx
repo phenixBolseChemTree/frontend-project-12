@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
 import { useApi } from '../../ApiProvider';
+import apiActions from '../../apiActions';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
@@ -45,10 +46,16 @@ const ChatView = () => {
       leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
       const validatedText = leoFilter.clean(values.textInputForm);
 
-      socket.emit('newMessage', {
+      // socket.emit('newMessage', {
+      //   body: validatedText,
+      //   username: localStorage.username,
+      //   channelId: currentChannelId,
+      // });
+      apiActions.newMessage({
         body: validatedText,
         username: localStorage.username,
         channelId: currentChannelId,
+        socket,
       });
 
       setSubmitting(false);

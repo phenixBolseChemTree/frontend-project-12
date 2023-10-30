@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff } from '../../slice';
+import apiActions from '../apiActions';
 
 const RemoveChannel = ({ handleClose, id }) => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const RemoveChannel = ({ handleClose, id }) => {
   const handleSubmit = () => {
     if (!isLoading) {
       dispatch(loadingOn());
-      socket.emit('removeChannel', { id });
+      apiActions.removeChannel({ id, socket });
       setTimeout(() => {
         dispatch(loadingOff());
       }, 3000);

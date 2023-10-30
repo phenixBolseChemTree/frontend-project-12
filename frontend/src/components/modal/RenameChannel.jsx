@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff } from '../../slice';
+import apiActions from '../apiActions';
 
 const RenameChannel = ({ handleClose, id }) => {
   const { t } = useTranslation();
@@ -38,7 +39,7 @@ const RenameChannel = ({ handleClose, id }) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
-        socket.emit('renameChannel', { id, name });
+        apiActions.renameChannel({ id, name, socket });
         setTimeout(() => {
           dispatch(loadingOff());
         }, 3000);

@@ -7,9 +7,13 @@ import io from 'socket.io-client';
 import resources from './locales/index';
 import App from './components/App';
 // import SocketConnect from './components/SocketConnect';
-import { ApiProvider } from './components/ApiProvider';
+// import { ApiProvider } from './components/ApiProvider';
 import 'react-toastify/dist/ReactToastify.css';
-import reducer from './slice';
+import reducer, {
+  closeModal,
+  loadingOff,
+  setNewChannel, setNewMessage, setRemoveChannel, setRenameChannel,
+} from './slice';
 import { AuthProvider } from './components/AuthContext';
 
 const init = async () => {
@@ -29,13 +33,54 @@ const init = async () => {
     reducer,
   });
 
+  const notify = () => {
+    store.dispatch(loadingOff());
+    store.dispatch(closeModal());
+  };
+
+  const getData = (action) => {
+    const eventHandler = (payload) => {
+      switch (action) {
+        case 'newMessage':
+          store.dispatch(setNewMessage(payload));
+          break;
+        case 'newChannel':
+          store.dispatch(setNewChannel(payload));
+          // notify('addChannel');
+          notify();
+          break;
+        case 'removeChannel':
+          store.dispatch(setRemoveChannel(payload));
+          // notify('removeChannel');
+          notify();
+          break;
+        case 'renameChannel':
+          store.dispatch(setRenameChannel(payload));
+          // notify('renameChannel');
+          notify();
+          break;
+        default:
+      }
+    };
+
+    socket.on(action, eventHandler);
+    return () => {
+      socket.off(action, eventHandler);
+    };
+  };
+
+  getData('newMessage');
+  getData('newChannel');
+  getData('removeChannel');
+  getData('renameChannel');
+
   return (
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
         <AuthProvider>
-          <ApiProvider socket={socket}>
-            <App />
-          </ApiProvider>
+          {/* <ApiProvider socket={socket}> */}
+          <App socket={socket} />
+          {/* </ApiProvider> */}
         </AuthProvider>
       </I18nextProvider>
     </Provider>

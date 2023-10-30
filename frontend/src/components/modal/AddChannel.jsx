@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff } from '../../slice';
+import apiActions from '../apiActions';
 
 const AddChannel = ({ handleClose }) => {
   const socket = useApi();
@@ -31,7 +32,8 @@ const AddChannel = ({ handleClose }) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
-        socket.emit('newChannel', { name });
+
+        apiActions.newChannel({ name, socket });
         setTimeout(() => {
           dispatch(loadingOff());
         }, 3000);
