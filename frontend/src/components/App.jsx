@@ -11,7 +11,6 @@ import {
   NavPage, Chat, Login, Signup, Page404,
 } from './pages/pages';
 import ModalWindow from './modal/ModalWindow';
-// import { SocketContext } from './ApiProvider';
 
 const { REACT_APP_ROLLBAR_ACCESS_TOKEN } = process.env;
 const { REACT_APP_ENV } = process.env;
@@ -26,7 +25,6 @@ const App = () => {
   return (
     <Provider config={rollbarConfig}>
       <ErrorBoundary>
-        {/* <SocketContext.Provider value={socket}> */}
         <AuthProvider>
           <BrowserRouter>
             <Routes>
@@ -41,7 +39,6 @@ const App = () => {
           <ToastContainer />
           <ModalWindow />
         </AuthProvider>
-        {/* </SocketContext.Provider> */}
       </ErrorBoundary>
     </Provider>
   );

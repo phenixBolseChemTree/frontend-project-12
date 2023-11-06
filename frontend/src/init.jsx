@@ -64,9 +64,7 @@ const init = async () => {
       <I18nextProvider i18n={i18n}>
         <AuthProvider>
           <SocketContext.Provider value={socket}>
-            {/* <ApiProvider socket={socket}> */}
             <App />
-            {/* </ApiProvider> */}
           </SocketContext.Provider>
         </AuthProvider>
       </I18nextProvider>
