@@ -39,41 +39,24 @@ const init = async () => {
     store.dispatch(closeModal());
   };
 
-  const getData = (action) => {
-    const eventHandler = (payload) => {
-      switch (action) {
-        case 'newMessage':
-          store.dispatch(setNewMessage(payload));
-          break;
-        case 'newChannel':
-          store.dispatch(setNewChannel(payload));
-          notify('addChannel');
-          // notify();
-          break;
-        case 'removeChannel':
-          store.dispatch(setRemoveChannel(payload));
-          notify('removeChannel');
-          // notify();
-          break;
-        case 'renameChannel':
-          store.dispatch(setRenameChannel(payload));
-          notify('renameChannel');
-          // notify();
-          break;
-        default:
-      }
-    };
+  socket.on('newMessage', (payload) => {
+    store.dispatch(setNewMessage(payload));
+  });
 
-    socket.on(action, eventHandler);
-    return () => {
-      socket.off(action, eventHandler);
-    };
-  };
+  socket.on('newChannel', (payload) => {
+    store.dispatch(setNewChannel(payload));
+    notify('addChannel');
+  });
 
-  getData('newMessage');
-  getData('newChannel');
-  getData('removeChannel');
-  getData('renameChannel');
+  socket.on('removeChannel', (payload) => {
+    store.dispatch(setRemoveChannel(payload));
+    notify('removeChannel');
+  });
+
+  socket.on('renameChannel', (payload) => {
+    store.dispatch(setRenameChannel(payload));
+    notify('renameChannel');
+  });
 
   return (
     <Provider store={store}>
