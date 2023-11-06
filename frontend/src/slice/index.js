@@ -10,12 +10,10 @@ import chatReducer, {
 import modalSlice, {
   openModal, closeModal, loadingOff, loadingOn,
 } from './modalSlice';
-import socketSlice, { setSocket, getSocket } from './socketSlice';
 
 const reducer = combineReducers({
   chat: chatReducer,
   modal: modalSlice,
-  socket: socketSlice,
 });
 
 export default reducer;
@@ -31,6 +29,4 @@ export {
   closeModal,
   loadingOff,
   loadingOn,
-  setSocket,
-  getSocket,
 };
