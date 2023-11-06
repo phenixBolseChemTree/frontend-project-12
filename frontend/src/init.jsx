@@ -7,6 +7,7 @@ import io from 'socket.io-client';
 import { toast } from 'react-toastify';
 import resources from './locales/index';
 import App from './components/App';
+import { SocketContext } from './components/ApiProvider';
 
 import 'react-toastify/dist/ReactToastify.css';
 import reducer, {
@@ -62,9 +63,11 @@ const init = async () => {
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
         <AuthProvider>
-          {/* <ApiProvider socket={socket}> */}
-          <App socket={socket} />
-          {/* </ApiProvider> */}
+          <SocketContext.Provider value={socket}>
+            {/* <ApiProvider socket={socket}> */}
+            <App />
+            {/* </ApiProvider> */}
+          </SocketContext.Provider>
         </AuthProvider>
       </I18nextProvider>
     </Provider>
