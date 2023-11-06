@@ -4,8 +4,9 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { useApi } from '../ApiProvider';
-import { loadingOn, loadingOff } from '../../slice';
+import { loadingOn, loadingOff, closeModal } from '../../slice';
 import apiActions from '../apiActions';
 
 const AddChannel = ({ handleClose }) => {
@@ -28,12 +29,18 @@ const AddChannel = ({ handleClose }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
-
-        apiActions.newChannel({ name, socket });
+        try {
+          await apiActions.newChannel({ name, socket });
+          toast(t('toast.addChannel'), { type: 'success' });
+          dispatch(loadingOff());
+          dispatch(closeModal());
+        } catch (e) {
+          console.log('Network Error');
+        }
         setTimeout(() => {
           dispatch(loadingOff());
         }, 3000);

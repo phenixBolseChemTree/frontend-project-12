@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff } from '../../slice';
 import apiActions from '../apiActions';
@@ -35,10 +36,12 @@ const RenameChannel = ({ handleClose, id }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
+        await toast(t('toast.renameChannel'), { type: 'success' });
+
         apiActions.renameChannel({ id, name, socket });
         setTimeout(() => {
           dispatch(loadingOff());

@@ -2,8 +2,10 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { useApi } from '../ApiProvider';
-import { loadingOn, loadingOff } from '../../slice';
+import { loadingOn, loadingOff, closeModal } from '../../slice';
+
 import apiActions from '../apiActions';
 
 const RemoveChannel = ({ handleClose, id }) => {
@@ -15,7 +17,14 @@ const RemoveChannel = ({ handleClose, id }) => {
   const handleSubmit = () => {
     if (!isLoading) {
       dispatch(loadingOn());
-      apiActions.removeChannel({ id, socket });
+      try {
+        apiActions.removeChannel({ id, socket });
+        toast(t('toast.removeChannel'), { type: 'success' });
+        dispatch(loadingOff());
+        dispatch(closeModal());
+      } catch (e) {
+        console.log('Networ Error');
+      }
       setTimeout(() => {
         dispatch(loadingOff());
       }, 3000);
