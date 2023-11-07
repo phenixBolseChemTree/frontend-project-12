@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff, closeModal } from '../../slice';
-import apiActions from '../apiActions';
+import api from '../api';
 
 const AddChannel = ({ handleClose }) => {
   const socket = useApi();
@@ -34,7 +34,7 @@ const AddChannel = ({ handleClose }) => {
         const { name } = values;
         dispatch(loadingOn());
         try {
-          await apiActions.newChannel({ name, socket });
+          await api.newChannel({ name, socket });
           toast(t('toast.addChannel'), { type: 'success' });
           dispatch(loadingOff());
           dispatch(closeModal());

@@ -6,7 +6,7 @@ import leoFilter from 'leo-profanity';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
 import { useApi } from '../../ApiProvider';
-import apiActions from '../../apiActions';
+import api from '../../api';
 
 const ChatForm = () => {
   const input = useRef(null);
@@ -37,7 +37,7 @@ const ChatForm = () => {
       //   username: localStorage.username,
       //   channelId: currentChannelId,
       // });
-      apiActions.newMessage({
+      api.newMessage({
         body: validatedText,
         username: localStorage.username,
         channelId: currentChannelId,

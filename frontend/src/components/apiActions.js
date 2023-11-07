@@ -1,4 +1,4 @@
-const apiActions = {
+const api = {
   newMessage: (data) => {
     data.socket.emit('newMessage', { body: data.body, username: data.username, channelId: data.channelId });
   },
@@ -13,4 +13,4 @@ const apiActions = {
   },
 };
 
-export default apiActions;
+export default api;

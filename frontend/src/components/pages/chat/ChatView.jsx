@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
 import { useApi } from '../../ApiProvider';
-import apiActions from '../../apiActions';
+import api from '../../api';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
@@ -51,7 +51,7 @@ const ChatView = () => {
       //   username: localStorage.username,
       //   channelId: currentChannelId,
       // });
-      apiActions.newMessage({
+      api.newMessage({
         body: validatedText,
         username: localStorage.username,
         channelId: currentChannelId,

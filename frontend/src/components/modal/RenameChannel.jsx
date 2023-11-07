@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff } from '../../slice';
-import apiActions from '../apiActions';
+import api from '../api';
 
 const RenameChannel = ({ handleClose, id }) => {
   const { t } = useTranslation();
@@ -42,7 +42,7 @@ const RenameChannel = ({ handleClose, id }) => {
         dispatch(loadingOn());
         await toast(t('toast.renameChannel'), { type: 'success' });
 
-        apiActions.renameChannel({ id, name, socket });
+        api.renameChannel({ id, name, socket });
         setTimeout(() => {
           dispatch(loadingOff());
         }, 3000);

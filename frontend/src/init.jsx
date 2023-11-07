@@ -38,17 +38,14 @@ const init = async () => {
 
   socket.on('newChannel', (payload) => {
     store.dispatch(setNewChannel(payload));
-    // notify('addChannel');
   });
 
   socket.on('removeChannel', (payload) => {
     store.dispatch(setRemoveChannel(payload));
-    // notify('removeChannel');
   });
 
   socket.on('renameChannel', (payload) => {
     store.dispatch(setRenameChannel(payload));
-    // notify('renameChannel');
   });
 
   return (

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff, closeModal } from '../../slice';
 
-import apiActions from '../apiActions';
+import api from '../api';
 
 const RemoveChannel = ({ handleClose, id }) => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const RemoveChannel = ({ handleClose, id }) => {
     if (!isLoading) {
       dispatch(loadingOn());
       try {
-        apiActions.removeChannel({ id, socket });
+        api.removeChannel({ id, socket });
         toast(t('toast.removeChannel'), { type: 'success' });
         dispatch(loadingOff());
         dispatch(closeModal());
