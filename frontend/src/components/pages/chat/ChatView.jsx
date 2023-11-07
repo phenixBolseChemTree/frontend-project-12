@@ -6,7 +6,6 @@ import * as yup from 'yup';
 import { Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
 import { useApi } from '../../ApiProvider';
-import api from '../../api';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
@@ -21,7 +20,7 @@ const getCurrentMessages = (messages, selectedChannel) => messages.filter(
 );
 
 const ChatView = () => {
-  const socket = useApi();
+  const api = useApi();
 
   const inputRef = useRef(null);
 
@@ -55,7 +54,6 @@ const ChatView = () => {
         body: validatedText,
         username: localStorage.username,
         channelId: currentChannelId,
-        socket,
       });
 
       setSubmitting(false);

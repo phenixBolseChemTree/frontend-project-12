@@ -48,11 +48,26 @@ const init = async () => {
     store.dispatch(setRenameChannel(payload));
   });
 
+  const api = {
+    newMessage: (data) => {
+      socket.emit('newMessage', { body: data.body, username: data.username, channelId: data.channelId });
+    },
+    newChannel: (data) => {
+      socket.emit('newChannel', { name: data.name });
+    },
+    removeChannel: (data) => {
+      socket.emit('removeChannel', { id: data.id });
+    },
+    renameChannel: (data) => {
+      socket.emit('renameChannel', { id: data.id, name: data.name });
+    },
+  };
+
   return (
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
         <AuthProvider>
-          <SocketContext.Provider value={socket}>
+          <SocketContext.Provider value={api}>
             <App />
           </SocketContext.Provider>
         </AuthProvider>

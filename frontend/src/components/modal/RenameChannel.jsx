@@ -7,12 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff } from '../../slice';
-import api from '../api';
 
 const RenameChannel = ({ handleClose, id }) => {
+  const api = useApi();
   const { t } = useTranslation();
   const controlRef = useRef(null);
-  const socket = useApi();
   const channels = useSelector((state) => state.chat.channels);
   const isLoading = useSelector((state) => state.modal.isLoading);
   const dispatch = useDispatch();
@@ -40,9 +39,14 @@ const RenameChannel = ({ handleClose, id }) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
-        await toast(t('toast.renameChannel'), { type: 'success' });
+        try {
+          api.renameChannel({ id, name });
+          await toast(t('toast.renameChannel'), { type: 'success' });
+          dispatch(loadingOff());
+        } catch (e) {
+          console.log('Network Error');
+        }
 
-        api.renameChannel({ id, name, socket });
         setTimeout(() => {
           dispatch(loadingOff());
         }, 3000);

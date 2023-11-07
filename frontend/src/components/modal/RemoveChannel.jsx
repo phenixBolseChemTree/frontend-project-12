@@ -3,22 +3,20 @@ import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff, closeModal } from '../../slice';
-
-import api from '../api';
+import { useApi } from '../ApiProvider';
 
 const RemoveChannel = ({ handleClose, id }) => {
+  const api = useApi();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.modal.isLoading);
   const { t } = useTranslation();
-  const socket = useApi();
 
   const handleSubmit = () => {
     if (!isLoading) {
       dispatch(loadingOn());
       try {
-        api.removeChannel({ id, socket });
+        api.removeChannel({ id });
         toast(t('toast.removeChannel'), { type: 'success' });
         dispatch(loadingOff());
         dispatch(closeModal());

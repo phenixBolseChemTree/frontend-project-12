@@ -5,12 +5,11 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useApi } from '../ApiProvider';
 import { loadingOn, loadingOff, closeModal } from '../../slice';
-import api from '../api';
+import { useApi } from '../ApiProvider';
 
 const AddChannel = ({ handleClose }) => {
-  const socket = useApi();
+  const api = useApi();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.chat.channels);
   const isLoading = useSelector((state) => state.modal.isLoading);
@@ -34,7 +33,7 @@ const AddChannel = ({ handleClose }) => {
         const { name } = values;
         dispatch(loadingOn());
         try {
-          await api.newChannel({ name, socket });
+          await api.newChannel({ name });
           toast(t('toast.addChannel'), { type: 'success' });
           dispatch(loadingOff());
           dispatch(closeModal());
