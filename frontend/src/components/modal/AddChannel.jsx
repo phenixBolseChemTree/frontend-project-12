@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { loadingOn, loadingOff, closeModal } from '../../slice';
-import { useApi } from '../ApiProvider';
+import { useApi } from '../ApiContext';
 
 const AddChannel = ({ handleClose }) => {
   const api = useApi();

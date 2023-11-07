@@ -6,7 +6,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import resources from './locales/index';
 import App from './components/App';
-import { ApiContext } from './components/ApiProvider';
+import { ApiContext } from './components/ApiContext';
 
 import 'react-toastify/dist/ReactToastify.css';
 import reducer, {

@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
-import { useApi } from '../../ApiProvider';
+import { useApi } from '../../ApiContext';
 
 const currentNameChannel = (channels, id) => {
   const foundChannel = channels.find((channel) => channel.id === id);
