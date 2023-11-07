@@ -45,11 +45,6 @@ const ChatView = () => {
       leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
       const validatedText = leoFilter.clean(values.textInputForm);
 
-      // socket.emit('newMessage', {
-      //   body: validatedText,
-      //   username: localStorage.username,
-      //   channelId: currentChannelId,
-      // });
       api.newMessage({
         body: validatedText,
         username: localStorage.username,
