@@ -28,12 +28,12 @@ const AddChannel = ({ handleClose }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
         try {
-          await api.newChannel({ name });
+          api.newChannel({ name });
           toast(t('toast.addChannel'), { type: 'success' });
           dispatch(loadingOff());
           dispatch(closeModal());

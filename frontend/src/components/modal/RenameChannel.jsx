@@ -35,13 +35,13 @@ const RenameChannel = ({ handleClose, id }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
         try {
           api.renameChannel({ id, name });
-          await toast(t('toast.renameChannel'), { type: 'success' });
+          toast(t('toast.renameChannel'), { type: 'success' });
           dispatch(loadingOff());
         } catch (e) {
           console.log('Network Error');
