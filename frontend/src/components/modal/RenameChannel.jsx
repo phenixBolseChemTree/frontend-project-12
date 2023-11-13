@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useApi } from '../ApiContext';
-import { loadingOn, loadingOff } from '../../slice';
+import { loadingOn, loadingOff, closeModal } from '../../slice';
 
 const RenameChannel = ({ handleClose, id }) => {
   const api = useApi();
@@ -35,21 +35,18 @@ const RenameChannel = ({ handleClose, id }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
         try {
-          api.renameChannel({ id, name });
+          await api.renameChannel({ id, name });
           toast(t('toast.renameChannel'), { type: 'success' });
           dispatch(loadingOff());
+          dispatch(closeModal());
         } catch (e) {
-          console.log('Network Error');
-        }
-
-        setTimeout(() => {
           dispatch(loadingOff());
-        }, 3000);
+        }
       }
     },
   });

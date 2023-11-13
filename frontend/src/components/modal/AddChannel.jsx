@@ -28,21 +28,18 @@ const AddChannel = ({ handleClose }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       if (!isLoading) {
         const { name } = values;
         dispatch(loadingOn());
         try {
-          api.newChannel({ name });
+          await api.newChannel({ name });
           toast(t('toast.addChannel'), { type: 'success' });
           dispatch(loadingOff());
           dispatch(closeModal());
         } catch (e) {
-          console.log('Network Error');
-        }
-        setTimeout(() => {
           dispatch(loadingOff());
-        }, 3000);
+        }
       }
     },
   });

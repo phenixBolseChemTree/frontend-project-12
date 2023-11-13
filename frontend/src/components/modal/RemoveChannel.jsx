@@ -12,20 +12,17 @@ const RemoveChannel = ({ handleClose, id }) => {
   const isLoading = useSelector((state) => state.modal.isLoading);
   const { t } = useTranslation();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!isLoading) {
       dispatch(loadingOn());
       try {
-        api.removeChannel({ id });
+        await api.removeChannel({ id });
         toast(t('toast.removeChannel'), { type: 'success' });
         dispatch(loadingOff());
         dispatch(closeModal());
       } catch (e) {
-        console.log('Networ Error');
-      }
-      setTimeout(() => {
         dispatch(loadingOff());
-      }, 3000);
+      }
     }
   };
 

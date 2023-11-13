@@ -56,19 +56,26 @@ const init = async () => {
     store.dispatch(setRenameChannel(payload));
   });
 
+  const promisAll = (event, data) => new Promise((resolve, reject) => {
+    const timerId = setTimeout(() => {
+      reject(new Error('Network timeout'));
+    }, 3000);
+
+    socket.emit(event, data, (response) => {
+      clearTimeout(timerId);
+      if (response.error) {
+        reject(response.error);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+
   const api = {
-    newMessage: (data) => {
-      socket.emit('newMessage', { body: data.body, username: data.username, channelId: data.channelId });
-    },
-    newChannel: (data) => {
-      socket.emit('newChannel', { name: data.name });
-    },
-    removeChannel: (data) => {
-      socket.emit('removeChannel', { id: data.id });
-    },
-    renameChannel: (data) => {
-      socket.emit('renameChannel', { id: data.id, name: data.name });
-    },
+    newMessage: async (data) => promisAll('newMessage', { body: data.body, username: data.username, channelId: data.channelId }),
+    newChannel: async (data) => promisAll('newChannel', { name: data.name }),
+    removeChannel: async (data) => promisAll('removeChannel', { id: data.id }),
+    renameChannel: async (data) => promisAll('renameChannel', { id: data.id, name: data.name }),
   };
 
   return (
