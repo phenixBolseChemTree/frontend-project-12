@@ -2,6 +2,8 @@ import React from 'react';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
+import { Provider as ProviderError, ErrorBoundary } from '@rollbar/react';
+
 import { configureStore } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import resources from './locales/index';
@@ -12,6 +14,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import reducer, {
   setNewChannel, setNewMessage, setRemoveChannel, setRenameChannel,
 } from './slice';
+
+const { REACT_APP_ROLLBAR_ACCESS_TOKEN } = process.env;
+const { REACT_APP_ENV } = process.env;
+
+const rollbarConfig = {
+  accessToken: REACT_APP_ROLLBAR_ACCESS_TOKEN,
+  environment: REACT_APP_ENV,
+};
 
 const init = async () => {
   const socket = io();
@@ -62,13 +72,17 @@ const init = async () => {
   };
 
   return (
-    <Provider store={store}>
-      <I18nextProvider i18n={i18n}>
-        <ApiContext.Provider value={api}>
-          <App />
-        </ApiContext.Provider>
-      </I18nextProvider>
-    </Provider>
+    <ProviderError config={rollbarConfig}>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <I18nextProvider i18n={i18n}>
+            <ApiContext.Provider value={api}>
+              <App />
+            </ApiContext.Provider>
+          </I18nextProvider>
+        </Provider>
+      </ErrorBoundary>
+    </ProviderError>
   );
 };
 
