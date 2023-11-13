@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import reducer, {
   setNewChannel, setNewMessage, setRemoveChannel, setRenameChannel,
 } from './slice';
-import { AuthProvider } from './components/AuthContext';
 
 const init = async () => {
   const socket = io();
@@ -65,11 +64,9 @@ const init = async () => {
   return (
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
-        <AuthProvider>
-          <ApiContext.Provider value={api}>
-            <App />
-          </ApiContext.Provider>
-        </AuthProvider>
+        <ApiContext.Provider value={api}>
+          <App />
+        </ApiContext.Provider>
       </I18nextProvider>
     </Provider>
   );
