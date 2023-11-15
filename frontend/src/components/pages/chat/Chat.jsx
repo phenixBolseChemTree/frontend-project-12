@@ -16,6 +16,7 @@ const Chat = () => {
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
+  // тут есть проблема. если я передаю токен из useContext то у меня происходит ошибка 401
   const { token } = localStorage;
   const [isPageLoading, setIsPageLoading] = useState(false);
 
@@ -45,8 +46,8 @@ const Chat = () => {
   }
 
   return (
-    <div className=" h-100 overflow-hidden rounded shadow">
-      <div className="row h-100 bg-white flex-md-row">
+    <div className=" chat h-100 overflow-hidden rounded shadow">
+      <div className="chat-container row h-100 bg-white flex-md-row">
         <Channels channels={channels} />
         <ChatView messages={messages} channels={channels} />
       </div>

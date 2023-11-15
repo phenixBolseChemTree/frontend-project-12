@@ -22,7 +22,7 @@ const NavPage = () => {
   return (
     <>
       <nav
-        className="shadow-sm navbar navbar-expand-lg navbar-light bg-white"
+        className="shadow-sm navbar navbar-expand-lg navbar-light bg-white z-1"
         style={{
           position: 'fixed',
           width: '100%',

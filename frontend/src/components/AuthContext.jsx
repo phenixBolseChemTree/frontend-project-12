@@ -4,8 +4,6 @@ import React, {
 
 const AuthContext = createContext();
 
-// есть вопрос касаемо того как именно
-
 const AuthProvider = ({ children }) => {
   const [context, setContext] = useState(
     (localStorage.getItem('token') && localStorage.getItem('username'))
@@ -47,9 +45,6 @@ const AuthProvider = ({ children }) => {
 
   return (
     <div>
-      Is loged In:
-      {' '}
-      {context ? 'true' : 'false'}
       <AuthContext.Provider value={authContextValue}>
         {children}
       </AuthContext.Provider>

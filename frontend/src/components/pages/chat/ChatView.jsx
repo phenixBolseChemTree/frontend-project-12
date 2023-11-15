@@ -23,6 +23,7 @@ const ChatView = () => {
   const api = useApi();
 
   const inputRef = useRef(null);
+  // const {username} = useContext(aut)
 
   const { messages, channels, currentChannelId } = useSelector((state) => state.chat);
 
@@ -78,9 +79,9 @@ const ChatView = () => {
   const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
 
   return (
-    <div className="col p-0 h-100">
+    <div className="col p-0 h-100 chat-board">
       <div className="chat d-flex flex-column h-100">
-        <div className="bg-light mb-4 p-3 shadow-sm small">
+        <div className="bg-light mb-4 p-3 shadow-sm small ">
           <p className="m-0">
             <b>
               #
@@ -103,7 +104,7 @@ const ChatView = () => {
             ))}
         </div>
         {/* <ChatForm /> */}
-        <div className="mt-auto px-5 py-3">
+        <div className="mt-auto px-5 py-3 message-box">
           <Form className="py-1 border rounded-2" onSubmit={formik.handleSubmit}>
             <Form.Group className="input-group has-validation">
               <Form.Control

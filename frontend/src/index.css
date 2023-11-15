@@ -5,9 +5,44 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* overflow: hidden; */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.chat-container {
+  overflow-y: auto;
+  height: 600px;
+}
+
+.chat {
+  /* height: 100%; */
+  position: fixed;
+  bottom: 0;
+  width: 95%;
+  padding-top: 57px;
+  /* overflow-y: auto; Добавляет вертикальную прокрутку, если содержимое блока больше его высоты */
+}
+
+.chat-messages {
+  height: 650px;
+  
+}
+
+/* .chat-board { */
+
+/* } */
+
+.message-box {
+  width: 84%;
+}
+
+.z-1 {
+  z-index: 1;
+}
+.z-0 {
+  z-index: 0;
 }
