@@ -57,16 +57,11 @@ const init = async () => {
   });
 
   const promisAll = (event, data) => new Promise((resolve, reject) => {
-    const timerId = setTimeout(() => {
-      reject(new Error('Network timeout'));
-    }, 3000);
-
-    socket.emit(event, data, (response) => {
-      clearTimeout(timerId);
-      if (response.error) {
-        reject(response.error);
+    socket.timeout(3000).emit(event, data, (err) => {
+      if (err) {
+        reject(err);
       } else {
-        resolve(response);
+        resolve();
       }
     });
   });
