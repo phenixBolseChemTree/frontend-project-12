@@ -19,7 +19,7 @@ const Chat = () => {
   const { t } = useTranslation();
   const { context } = useContext(AuthContext);
   const [isPageLoading, setIsPageLoading] = useState(false);
-
+  console.log(123);
   useEffect(() => {
     axios.get(routes.data, {
       headers: {
