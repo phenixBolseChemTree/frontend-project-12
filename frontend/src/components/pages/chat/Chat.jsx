@@ -16,7 +16,9 @@ const Chat = () => {
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
-  // тут есть проблема. если я передаю токен из useContext то у меня происходит ошибка 401
+  // тут есть проблема. если я передаю токен из useContext то у меня происходит ошибка
+  // (она есть только на тестах хекслета)
+  //
   const { token } = localStorage;
   const [isPageLoading, setIsPageLoading] = useState(false);
 
