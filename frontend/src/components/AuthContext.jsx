@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
     setContext(null);
   }, []);
 
-  const login = (_token, _username) => {
+  const login = useCallback((_token, _username) => {
     console.log('!!!saveLogin', {
       _token,
       _username,
@@ -37,19 +37,16 @@ const AuthProvider = ({ children }) => {
       token: _token,
       username: _username,
     });
-  };
+  }, []);
 
   const authContextValue = useMemo(() => ({
     context, login, logout,
   }), [context, logout, login]);
 
   return (
-    <div>
-      <AuthContext.Provider value={authContextValue}>
-        {children}
-      </AuthContext.Provider>
-    </div>
-
+    <AuthContext.Provider value={authContextValue}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
