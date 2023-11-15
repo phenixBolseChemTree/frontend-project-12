@@ -16,8 +16,7 @@ const AuthProvider = ({ children }) => {
   console.log('!!!context', context);
 
   const logout = useCallback(() => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    localStorage.clear();
 
     setContext(null);
   }, []);

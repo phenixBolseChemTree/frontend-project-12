@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -6,11 +6,13 @@ import * as yup from 'yup';
 import { Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
 import { useApi } from '../../ApiContext';
+import { AuthContext } from '../../AuthContext';
 
 const ChatForm = () => {
   const api = useApi();
 
   const { currentChannelId } = useSelector((state) => state.chat);
+  const { context } = useContext(AuthContext);
 
   const { t } = useTranslation();
 
@@ -28,7 +30,7 @@ const ChatForm = () => {
       const validatedText = leoFilter.clean(values.textInputForm);
       api.newMessage({
         body: validatedText,
-        username: localStorage.username,
+        username: context.username,
         channelId: currentChannelId,
       });
       setSubmitting(false);
