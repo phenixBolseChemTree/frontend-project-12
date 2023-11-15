@@ -9,13 +9,14 @@ const NavPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoggedIn, logout, login } = useContext(AuthContext);
+  const {
+    isLoggedIn, logout, login, token,
+  } = useContext(AuthContext);
   useEffect(() => {
-    const token = localStorage.getItem('token');
     if (token) {
       login();
     }
-  }, [login, navigate, location]);
+  }, [login, navigate, location, token, isLoggedIn]);
 
   const handleLogout = () => {
     logout();
@@ -34,8 +35,8 @@ const NavPage = () => {
         }}
       >
         <div className="container">
-          <Link to={isLoggedIn ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
-          {isLoggedIn && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
+          <Link to={token ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
+          {token && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
         </div>
       </nav>
       <div style={{
