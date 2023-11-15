@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
-  Outlet, Link, useNavigate, useLocation,
+  Outlet, Link, useNavigate,
 } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../../AuthContext';
@@ -8,15 +8,9 @@ import { AuthContext } from '../../AuthContext';
 const NavPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const location = useLocation();
   const {
-    isLoggedIn, logout, login, token,
+    logout, context,
   } = useContext(AuthContext);
-  useEffect(() => {
-    if (token) {
-      login();
-    }
-  }, [login, navigate, location, token, isLoggedIn]);
 
   const handleLogout = () => {
     logout();
@@ -35,8 +29,8 @@ const NavPage = () => {
         }}
       >
         <div className="container">
-          <Link to={token ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
-          {token && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
+          <Link to={context ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
+          {context && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
         </div>
       </nav>
       <div style={{

@@ -42,9 +42,7 @@ const SignupForm = () => {
       try {
         const response = await axios.post(routes.signup, { username: name, password });
         const { token } = response.data;
-        localStorage.setItem('username', name);
-        localStorage.setItem('token', token);
-        login();
+        login(token, name);
         navigate('/');
       } catch (error) {
         if (error.message === 'Network Error') {
