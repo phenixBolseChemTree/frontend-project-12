@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -10,25 +10,25 @@ import {
 import Channels from './Сhannels';
 import ChatView from './ChatView';
 import routes from '../../../routes';
-import { AuthContext } from '../../AuthContext';
 
 const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
-  const { context } = useContext(AuthContext);
+  // тут есть проблема. если я передаю токен из useContext то у меня происходит ошибка 401
+  const { token } = localStorage;
   const [isPageLoading, setIsPageLoading] = useState(false);
-  console.log(123);
+
   useEffect(() => {
     axios.get(routes.data, {
       headers: {
-        Authorization: `Bearer ${context.token}`,
+        Authorization: `Bearer ${token}`,
       },
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch(() => {
-      if (context.token) {
+      if (token) {
         toast(t('toast.networkError'), { type: 'error' });
         navigate('/login');
       } else {
@@ -37,7 +37,7 @@ const Chat = () => {
     }).finally(() => {
       setIsPageLoading(true);
     });
-  }, [dispatch, context.token, t, navigate]);
+  }, [dispatch, token, t, navigate]);
 
   const { channels, messages } = chatData;
 
