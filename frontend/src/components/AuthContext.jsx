@@ -5,23 +5,23 @@ import React, {
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [context, setContext] = useState(JSON.parse(localStorage.getItem('auth')) || null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')) || null);
 
   const logout = useCallback(() => {
     localStorage.removeItem('auth');
 
-    setContext(null);
+    setUser(null);
   }, []);
 
   const login = useCallback((data) => {
     localStorage.setItem('auth', JSON.stringify(data));
 
-    setContext(data);
+    setUser(data);
   }, []);
 
   const authContextValue = useMemo(() => ({
-    context, login, logout,
-  }), [context, logout, login]);
+    user, login, logout,
+  }), [user, logout, login]);
 
   return (
     <AuthContext.Provider value={authContextValue}>

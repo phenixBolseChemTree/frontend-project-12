@@ -9,7 +9,7 @@ const NavPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const {
-    logout, context,
+    logout, user,
   } = useContext(AuthContext);
 
   const handleLogout = () => {
@@ -27,8 +27,8 @@ const NavPage = () => {
         }}
       >
         <div className="container">
-          <Link to={context ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
-          {context && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
+          <Link to={user ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
+          {user && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
         </div>
       </nav>
       <div style={{

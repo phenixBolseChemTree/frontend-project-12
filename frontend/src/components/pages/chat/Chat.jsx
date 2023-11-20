@@ -18,12 +18,12 @@ const Chat = () => {
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
 
-  const { context } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [isPageLoading, setIsPageLoading] = useState(false);
 
   useEffect(() => {
-    const hasToken = context?.token;
+    const hasToken = user?.token;
 
     if (!hasToken) {
       navigate('/login');
@@ -32,12 +32,12 @@ const Chat = () => {
 
     axios.get(routes.data, {
       headers: {
-        Authorization: `Bearer ${context.token}`,
+        Authorization: `Bearer ${user.token}`,
       },
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch(() => {
-      if (context.token) {
+      if (user.token) {
         toast(t('toast.networkError'), { type: 'error' });
         navigate('/login');
       } else {
@@ -46,7 +46,7 @@ const Chat = () => {
     }).finally(() => {
       setIsPageLoading(true);
     });
-  }, [dispatch, t, navigate, context?.token]);
+  }, [dispatch, t, navigate, user?.token]);
 
   const { channels, messages } = chatData;
 

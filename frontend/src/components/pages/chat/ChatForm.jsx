@@ -12,8 +12,8 @@ const ChatForm = () => {
   const api = useApi();
 
   const { currentChannelId } = useSelector((state) => state.chat);
-  const { context } = useContext(AuthContext);
-  const { username } = context;
+  const { user } = useContext(AuthContext);
+  const { username } = user;
 
   const { t } = useTranslation();
 
