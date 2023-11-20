@@ -29,10 +29,10 @@ const LoginForm = () => {
 
         console.log('!!!response.data', response.data);
 
-        const { token, username } = response.data;
-        if (token) {
+        // const { token, username } = response.data;
+        if (response.data) {
           navigate('/');
-          login(token, username);
+          login(response.data);
         }
       } catch (error) {
         if (error.message === 'Network Error') {

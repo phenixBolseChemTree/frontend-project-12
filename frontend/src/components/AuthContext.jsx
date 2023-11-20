@@ -21,20 +21,19 @@ const AuthProvider = ({ children }) => {
     setContext(null);
   }, []);
 
-  const login = useCallback((_token, _username) => {
-    console.log('!!!saveLogin', {
-      _token,
-      _username,
+  const login = useCallback((data) => {
+    console.log('!!!saveLogin (data)', {
+      data,
     });
 
-    localStorage.setItem('token', _token);
-    localStorage.setItem('username', _username);
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('username', data.username);
 
     console.log('!!!setcontext');
 
     setContext({
-      token: _token,
-      username: _username,
+      token: data.token,
+      username: data.username,
     });
   }, []);
 
