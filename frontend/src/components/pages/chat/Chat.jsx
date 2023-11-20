@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -10,27 +10,34 @@ import {
 import Channels from './Сhannels';
 import ChatView from './ChatView';
 import routes from '../../../routes';
+import { AuthContext } from '../../AuthContext';
 
 const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
-  // тут есть проблема. если я передаю токен из useContext то у меня происходит ошибка
-  // (она есть только на тестах хекслета)
-  //
-  const { token } = localStorage;
+
+  const { context } = useContext(AuthContext);
+
   const [isPageLoading, setIsPageLoading] = useState(false);
 
   useEffect(() => {
+    const hasToken = context?.token;
+
+    if (!hasToken) {
+      navigate('/login');
+      return;
+    }
+
     axios.get(routes.data, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${context.token}`,
       },
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch(() => {
-      if (token) {
+      if (context.token) {
         toast(t('toast.networkError'), { type: 'error' });
         navigate('/login');
       } else {
@@ -39,7 +46,7 @@ const Chat = () => {
     }).finally(() => {
       setIsPageLoading(true);
     });
-  }, [dispatch, token, t, navigate]);
+  }, [dispatch, t, navigate, context?.token]);
 
   const { channels, messages } = chatData;
 

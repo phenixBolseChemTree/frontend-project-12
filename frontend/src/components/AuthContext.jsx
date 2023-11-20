@@ -5,36 +5,18 @@ import React, {
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [context, setContext] = useState(
-    (localStorage.getItem('token') && localStorage.getItem('username'))
-      ? {
-        token: localStorage.getItem('token'),
-        username: localStorage.getItem('username'),
-      } : null,
-  );
-
-  console.log('!!!context', context);
+  const [context, setContext] = useState(JSON.parse(localStorage.getItem('auth')) || null);
 
   const logout = useCallback(() => {
-    localStorage.clear();
+    localStorage.removeItem('auth');
 
     setContext(null);
   }, []);
 
   const login = useCallback((data) => {
-    console.log('!!!saveLogin (data)', {
-      data,
-    });
+    localStorage.setItem('auth', JSON.stringify(data));
 
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('username', data.username);
-
-    console.log('!!!setcontext');
-
-    setContext({
-      token: data.token,
-      username: data.username,
-    });
+    setContext(data);
   }, []);
 
   const authContextValue = useMemo(() => ({

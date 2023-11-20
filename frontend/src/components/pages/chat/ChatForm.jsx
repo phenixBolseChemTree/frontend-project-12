@@ -13,6 +13,7 @@ const ChatForm = () => {
 
   const { currentChannelId } = useSelector((state) => state.chat);
   const { context } = useContext(AuthContext);
+  const { username } = context;
 
   const { t } = useTranslation();
 
@@ -30,7 +31,7 @@ const ChatForm = () => {
       const validatedText = leoFilter.clean(values.textInputForm);
       api.newMessage({
         body: validatedText,
-        username: context.username,
+        username,
         channelId: currentChannelId,
       });
       setSubmitting(false);
