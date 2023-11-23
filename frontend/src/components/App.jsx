@@ -8,7 +8,7 @@ import '../App.css';
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from './AuthContext';
 import {
-  NavPage, Chat, Login, Signup, Page404,
+  NavPage, Login, Signup, Page404, RenderChat,
 } from './pages/pages';
 import ModalWindow from './modal/ModalWindow';
 
@@ -17,7 +17,7 @@ const App = () => (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<NavPage />}>
-          <Route path="/" element={<Chat />} />
+          <Route path="/" element={<RenderChat />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<Page404 />} />

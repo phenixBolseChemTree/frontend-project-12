@@ -23,13 +23,6 @@ const Chat = () => {
   const [isPageLoading, setIsPageLoading] = useState(false);
 
   useEffect(() => {
-    const hasToken = user?.token;
-
-    if (!hasToken) {
-      navigate('/login');
-      return;
-    }
-
     axios.get(routes.data, {
       headers: {
         Authorization: `Bearer ${user.token}`,
