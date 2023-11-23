@@ -7,7 +7,7 @@ const RenderChat = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const { token } = user;
+  const token = user?.token;
 
   useEffect(() => {
     console.log('token', token);
