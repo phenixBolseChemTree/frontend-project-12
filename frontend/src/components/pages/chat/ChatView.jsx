@@ -16,8 +16,6 @@ const getCurrentMessages = (messages, selectedChannel) => messages.filter(
 );
 
 const ChatView = () => {
-  // const {username} = useContext(aut)
-
   const { messages, channels, currentChannelId } = useSelector((state) => state.chat);
 
   const { t } = useTranslation();

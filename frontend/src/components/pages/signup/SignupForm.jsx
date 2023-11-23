@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
@@ -6,14 +6,17 @@ import axios from 'axios';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../../AuthContext';
+import { useAuth } from '../../AuthContext';
 import routes from '../../../routes';
 
 const SignupForm = () => {
   const [signupError, setSignupError] = useState(false);
   const passwordResRef = useRef(null);
   const { t } = useTranslation();
-  const { login } = useContext(AuthContext);
+
+  const auth = useAuth();
+  const { login } = auth;
+
   const navigate = useNavigate();
 
   const SignupSchema = yup.object().shape({

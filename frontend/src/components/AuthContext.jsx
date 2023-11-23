@@ -1,8 +1,10 @@
 import React, {
-  useState, createContext, useMemo, useCallback,
+  useState, createContext, useMemo, useCallback, useContext,
 } from 'react';
 
 const AuthContext = createContext();
+
+const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')) || null);
@@ -30,4 +32,4 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-export { AuthProvider, AuthContext };
+export { AuthProvider, AuthContext, useAuth };

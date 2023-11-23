@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -10,7 +10,7 @@ import {
 import Channels from './Сhannels';
 import ChatView from './ChatView';
 import routes from '../../../routes';
-import { AuthContext } from '../../AuthContext';
+import { useAuth } from '../../AuthContext';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -18,19 +18,20 @@ const Chat = () => {
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
 
-  const { user } = useContext(AuthContext);
+  const auth = useAuth();
+  const { token } = auth.user;
 
   const [isPageLoading, setIsPageLoading] = useState(false);
 
   useEffect(() => {
     axios.get(routes.data, {
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
       },
     }).then((response) => {
       dispatch(addChatData(response.data));
     }).catch(() => {
-      if (user.token) {
+      if (token) {
         toast(t('toast.networkError'), { type: 'error' });
         navigate('/login');
       } else {
@@ -39,7 +40,7 @@ const Chat = () => {
     }).finally(() => {
       setIsPageLoading(true);
     });
-  }, [dispatch, t, navigate, user?.token]);
+  }, [dispatch, t, navigate, token]);
 
   const { channels, messages } = chatData;
 

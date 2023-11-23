@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -7,12 +7,13 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import routes from '../../../routes';
-import { AuthContext } from '../../AuthContext';
+import { useAuth } from '../../AuthContext';
 
 const LoginForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const auth = useAuth();
+  const { login } = auth;
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [loginError, setLoginError] = useState(false);

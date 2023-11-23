@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Outlet, Link, useNavigate,
 } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../../AuthContext';
+import { useAuth } from '../../AuthContext';
 
 const NavPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const {
-    logout, user,
-  } = useContext(AuthContext);
+
+  const auth = useAuth();
+  const { user, logout } = auth;
 
   const handleLogout = () => {
     logout();
