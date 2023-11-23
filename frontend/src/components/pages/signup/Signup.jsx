@@ -3,7 +3,7 @@ import {
 } from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
-
+//
 import img from '../../../assets/happy_man.jpg';
 import SignupForm from './SignupForm';
 
