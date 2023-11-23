@@ -5,12 +5,11 @@ import Chat from './Chat';
 
 const RenderChat = () => {
   const navigate = useNavigate();
-
   const auth = useAuth();
-  const { token } = auth.user;
+
+  const token = auth.user?.token;
 
   useEffect(() => {
-    console.log('token', token);
     if (!token) {
       navigate('/login');
     }
