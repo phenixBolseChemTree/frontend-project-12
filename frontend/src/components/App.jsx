@@ -11,7 +11,7 @@ import { AuthProvider } from '../context/AuthContext';
 //   NavPage, Login, Signup, Page404, RenderChat,
 // } from './pages/pages';
 import NavPage from './NavPage';
-import RenderChat from './RenderChat';
+import RenderChat from './ChatRouteProtector';
 import Signup from './Signup';
 import Login from './Login';
 import Page404 from './Page404';
