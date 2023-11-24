@@ -3,7 +3,7 @@ import {
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import img from '../../../assets/red_flag.jpeg';
+import img from '../assets/red_flag.jpeg';
 import LoginForm from './LoginForm';
 
 const Login = () => {

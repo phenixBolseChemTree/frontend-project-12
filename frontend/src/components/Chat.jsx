@@ -6,11 +6,11 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import {
   addChatData,
-} from '../../../slice/index';
+} from '../slice/index';
 import Channels from './Сhannels';
 import ChatView from './ChatView';
-import routes from '../../../routes';
-import { useAuth } from '../../../context/AuthContext';
+import routes from '../routes';
+import { useAuth } from '../context/AuthContext';
 
 const Chat = () => {
   const navigate = useNavigate();

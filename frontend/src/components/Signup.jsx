@@ -4,7 +4,7 @@ import {
 
 import { useTranslation } from 'react-i18next';
 //
-import img from '../../../assets/happy_man.jpg';
+import img from '../assets/happy_man.jpg';
 import SignupForm from './SignupForm';
 
 const Signup = () => {
