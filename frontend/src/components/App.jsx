@@ -7,9 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from '../context/AuthContext';
-// import {
-//   NavPage, Login, Signup, Page404, RenderChat,
-// } from './pages/pages';
 import NavPage from './NavPage';
 import RenderChat from './ChatRouteProtector';
 import Signup from './Signup';

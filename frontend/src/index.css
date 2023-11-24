@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* overflow: hidden; */
 }
 
 code {
@@ -19,22 +18,16 @@ code {
 }
 
 .chat {
-  /* height: 100%; */
   position: fixed;
   bottom: 0;
   width: 95%;
   padding-top: 57px;
-  /* overflow-y: auto; Добавляет вертикальную прокрутку, если содержимое блока больше его высоты */
 }
 
 .chat-messages {
   height: 650px;
   
 }
-
-/* .chat-board { */
-
-/* } */
 
 .message-box {
   width: 84%;

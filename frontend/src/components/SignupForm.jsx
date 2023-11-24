@@ -44,7 +44,6 @@ const SignupForm = () => {
       const { name, password } = values;
       try {
         const response = await axios.post(routes.signup, { username: name, password });
-        // const { token } = response.data;
         login(response.data);
         navigate('/');
       } catch (error) {
