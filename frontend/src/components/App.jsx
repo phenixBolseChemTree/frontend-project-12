@@ -10,7 +10,7 @@ import { AuthProvider } from '../context/AuthContext';
 // import {
 //   NavPage, Login, Signup, Page404, RenderChat,
 // } from './pages/pages';
-import NavPage from './pages/navPage/NavPage';
+import NavPage from './NavPage';
 import RenderChat from './RenderChat';
 import Signup from './Signup';
 import Login from './Login';
