@@ -10,7 +10,7 @@ import {
 import Channels from './Сhannels';
 import ChatView from './ChatView';
 import routes from '../../../routes';
-import { useAuth } from '../../AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
 const Chat = () => {
   const navigate = useNavigate();

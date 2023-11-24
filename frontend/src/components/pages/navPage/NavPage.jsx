@@ -3,7 +3,7 @@ import {
   Outlet, Link, useNavigate,
 } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
 const NavPage = () => {
   const { t } = useTranslation();
