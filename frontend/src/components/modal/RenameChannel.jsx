@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useApi } from '../ApiContext';
+import { useApi } from '../../context/ApiContext';
 import { loadingOn, loadingOff, closeModal } from '../../slice';
 
 const RenameChannel = ({ handleClose, id }) => {

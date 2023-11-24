@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
-import { useApi } from '../../ApiContext';
+import { useApi } from '../../../context/ApiContext';
 import { useAuth } from '../../AuthContext';
 
 const ChatForm = () => {
