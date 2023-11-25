@@ -67,10 +67,10 @@ const init = async () => {
   });
 
   const api = {
-    newMessage: async (data) => promisAll('newMessage', { body: data.body, username: data.username, channelId: data.channelId }),
-    newChannel: async (data) => promisAll('newChannel', { name: data.name }),
-    removeChannel: async (data) => promisAll('removeChannel', { id: data.id }),
-    renameChannel: async (data) => promisAll('renameChannel', { id: data.id, name: data.name }),
+    newMessage: (data) => promisAll('newMessage', { body: data.body, username: data.username, channelId: data.channelId }),
+    newChannel: (data) => promisAll('newChannel', { name: data.name }),
+    removeChannel: (data) => promisAll('removeChannel', { id: data.id }),
+    renameChannel: (data) => promisAll('renameChannel', { id: data.id, name: data.name }),
   };
 
   return (
