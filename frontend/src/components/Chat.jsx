@@ -49,7 +49,7 @@ const Chat = () => {
   }
 
   return (
-    <div className=" chat h-100 overflow-hidden rounded shadow">
+    <div className=" chat w-100 h-100 overflow-hidden rounded shadow">
       <div className="chat-container row h-100 bg-white flex-md-row">
         <Channels channels={channels} />
         <ChatView messages={messages} channels={channels} />

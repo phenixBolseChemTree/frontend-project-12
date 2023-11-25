@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Chat from './Chat';
 
-const RenderChat = () => {
+const PrivateOutlet = () => {
   const navigate = useNavigate();
   const auth = useAuth();
 
   const token = auth.user?.token;
+
+  console.log('token', token);
 
   useEffect(() => {
     if (!token) {
@@ -18,4 +20,4 @@ const RenderChat = () => {
   return token ? <Chat /> : null;
 };
 
-export default RenderChat;
+export default PrivateOutlet;
