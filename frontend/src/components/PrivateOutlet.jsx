@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import Chat from './Chat';
 
-const PrivateOutlet = () => {
+const PrivateOutlet = ({ children }) => {
   const navigate = useNavigate();
   const auth = useAuth();
 
@@ -17,7 +16,7 @@ const PrivateOutlet = () => {
     }
   }, [token, navigate]);
 
-  return token ? <Chat /> : null;
+  return token ? children : null;
 };
 
 export default PrivateOutlet;

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 
-const Layout = () => {
+const Layout = ({ children }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const Layout = () => {
         height: '100%',
       }}
       >
-        <Outlet />
+        {children}
       </main>
     </>
   );
