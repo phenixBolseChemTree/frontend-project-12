@@ -21,20 +21,18 @@ const App = () => (
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/">
-            <Route
-              index
-              element={(
-                <PrivateOutlet>
-                  <Chat />
-                </PrivateOutlet>
+          <Route
+            index
+            element={(
+              <PrivateOutlet>
+                <Chat />
+              </PrivateOutlet>
               )}
-            />
-            <Route index element={<Outlet />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<Page404 />} />
-          </Route>
+          />
+          <Route index element={<Outlet />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </Layout>
 
