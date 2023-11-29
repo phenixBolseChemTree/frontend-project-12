@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter, Routes, Route, Outlet,
+  BrowserRouter, Routes, Route,
 } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,7 +29,6 @@ const App = () => (
               </PrivateOutlet>
               )}
           />
-          <Route index element={<Outlet />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<Page404 />} />
