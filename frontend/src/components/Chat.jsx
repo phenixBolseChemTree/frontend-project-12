@@ -12,6 +12,12 @@ import ChatView from './ChatView';
 import routes from '../routes';
 import { useAuth } from '../context/AuthContext';
 
+const dataRequest = (token) => ({
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
+
 const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,23 +27,22 @@ const Chat = () => {
   const auth = useAuth();
   const { token } = auth.user;
 
-  // const [isPageLoading, setIsPageLoading] = useState(false);
-
   useEffect(() => {
-    axios.get(routes.data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((response) => {
-      dispatch(addChatData(response.data));
-    }).catch(() => {
-      if (token) {
-        toast(t('toast.networkError'), { type: 'error' });
-        navigate('/login');
-      } else {
-        navigate('/login');
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(routes.data, dataRequest(token));
+        dispatch(addChatData(response.data));
+      } catch (error) {
+        if (token) {
+          toast(t('toast.networkError'), { type: 'error' });
+          navigate('/login');
+        } else {
+          navigate('/login');
+        }
       }
-    });
+    };
+
+    fetchData();
   }, [dispatch, t, navigate, token]);
 
   const { channels, messages } = chatData;
