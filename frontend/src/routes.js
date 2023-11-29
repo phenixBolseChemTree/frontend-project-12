@@ -1,7 +1,7 @@
-const endPoint = '/api/v1';
+const apiPrefix = '/api/v1';
 
 export default {
-  data: [endPoint, 'data'].join('/'),
-  login: [endPoint, 'login'].join('/'),
-  signup: [endPoint, 'signup'].join('/'),
+  me: [apiPrefix, 'data'].join('/'),
+  login: [apiPrefix, 'login'].join('/'),
+  signup: [apiPrefix, 'signup'].join('/'),
 };

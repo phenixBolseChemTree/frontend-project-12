@@ -14,8 +14,7 @@ const SignupForm = () => {
   const passwordResRef = useRef(null);
   const { t } = useTranslation();
 
-  const auth = useAuth();
-  const { login } = auth;
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 

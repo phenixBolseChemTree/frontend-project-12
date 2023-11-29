@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const PrivateOutlet = ({ children }) => {
+  console.log('!!!private outlet');
   const navigate = useNavigate();
-  const auth = useAuth();
+  const { auth } = useAuth();
 
-  const token = auth.user?.token;
+  console.log('!!!auth', auth);
 
-  console.log('token', token);
+  const token = auth?.token;
+
+  console.log('!!!token', token);
 
   useEffect(() => {
     if (!token) {

@@ -16,29 +16,32 @@ import PrivateOutlet from './PrivateOutlet';
 import ModalWindow from './modal/ModalWindow';
 import Layout from './Layout';
 
-const App = () => (
-  <AuthProvider>
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route
-            index
-            element={(
-              <PrivateOutlet>
-                <Chat />
-              </PrivateOutlet>
-              )}
-          />
-          <Route path="signup" element={<Signup />} />
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
-      </Layout>
+const App = () => {
+  console.log('!!!render app');
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route
+              index
+              element={(
+                <PrivateOutlet>
+                  <Chat />
+                </PrivateOutlet>
+                )}
+            />
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </Layout>
 
-    </BrowserRouter>
-    <ToastContainer />
-    <ModalWindow />
-  </AuthProvider>
-);
+      </BrowserRouter>
+      <ToastContainer />
+      <ModalWindow />
+    </AuthProvider>
+  );
+};
 
 export default App;

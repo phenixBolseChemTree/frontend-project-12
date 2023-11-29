@@ -7,8 +7,7 @@ const Layout = ({ children }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const auth = useAuth();
-  const { user, logout } = auth;
+  const { auth, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -26,8 +25,8 @@ const Layout = ({ children }) => {
           }}
         >
           <div className="container">
-            <Link to={user ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
-            {user && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
+            <Link to={auth ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
+            {auth && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
           </div>
         </nav>
       </header>

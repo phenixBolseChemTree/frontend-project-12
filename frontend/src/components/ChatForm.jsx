@@ -13,8 +13,11 @@ const ChatForm = () => {
 
   const { currentChannelId } = useSelector((state) => state.chat);
 
-  const auth = useAuth();
-  const { username } = auth.user;
+  const {
+    auth: {
+      username,
+    },
+  } = useAuth();
 
   const { t } = useTranslation();
 

@@ -12,8 +12,7 @@ import { useAuth } from '../context/AuthContext';
 const LoginForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const auth = useAuth();
-  const { login } = auth;
+  const { login } = useAuth();
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [loginError, setLoginError] = useState(false);
