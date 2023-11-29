@@ -22,12 +22,8 @@ const Chat = () => {
   useEffect(() => {
     console.log('!!chat useeffect111', me);
     const fetchData = async () => {
-      try {
-        const response = await me();
-        dispatch(addChatData(response.data));
-      } catch (error) {
-        navigate('/login');
-      }
+      const response = await me();
+      dispatch(addChatData(response.data));
     };
 
     fetchData();
