@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -21,7 +21,7 @@ const Chat = () => {
   const auth = useAuth();
   const { token } = auth.user;
 
-  const [isPageLoading, setIsPageLoading] = useState(false);
+  // const [isPageLoading, setIsPageLoading] = useState(false);
 
   useEffect(() => {
     axios.get(routes.data, {
@@ -37,16 +37,10 @@ const Chat = () => {
       } else {
         navigate('/login');
       }
-    }).finally(() => {
-      setIsPageLoading(true);
     });
   }, [dispatch, t, navigate, token]);
 
   const { channels, messages } = chatData;
-
-  if (!isPageLoading) {
-    return null;
-  }
 
   return (
     <div className=" chat w-100 h-100 overflow-hidden rounded shadow">
