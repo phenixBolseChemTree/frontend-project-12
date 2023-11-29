@@ -21,12 +21,10 @@ const Chat = () => {
 
   useEffect(() => {
     console.log('!!chat useeffect111', me);
-    const fetchData = async () => {
+    (async () => {
       const response = await me();
       dispatch(addChatData(response.data));
-    };
-
-    fetchData();
+    })();
   }, [dispatch, t, navigate, me]);
 
   const { channels, messages } = chatData;
