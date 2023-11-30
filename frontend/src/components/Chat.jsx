@@ -18,10 +18,7 @@ const Chat = () => {
 
   const { me, logout } = useAuth();
 
-  console.log('!!!renderChat');
-
   useEffect(() => {
-    console.log('!!chat useeffect111', me);
     const fetchData = async () => {
       try {
         const response = await me();

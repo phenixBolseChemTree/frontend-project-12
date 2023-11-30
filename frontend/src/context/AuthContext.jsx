@@ -23,14 +23,11 @@ const AuthProvider = ({ children }) => {
     setAuth(data);
   }, []);
 
-  const me = useCallback(() => {
-    console.log('!!!me');
-    return axios.get(routes.me, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    });
-  }, [auth]);
+  const me = useCallback(() => axios.get(routes.me, {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  }), [auth]);
 
   const authContextValue = useMemo(() => ({
     auth, login, logout, me,
