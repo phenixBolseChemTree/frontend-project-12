@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import {
   addChatData,
 } from '../slice/index';
@@ -15,17 +16,30 @@ const Chat = () => {
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
 
-  const { me } = useAuth();
+  const { me, logout } = useAuth();
 
   console.log('!!!renderChat');
 
   useEffect(() => {
     console.log('!!chat useeffect111', me);
-    (async () => {
-      const response = await me();
-      dispatch(addChatData(response.data));
-    })();
-  }, [dispatch, t, navigate, me]);
+    const fetchData = async () => {
+      try {
+        const response = await me();
+        dispatch(addChatData(response.data));
+      } catch (error) {
+        if (!error.isAxiosError) {
+          toast(t('error.unknownError'), { type: 'error' });
+        } else if (error.response?.status === 401) {
+          logout();
+          navigate('/login');
+        } else {
+          toast(t('error.networkError'), { type: 'error' });
+        }
+      }
+    };
+
+    fetchData();
+  }, [dispatch, t, navigate, me, logout]);
 
   const { channels, messages } = chatData;
 

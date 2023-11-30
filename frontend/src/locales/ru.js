@@ -58,6 +58,8 @@ export default {
       requiredField: 'Обязательное поле',
       samePasswords: 'Пароли должны совпадать',
       invalidNameOrPassword: 'Неверные имя пользователя или пароль',
+      unknownError: 'Неизвестная ошибка',
+      networkError: 'Ошибка сети',
     },
     modal: {
       addChannel: 'Добавить канал',
