@@ -24,7 +24,6 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const me = useCallback(() => {
-    console.log('!!!me');
     return axios.get(routes.me, {
       headers: {
         Authorization: `Bearer ${auth.token}`,
