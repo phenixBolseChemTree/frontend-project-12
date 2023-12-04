@@ -22,7 +22,7 @@ const App = () => (
       <Layout>
         <Routes>
           <Route
-            index
+            path="/"
             element={(
               <PrivateOutlet>
                 <Chat />
