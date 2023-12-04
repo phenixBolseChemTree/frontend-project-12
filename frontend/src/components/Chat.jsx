@@ -23,14 +23,20 @@ const Chat = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const fetchData1 = async () => {
-        const authObj = getAuthObject();
-        const response = await axios.get(routes.data, authObj);
+        // const response = await data();
+        // место для запроса
+        // eslint-disable-next-line no-shadow
+        const fetchData = async () => {
+          const authObj = getAuthObject();
 
-        dispatch(addChatData(response.data));
-        // };
+          // const response = await me();
+          const response = await axios.get(routes.data, authObj);
 
-        // fetchData1();
+          dispatch(addChatData(response.data));
+        };
+
+        fetchData();
+        // dispatch(addChatData(response.data));
       } catch (error) {
         if (!error.isAxiosError) {
           toast(t('error.unknownError'), { type: 'error' });
