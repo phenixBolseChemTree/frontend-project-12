@@ -23,11 +23,18 @@ const AuthProvider = ({ children }) => {
     setAuth(data);
   }, []);
 
-  const getAuthObject = useCallback(() => ({
+  // const data = useCallback(() => axios.get(routes.data, {
+  //   headers: {
+  //     Authorization: `Bearer ${auth.token}`,
+  //   },
+  // }), [auth]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getAuthObject = () => ({
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
-  }), [auth.token]);
+  });
 
   const authContextValue = useMemo(() => ({
     auth, login, logout, getAuthObject,
