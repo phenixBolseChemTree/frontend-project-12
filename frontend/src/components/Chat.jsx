@@ -23,14 +23,10 @@ const Chat = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchData1 = async () => {
-          const authObj = getAuthObject();
-          const response = await axios.get(routes.data, authObj);
+        const authObj = getAuthObject();
+        const response = await axios.get(routes.data, authObj);
 
-          dispatch(addChatData(response.data));
-        };
-
-        fetchData1();
+        dispatch(addChatData(response.data));
       } catch (error) {
         if (!error.isAxiosError) {
           toast(t('error.unknownError'), { type: 'error' });
