@@ -1,6 +1,8 @@
+// import axios from 'axios';
 import React, {
   useState, createContext, useMemo, useCallback, useContext,
 } from 'react';
+// import routes from '../routes';
 
 const AuthContext = createContext();
 
@@ -11,11 +13,13 @@ const AuthProvider = ({ children }) => {
 
   const logout = useCallback(() => {
     localStorage.removeItem('auth');
+
     setAuth(null);
   }, []);
 
   const login = useCallback((data) => {
     localStorage.setItem('auth', JSON.stringify(data));
+
     setAuth(data);
   }, []);
 
@@ -23,7 +27,7 @@ const AuthProvider = ({ children }) => {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
-  }), [auth.token]);
+  }), [auth]);
 
   const authContextValue = useMemo(() => ({
     auth, login, logout, getAuthObject,
