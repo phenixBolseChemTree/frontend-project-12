@@ -16,12 +16,12 @@ const Chat = () => {
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
 
-  const { me, logout } = useAuth();
+  const { data, logout } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await me();
+        const response = await data();
         dispatch(addChatData(response.data));
       } catch (error) {
         if (!error.isAxiosError) {
@@ -36,7 +36,7 @@ const Chat = () => {
     };
 
     fetchData();
-  }, [dispatch, t, navigate, me, logout]);
+  }, [dispatch, t, navigate, data, logout]);
 
   const { channels, messages } = chatData;
 
