@@ -31,7 +31,6 @@ const Chat = () => {
         };
 
         fetchData1();
-        // dispatch(addChatData(response.data));
       } catch (error) {
         if (!error.isAxiosError) {
           toast(t('error.unknownError'), { type: 'error' });

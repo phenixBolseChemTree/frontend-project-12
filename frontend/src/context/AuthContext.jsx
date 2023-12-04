@@ -1,8 +1,6 @@
-// import axios from 'axios';
 import React, {
   useState, createContext, useMemo, useCallback, useContext,
 } from 'react';
-// import routes from '../routes';
 
 const AuthContext = createContext();
 
