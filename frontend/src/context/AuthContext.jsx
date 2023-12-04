@@ -1,8 +1,8 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, {
   useState, createContext, useMemo, useCallback, useContext,
 } from 'react';
-import routes from '../routes';
+// import routes from '../routes';
 
 const AuthContext = createContext();
 
@@ -23,15 +23,22 @@ const AuthProvider = ({ children }) => {
     setAuth(data);
   }, []);
 
-  const data = useCallback(() => axios.get(routes.data, {
+  // const data = useCallback(() => axios.get(routes.data, {
+  //   headers: {
+  //     Authorization: `Bearer ${auth.token}`,
+  //   },
+  // }), [auth]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getAuthObject = () => ({
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
-  }), [auth]);
+  });
 
   const authContextValue = useMemo(() => ({
-    auth, login, logout, data,
-  }), [auth, logout, login, data]);
+    auth, login, logout, getAuthObject,
+  }), [auth, logout, login, getAuthObject]);
 
   return (
     <AuthContext.Provider value={authContextValue}>

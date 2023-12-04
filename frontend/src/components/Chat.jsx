@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 import {
   addChatData,
 } from '../slice/index';
 import Channels from './Сhannels';
 import ChatView from './ChatView';
 import { useAuth } from '../context/AuthContext';
+import routes from '../routes';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -16,13 +18,25 @@ const Chat = () => {
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
 
-  const { data, logout } = useAuth();
+  const { getAuthObject, logout } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await data();
-        dispatch(addChatData(response.data));
+        // const response = await data();
+        // место для запроса
+        // eslint-disable-next-line no-shadow
+        const fetchData = async () => {
+          const authObj = getAuthObject();
+
+          // const response = await me();
+          const response = await axios.get(routes.data, authObj);
+
+          dispatch(addChatData(response.data));
+        };
+
+        fetchData();
+        // dispatch(addChatData(response.data));
       } catch (error) {
         if (!error.isAxiosError) {
           toast(t('error.unknownError'), { type: 'error' });
@@ -36,7 +50,7 @@ const Chat = () => {
     };
 
     fetchData();
-  }, [dispatch, t, navigate, data, logout]);
+  }, [dispatch, t, navigate, getAuthObject, logout]);
 
   const { channels, messages } = chatData;
 
