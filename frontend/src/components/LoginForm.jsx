@@ -28,8 +28,8 @@ const LoginForm = () => {
         const response = await axios.post(routes.apiLogin, { username: name, password });
 
         if (response.data) {
-          navigate(routes.chat);
           login(response.data);
+          navigate(routes.chat);
         }
       } catch (error) {
         if (error.message === 'Network Error') {
