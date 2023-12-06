@@ -32,12 +32,15 @@ const LoginForm = () => {
           navigate(routes.chat);
         }
       } catch (error) {
-        if (error.message === 'Network Error') {
-          toast(t('toast.connectError'), { type: 'error' });
+        if (!error.isAxiosError) {
+          toast(t('error.unknownError'), { type: 'error' });
+        } else if (error.response?.status === 401) {
+          setLoginError(true);
+          passwordRef.current.classList.add('is-invalid');
+          usernameRef.current.classList.add('is-invalid');
+        } else {
+          toast(t('error.networkError'), { type: 'error' });
         }
-        setLoginError(true);
-        passwordRef.current.classList.add('is-invalid');
-        usernameRef.current.classList.add('is-invalid');
       }
     },
   });

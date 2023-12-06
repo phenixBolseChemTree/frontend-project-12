@@ -46,12 +46,13 @@ const SignupForm = () => {
         login(response.data);
         navigate(routes.chat);
       } catch (error) {
-        if (error.message === 'Network Error') {
-          toast(t('signup.connectError'), { type: 'error' });
-        }
-        if (error.response.status === 409) {
+        if (!error.isAxiosError) {
+          toast(t('error.unknownError'), { type: 'error' });
+        } else if (error.response.status === 409) {
           setSignupError(true);
           passwordResRef.current.classList.add('is-invalid');
+        } else {
+          toast(t('error.networkError'), { type: 'error' });
         }
       }
     },
