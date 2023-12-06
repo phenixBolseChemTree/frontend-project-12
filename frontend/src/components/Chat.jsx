@@ -32,7 +32,7 @@ const Chat = () => {
           toast(t('error.unknownError'), { type: 'error' });
         } else if (error.response?.status === 401) {
           logout();
-          navigate('/login');
+          navigate(routes.login);
         } else {
           toast(t('error.networkError'), { type: 'error' });
         }

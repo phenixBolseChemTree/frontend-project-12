@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
+import routes from '../routes';
 
 const Layout = ({ children }) => {
   const { t } = useTranslation();
@@ -11,7 +12,7 @@ const Layout = ({ children }) => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate(routes.login);
   };
 
   return (
@@ -25,7 +26,7 @@ const Layout = ({ children }) => {
           }}
         >
           <div className="container">
-            <Link to={auth ? '/' : '/login'} className="navbar-brand">{t('nav.chatName')}</Link>
+            <Link to={auth ? routes.chat : routes.login} className="navbar-brand">{t('nav.chatName')}</Link>
             {auth && <button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</button>}
           </div>
         </nav>

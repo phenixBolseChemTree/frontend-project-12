@@ -28,7 +28,7 @@ const LoginForm = () => {
         const response = await axios.post(routes.apiLogin, { username: name, password });
 
         if (response.data) {
-          navigate('/');
+          navigate(routes.chat);
           login(response.data);
         }
       } catch (error) {

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import routes from '../routes';
 
 const PrivateOutlet = ({ children }) => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const PrivateOutlet = ({ children }) => {
 
   useEffect(() => {
     if (!token) {
-      navigate('/login');
+      navigate(routes.login);
     }
   }, [token, navigate]);
 

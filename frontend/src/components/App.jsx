@@ -12,7 +12,7 @@ import Login from './Login';
 import Page404 from './Page404';
 import Chat from './Chat';
 import PrivateOutlet from './PrivateOutlet';
-
+import routes from '../routes';
 import ModalWindow from './modal/ModalWindow';
 import Layout from './Layout';
 
@@ -22,15 +22,15 @@ const App = () => (
       <Layout>
         <Routes>
           <Route
-            path="/"
+            path={routes.chat}
             element={(
               <PrivateOutlet>
                 <Chat />
               </PrivateOutlet>
             )}
           />
-          <Route path="signup" element={<Signup />} />
-          <Route path="login" element={<Login />} />
+          <Route path={routes.signup} element={<Signup />} />
+          <Route path={routes.login} element={<Login />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Layout>

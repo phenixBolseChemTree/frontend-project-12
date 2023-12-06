@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import img from '../assets/red_flag.jpeg';
 import LoginForm from './LoginForm';
+import routes from '../routes';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -31,7 +32,7 @@ const Login = () => {
               <div className="text-center">
                 <span>{t('login.noAccount')}</span>
                 {' '}
-                <Link to="/signup">{t('login.registration')}</Link>
+                <Link to={routes.signup}>{t('login.registration')}</Link>
               </div>
             </Card.Footer>
           </Card>

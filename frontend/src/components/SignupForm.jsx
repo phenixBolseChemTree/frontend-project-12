@@ -44,7 +44,7 @@ const SignupForm = () => {
       try {
         const response = await axios.post(routes.apiSignup, { username: name, password });
         login(response.data);
-        navigate('/');
+        navigate(routes.chat);
       } catch (error) {
         if (error.message === 'Network Error') {
           toast(t('signup.connectError'), { type: 'error' });
