@@ -25,7 +25,7 @@ const LoginForm = () => {
     onSubmit: async (values) => {
       const { name, password } = values;
       try {
-        const response = await axios.post(routes.login, { username: name, password });
+        const response = await axios.post(routes.apiLogin, { username: name, password });
 
         if (response.data) {
           navigate('/');
