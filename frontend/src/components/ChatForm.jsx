@@ -4,12 +4,13 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Form } from 'react-bootstrap';
-import leoFilter from 'leo-profanity';
 import { useApi } from '../context/ApiContext';
 import { useAuth } from '../context/AuthContext';
+import { useLeoFilter } from '../context/LeoFilterContext';
 
 const ChatForm = () => {
   const api = useApi();
+  const leoFilter = useLeoFilter();
 
   const { currentChannelId } = useSelector((state) => state.chat);
 
@@ -31,7 +32,6 @@ const ChatForm = () => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-      leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
       const validatedText = leoFilter.clean(values.textInputForm);
       api.newMessage({
         body: validatedText,

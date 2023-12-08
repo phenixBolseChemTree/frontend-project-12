@@ -6,9 +6,11 @@ import { Provider as ProviderError, ErrorBoundary } from '@rollbar/react';
 
 import { configureStore } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
+import leoFilter from 'leo-profanity';
 import resources from './locales/index';
 import App from './components/App';
 import { ApiContext } from './context/ApiContext';
+import { LeoFilterContext } from './context/LeoFilterContext';
 
 import 'react-toastify/dist/ReactToastify.css';
 import reducer, {
@@ -25,6 +27,7 @@ const rollbarConfig = {
 
 const init = async () => {
   const socket = io();
+  leoFilter.add(leoFilter.getDictionary('ru'), leoFilter.getDictionary('en'), leoFilter.getDictionary('fr'));
   const i18n = i18next.createInstance();
   await i18n
     .use(initReactI18next)
@@ -78,9 +81,11 @@ const init = async () => {
       <ErrorBoundary>
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>
-            <ApiContext.Provider value={api}>
-              <App />
-            </ApiContext.Provider>
+            <LeoFilterContext.Provider value={leoFilter}>
+              <ApiContext.Provider value={api}>
+                <App />
+              </ApiContext.Provider>
+            </LeoFilterContext.Provider>
           </I18nextProvider>
         </Provider>
       </ErrorBoundary>
