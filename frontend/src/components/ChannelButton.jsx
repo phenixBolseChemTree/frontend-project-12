@@ -23,14 +23,14 @@ const ButtonChannel = ({ id, name, removable }) => {
   return (
     <>
       {!removable && (
-        <button
+        <Button
           onClick={() => handleSetChannet(id)}
           type="button"
           className={btnClassesPart1}
         >
           <span className="me-1">#</span>
           {name}
-        </button>
+        </Button>
       )}
       {removable && (
         <ButtonGroup className="d-flex justify-content-start">
