@@ -9,7 +9,10 @@ import { toast } from 'react-toastify';
 import routes from '../routes';
 import { useAuth } from '../context/AuthContext';
 
+// ... остальной код
+
 const LoginForm = () => {
+  // ... остальной код
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -17,14 +20,20 @@ const LoginForm = () => {
   const passwordRef = useRef(null);
   const [loginError, setLoginError] = useState(false);
 
+  const [invalidUsername, setInvalidUsername] = useState(false);
+  const [invalidPassword, setInvalidPassword] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       name: '',
       password: '',
     },
     onSubmit: async (values) => {
+      // ... остальной код
       const { name, password } = values;
+
       try {
+        // ... остальной код
         const response = await axios.post(routes.apiLogin, { username: name, password });
 
         if (response.data) {
@@ -36,8 +45,8 @@ const LoginForm = () => {
           toast(t('error.unknownError'), { type: 'error' });
         } else if (error.response?.status === 401) {
           setLoginError(true);
-          passwordRef.current.classList.add('is-invalid');
-          usernameRef.current.classList.add('is-invalid');
+          setInvalidUsername(true);
+          setInvalidPassword(true);
         } else {
           toast(t('error.networkError'), { type: 'error' });
         }
@@ -56,9 +65,9 @@ const LoginForm = () => {
           onChange={formik.handleChange}
           value={formik.values.name}
           ref={usernameRef}
+          isInvalid={invalidUsername}
         />
         <Form.Label htmlFor="name">{t('login.yourName')}</Form.Label>
-
       </Form.Group>
 
       <Form.Group className="form-floating mb-5">
@@ -70,6 +79,7 @@ const LoginForm = () => {
           onChange={formik.handleChange}
           value={formik.values.password}
           ref={passwordRef}
+          isInvalid={invalidPassword}
         />
         <Form.Label htmlFor="password">{t('login.password')}</Form.Label>
 
@@ -77,7 +87,9 @@ const LoginForm = () => {
           {loginError && t('error.invalidNameOrPassword')}
         </Form.Control.Feedback>
       </Form.Group>
-      <Button onClick={formik.handleSubmit} type="submit" variant="outline-primary" className="w-100 mb-3 btn btn-outline-primary">{t('login.come')}</Button>
+      <Button type="submit" variant="outline-primary" className="w-100 mb-3 btn btn-outline-primary">
+        {t('login.come')}
+      </Button>
     </Form>
   );
 };
