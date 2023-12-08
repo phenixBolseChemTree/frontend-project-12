@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -13,7 +12,6 @@ import { useAuth } from '../context/AuthContext';
 import routes from '../routes';
 
 const Chat = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const chatData = useSelector((state) => state.chat);
   const { t } = useTranslation();
@@ -32,7 +30,6 @@ const Chat = () => {
           toast(t('error.unknownError'), { type: 'error' });
         } else if (error.response?.status === 401) {
           logout();
-          navigate(routes.login);
         } else {
           toast(t('error.networkError'), { type: 'error' });
         }
@@ -40,7 +37,7 @@ const Chat = () => {
     };
 
     fetchData();
-  }, [dispatch, t, navigate, getAuthObject, logout]);
+  }, [dispatch, t, getAuthObject, logout]);
 
   const { channels, messages } = chatData;
 
