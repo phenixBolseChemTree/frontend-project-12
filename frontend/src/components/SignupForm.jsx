@@ -12,6 +12,9 @@ import routes from '../routes';
 const SignupForm = () => {
   const [signupError, setSignupError] = useState(false);
   const passwordResRef = useRef(null);
+
+  const [isPasswordResInvalid, setIsPasswordResInvalid] = useState(false);
+
   const { t } = useTranslation();
 
   const { login } = useAuth();
@@ -50,7 +53,8 @@ const SignupForm = () => {
           toast(t('error.unknownError'), { type: 'error' });
         } else if (error.response.status === 409) {
           setSignupError(true);
-          passwordResRef.current.classList.add('is-invalid');
+          // passwordResRef.current.classList.add('is-invalid');
+          setIsPasswordResInvalid(true);
         } else {
           toast(t('error.networkError'), { type: 'error' });
         }
@@ -102,7 +106,7 @@ const SignupForm = () => {
           id="passwordRes"
           onChange={formik.handleChange}
           value={formik.values.passwordRes}
-          isInvalid={!!formik.errors.passwordRes}
+          isInvalid={!!formik.errors.passwordRes || isPasswordResInvalid}
           ref={passwordResRef}
         />
         <Form.Label htmlFor="passwordRes">{t('signup.resPassword')}</Form.Label>
