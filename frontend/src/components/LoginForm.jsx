@@ -9,10 +9,8 @@ import { toast } from 'react-toastify';
 import routes from '../routes';
 import { useAuth } from '../context/AuthContext';
 
-// ... остальной код
 
 const LoginForm = () => {
-  // ... остальной код
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -29,11 +27,9 @@ const LoginForm = () => {
       password: '',
     },
     onSubmit: async (values) => {
-      // ... остальной код
       const { name, password } = values;
 
       try {
-        // ... остальной код
         const response = await axios.post(routes.apiLogin, { username: name, password });
 
         if (response.data) {

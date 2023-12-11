@@ -53,7 +53,6 @@ const SignupForm = () => {
           toast(t('error.unknownError'), { type: 'error' });
         } else if (error.response.status === 409) {
           setSignupError(true);
-          // passwordResRef.current.classList.add('is-invalid');
           setIsPasswordResInvalid(true);
         } else {
           toast(t('error.networkError'), { type: 'error' });
