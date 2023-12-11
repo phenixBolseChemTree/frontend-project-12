@@ -22,23 +22,7 @@ const ChatView = () => {
   const nameChanel = currentNameChannel(channels, currentChannelId);
   const currentMessages = getCurrentMessages(messages, currentChannelId);
 
-  const messageCount = currentMessages.length;
-
-  const generateMessageKey = () => {
-    if (messageCount === 1) {
-      return 'key_one';
-    }
-
-    if (messageCount >= 2 && messageCount <= 4) {
-      return 'key_few';
-    }
-
-    return 'key_many';
-  };
-
-  const messageKey = generateMessageKey();
-
-  const messageText = t(`chat.messages.${messageKey}`, { count: messageCount });
+  const messageText = t('chat.messages.key', { count: currentMessages.length });
 
   return (
     <div className="col p-0 h-100 chat-board">
