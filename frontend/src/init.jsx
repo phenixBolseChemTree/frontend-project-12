@@ -10,7 +10,6 @@ import leoFilter from 'leo-profanity';
 import resources from './locales/index';
 import App from './components/App';
 import { ApiContext } from './context/ApiContext';
-import { LeoFilterContext } from './context/LeoFilterContext';
 
 import 'react-toastify/dist/ReactToastify.css';
 import reducer, {
@@ -81,11 +80,9 @@ const init = async () => {
       <ErrorBoundary>
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>
-            <LeoFilterContext.Provider value={leoFilter}>
-              <ApiContext.Provider value={api}>
-                <App />
-              </ApiContext.Provider>
-            </LeoFilterContext.Provider>
+            <ApiContext.Provider value={api}>
+              <App />
+            </ApiContext.Provider>
           </I18nextProvider>
         </Provider>
       </ErrorBoundary>

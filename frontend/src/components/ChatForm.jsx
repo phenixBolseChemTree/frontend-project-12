@@ -4,14 +4,12 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, Form } from 'react-bootstrap';
+import leoFilter from 'leo-profanity';
 import { useApi } from '../context/ApiContext';
 import { useAuth } from '../context/AuthContext';
-import { useLeoFilter } from '../context/LeoFilterContext';
 
 const ChatForm = () => {
   const api = useApi();
-  const leoFilter = useLeoFilter();
-
   const { currentChannelId } = useSelector((state) => state.chat);
 
   const {
