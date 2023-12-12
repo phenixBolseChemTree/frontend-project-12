@@ -26,7 +26,6 @@ const ButtonChannel = ({ id, name, removable }) => {
         <Button
           variant="light"
           onClick={() => handleSetChannet(id)}
-          type="button"
           className={btnClassesPart1}
         >
           <span className="me-1">#</span>
