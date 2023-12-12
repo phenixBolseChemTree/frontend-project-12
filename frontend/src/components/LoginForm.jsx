@@ -16,9 +16,6 @@ const LoginForm = () => {
   const passwordRef = useRef(null);
   const [loginError, setLoginError] = useState(false);
 
-  const [invalidUsername, setInvalidUsername] = useState(false);
-  const [invalidPassword, setInvalidPassword] = useState(false);
-
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -39,8 +36,6 @@ const LoginForm = () => {
           toast(t('error.unknownError'), { type: 'error' });
         } else if (error.response?.status === 401) {
           setLoginError(true);
-          setInvalidUsername(true);
-          setInvalidPassword(true);
         } else {
           toast(t('error.networkError'), { type: 'error' });
         }
@@ -59,7 +54,7 @@ const LoginForm = () => {
           onChange={formik.handleChange}
           value={formik.values.name}
           ref={usernameRef}
-          isInvalid={invalidUsername}
+          isInvalid={loginError}
         />
         <Form.Label htmlFor="name">{t('login.yourName')}</Form.Label>
       </Form.Group>
@@ -67,13 +62,13 @@ const LoginForm = () => {
       <Form.Group className="form-floating mb-5">
         <Form.Control
           required
-          type="text"
+          type="password"
           name="password"
           id="password"
           onChange={formik.handleChange}
           value={formik.values.password}
           ref={passwordRef}
-          isInvalid={invalidPassword}
+          isInvalid={loginError}
         />
         <Form.Label htmlFor="password">{t('login.password')}</Form.Label>
 
