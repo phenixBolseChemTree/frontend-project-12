@@ -29,14 +29,13 @@ const ChatForm = () => {
       textInputForm: '',
     },
     validationSchema,
-    onSubmit: async (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { resetForm }) => {
       const validatedText = leoFilter.clean(values.textInputForm);
       await api.newMessage({
         body: validatedText,
         username,
         channelId: currentChannelId,
       });
-      setSubmitting(false);
       resetForm();
     },
   });
