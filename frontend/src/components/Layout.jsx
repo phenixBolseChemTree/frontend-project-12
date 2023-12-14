@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Button, Container, Nav } from 'react-bootstrap';
+import {
+  Button, Container, Nav, NavbarBrand,
+} from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import routes from '../routes';
 
@@ -27,7 +29,9 @@ const Layout = ({ children }) => {
           }}
         >
           <Container>
-            <Link to={auth ? routes.chat : routes.login} className="navbar-brand">{t('nav.chatName')}</Link>
+            <NavbarBrand as={Link} to={auth ? routes.chat : routes.login}>
+              {t('nav.chatName')}
+            </NavbarBrand>
             {auth && <Button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</Button>}
           </Container>
         </Nav>
