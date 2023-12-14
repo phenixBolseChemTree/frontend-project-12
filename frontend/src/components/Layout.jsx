@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
           data-bs-theme="light"
           expand="lg"
           variant="white"
-          className="shadow-sm z-1 sticky-top w-100"
+          className="shadow-sm z-1 w-100"
         >
           <Container>
             <NavbarBrand as={Link} to={auth ? routes.chat : routes.login}>
