@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
-  Button, Container, Nav, NavbarBrand,
+  Button, Container, Navbar, NavbarBrand,
 } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import routes from '../routes';
@@ -21,12 +21,11 @@ const Layout = ({ children }) => {
   return (
     <div>
       <header>
-        <Nav
-          className="shadow-sm navbar navbar-expand-lg navbar-light bg-white z-1"
-          style={{
-            position: 'fixed',
-            width: '100%',
-          }}
+        <Navbar
+          data-bs-theme="light"
+          expand="lg"
+          variant="white"
+          className="shadow-sm z-1 sticky-top w-100"
         >
           <Container>
             <NavbarBrand as={Link} to={auth ? routes.chat : routes.login}>
@@ -34,7 +33,7 @@ const Layout = ({ children }) => {
             </NavbarBrand>
             {auth && <Button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</Button>}
           </Container>
-        </Nav>
+        </Navbar>
       </header>
       <main style={{
         paddingTop: 50,
