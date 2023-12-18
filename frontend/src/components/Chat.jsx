@@ -22,7 +22,7 @@ const Chat = () => {
     const fetchData = async () => {
       try {
         const authObj = getAuthObject();
-        const response = await axios.get(routes.apiData, { headers: { authObj } });
+        const response = await axios.get(routes.apiData, { headers: authObj });
 
         dispatch(addChatData(response.data));
       } catch (error) {
