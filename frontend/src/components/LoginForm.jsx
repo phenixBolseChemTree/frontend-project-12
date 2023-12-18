@@ -76,7 +76,7 @@ const LoginForm = () => {
           {loginError && t('error.invalidNameOrPassword')}
         </Form.Control.Feedback>
       </Form.Group>
-      <Button type="submit" variant="outline-primary" className="w-100 mb-3 btn btn-outline-primary">
+      <Button type="submit" variant="outline-primary" className="w-100 mb-3 btn-outline-primary">
         {t('login.come')}
       </Button>
     </Form>

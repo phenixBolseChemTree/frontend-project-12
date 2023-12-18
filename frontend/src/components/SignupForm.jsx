@@ -114,7 +114,7 @@ const SignupForm = () => {
       </Form.Group>
       <Button
         variant="outline-primary"
-        className="w-100 btn btn-outline-primary"
+        className="w-100"
         type="submit"
         onClick={formik.handleSubmit}
       >

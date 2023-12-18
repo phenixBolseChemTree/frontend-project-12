@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
             <NavbarBrand as={Link} to={auth ? routes.chat : routes.login}>
               {t('nav.chatName')}
             </NavbarBrand>
-            {auth && <Button type="button" onClick={handleLogout} className="btn btn-primary">{t('nav.logOut')}</Button>}
+            {auth && <Button type="button" onClick={handleLogout} variant="primary">{t('nav.logOut')}</Button>}
           </Container>
         </Navbar>
       </header>
