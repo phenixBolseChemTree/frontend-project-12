@@ -4,7 +4,6 @@ import {
 } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from '../context/AuthContext';
 import Signup from './Signup';
