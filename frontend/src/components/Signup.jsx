@@ -14,7 +14,7 @@ const Signup = () => {
       <Row className="justify-content-center">
         <Col xs={12} md={8} xxl={6}>
           <Card className="shadow-sm">
-            <Card.Body className="d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
+            <Card.Body bsPrefix="d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
               <div>
                 <img
                   src={img}

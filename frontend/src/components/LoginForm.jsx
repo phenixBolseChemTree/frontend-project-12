@@ -45,7 +45,7 @@ const LoginForm = () => {
 
   return (
     <Form onSubmit={formik.handleSubmit}>
-      <Form.Group className="form-floating mb-3">
+      <Form.Floating className="mb-3">
         <Form.Control
           required
           type="text"
@@ -57,9 +57,9 @@ const LoginForm = () => {
           isInvalid={loginError}
         />
         <Form.Label htmlFor="name">{t('login.yourName')}</Form.Label>
-      </Form.Group>
+      </Form.Floating>
 
-      <Form.Group className="form-floating mb-5">
+      <Form.Floating className="mb-5">
         <Form.Control
           required
           type="password"
@@ -75,8 +75,8 @@ const LoginForm = () => {
         <Form.Control.Feedback type="invalid" tooltip>
           {loginError && t('error.invalidNameOrPassword')}
         </Form.Control.Feedback>
-      </Form.Group>
-      <Button type="submit" variant="outline-primary" className="w-100 mb-3 btn-outline-primary">
+      </Form.Floating>
+      <Button type="submit" variant="outline-primary" className="w-100 mb-3">
         {t('login.come')}
       </Button>
     </Form>

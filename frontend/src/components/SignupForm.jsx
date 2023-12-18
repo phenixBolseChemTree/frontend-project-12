@@ -61,7 +61,7 @@ const SignupForm = () => {
   return (
     <Form onSubmit={formik.handleSubmit}>
       <h1 className="text-center mb-4">{t('login.registration')}</h1>
-      <Form.Group className="form-floating mb-3">
+      <Form.Floating className="mb-3">
         <Form.Control
           required
           type="text"
@@ -75,9 +75,9 @@ const SignupForm = () => {
         <Form.Control.Feedback type="invalid" tooltip>
           {formik.errors.name}
         </Form.Control.Feedback>
-      </Form.Group>
+      </Form.Floating>
 
-      <Form.Group className="form-floating mb-3">
+      <Form.Floating className="mb-3">
         <Form.Control
           required
           type="text"
@@ -92,8 +92,8 @@ const SignupForm = () => {
         <Form.Control.Feedback type="invalid" tooltip>
           {formik.errors.password}
         </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="form-floating mb-5">
+      </Form.Floating>
+      <Form.Floating className="mb-5">
 
         <Form.Control
           required
@@ -111,7 +111,7 @@ const SignupForm = () => {
           {signupError ? 'Такой пользователь уже существует' : formik.errors.passwordRes}
 
         </Form.Control.Feedback>
-      </Form.Group>
+      </Form.Floating>
       <Button
         variant="outline-primary"
         className="w-100"

@@ -47,7 +47,7 @@ const ChatForm = () => {
           type="text"
           name="textInputForm"
           aria-label={t('chat.newMessage')}
-          className="border-0 p-0 ps-2 form-control"
+          className="border-0 p-0 ps-2"
           value={formik.values.textInputForm}
           placeholder={t('chat.formPlaceholder')}
           onChange={formik.handleChange}

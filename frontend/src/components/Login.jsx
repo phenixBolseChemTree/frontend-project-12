@@ -15,7 +15,7 @@ const Login = () => {
       <Row className="justify-content-center">
         <Col md={8} xxl={6}>
           <Card className="shadow-sm">
-            <Card.Body className="row p-5">
+            <Card.Body bsPrefix="row p-5">
               <Col md={6} className="d-flex align-items-center justify-content-center">
                 <img
                   src={img}

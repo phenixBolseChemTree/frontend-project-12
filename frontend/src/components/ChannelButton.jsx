@@ -12,7 +12,7 @@ const ButtonChannel = ({ id, name, removable }) => {
 
   const currentChannelId = useSelector((state) => state.chat.currentChannelId);
   const isSelected = currentChannelId === id;
-  const btnClassesPart1 = cn('w-100 rounded-0 text-start border-0', {
+  const btnClassesPart1 = cn('w-100 111 rounded-0 text-start border-0', {
     'bg-secondary text-white': isSelected,
   });
 
