@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import reducer, {
   setNewChannel, setNewMessage, setRemoveChannel, setRenameChannel,
 } from './slice';
+import { AuthProvider } from './context/AuthContext';
 
 const { REACT_APP_ROLLBAR_ACCESS_TOKEN } = process.env;
 const { REACT_APP_ENV } = process.env;
@@ -81,7 +82,9 @@ const init = async () => {
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>
             <ApiContext.Provider value={api}>
-              <App />
+              <AuthProvider>
+                <App />
+              </AuthProvider>
             </ApiContext.Provider>
           </I18nextProvider>
         </Provider>

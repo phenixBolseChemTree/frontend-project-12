@@ -5,7 +5,6 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer } from 'react-toastify';
-import { AuthProvider } from '../context/AuthContext';
 import Signup from './Signup';
 import Login from './Login';
 import Page404 from './Page404';
@@ -16,7 +15,7 @@ import ModalWindow from './modal/ModalWindow';
 import Layout from './Layout';
 
 const App = () => (
-  <AuthProvider>
+  <>
     <BrowserRouter>
       <Layout>
         <Routes>
@@ -36,7 +35,7 @@ const App = () => (
     </BrowserRouter>
     <ToastContainer />
     <ModalWindow />
-  </AuthProvider>
+  </>
 );
 
 export default App;
