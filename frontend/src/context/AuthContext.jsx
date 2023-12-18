@@ -21,11 +21,7 @@ const AuthProvider = ({ children }) => {
     setAuth(data);
   }, []);
 
-  const getAuthObject = useCallback(() => ({
-    headers: {
-      Authorization: `Bearer ${auth.token}`,
-    },
-  }), [auth]);
+  const getAuthObject = useCallback(() => ({ Authorization: `Bearer ${auth.token}` }), [auth]);
 
   const authContextValue = useMemo(() => ({
     auth, login, logout, getAuthObject,
