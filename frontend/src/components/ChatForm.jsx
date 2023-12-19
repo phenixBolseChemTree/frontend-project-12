@@ -22,7 +22,7 @@ const ChatForm = () => {
   const { t } = useTranslation();
 
   const validationSchema = yup.object().shape({
-    textInputForm: yup.string().required(t('chat.formPlaceholder')),
+    textInputForm: yup.string(),
   });
 
   const formik = useFormik({

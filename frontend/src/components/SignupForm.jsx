@@ -26,7 +26,7 @@ const SignupForm = () => {
       .required(t('error.requiredField')),
     password: yup.string()
       .min(6, t('error.minCharacters6'))
-      .max(50, 'Максимум 50 символов')
+      .max(50, t('error.maxCharacters50'))
       .required(t('error.requiredField')),
     passwordRes: yup.string()
       .oneOf([yup.ref('password'), null], t('error.samePasswords'))
@@ -108,7 +108,7 @@ const SignupForm = () => {
         <Form.Label htmlFor="passwordRes">{t('signup.resPassword')}</Form.Label>
 
         <Form.Control.Feedback type="invalid" tooltip>
-          {signupError ? 'Такой пользователь уже существует' : formik.errors.passwordRes}
+          {signupError ? t('signup.error409') : formik.errors.passwordRes}
 
         </Form.Control.Feedback>
       </Form.Floating>
