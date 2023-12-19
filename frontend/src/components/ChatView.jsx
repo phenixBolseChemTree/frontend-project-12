@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { Col, Container } from 'react-bootstrap';
 import ChatForm from './ChatForm';
 
 const currentNameChannel = (channels, id) => {
@@ -29,9 +30,9 @@ const ChatView = () => {
   }, [messages]);
 
   return (
-    <div className="col p-0 h-100 chat-board">
-      <div className="chat d-flex flex-column h-100">
-        <div className="bg-light mb-4 p-3 shadow-sm small">
+    <Col className="col-9 222 p-0 d-flex flex-column h-100 chat-board ">
+      <Container className="d-flex flex-column h-100">
+        <div className="mb-4 p-3 shadow-sm small">
           <p className="m-0">
             <b>
               #
@@ -58,11 +59,11 @@ const ChatView = () => {
           ))}
           <div ref={messagesEndRef} />
         </div>
-        <div className="mt-auto px-5 py-3 message-box">
+        <div className="mt-auto px-5 py-3">
           <ChatForm />
         </div>
-      </div>
-    </div>
+      </Container>
+    </Col>
   );
 };
 
