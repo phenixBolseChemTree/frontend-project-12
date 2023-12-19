@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
+import { toast } from 'react-toastify';
 import { useApi } from '../context/ApiContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -31,12 +32,16 @@ const ChatForm = () => {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       const validatedText = leoFilter.clean(values.textInputForm);
-      await api.newMessage({
-        body: validatedText,
-        username,
-        channelId: currentChannelId,
-      });
-      resetForm();
+      try {
+        await api.newMessage({
+          body: validatedText,
+          username,
+          channelId: currentChannelId,
+        });
+        resetForm();
+      } catch (e) {
+        toast(t('toast.connectError'), { type: 'error' });
+      }
     },
   });
 
