@@ -16,9 +16,9 @@ const AddChannel = ({ handleClose }) => {
 
   const validationSchema = yup.object().shape({
     name: yup.string()
-      .min(3, t('error.minWord3AndmaxWord20'))
-      .max(20, t('error.minWord3AndmaxWord20'))
-      .test('is-unique', t('modal.mustBeUnique'), (value) => !channels.map((channel) => channel.name).includes(value))
+      .min(3, 'minWord3AndmaxWord20')
+      .max(20, 'minWord3AndmaxWord20')
+      .test('is-unique', 'mustBeUnique', (value) => !channels.map((channel) => channel.name).includes(value))
       .required(''),
   });
 
@@ -66,7 +66,7 @@ const AddChannel = ({ handleClose }) => {
             />
             <Form.Label className="visually-hidden" htmlFor="name">{t('modal.formLabelName')}</Form.Label>
             <Form.Control.Feedback type="invalid">
-              {formik.errors.name}
+              {t(`error.${formik.errors.name}`)}
             </Form.Control.Feedback>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleModalClose}>

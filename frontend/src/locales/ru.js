@@ -60,6 +60,7 @@ export default {
       invalidNameOrPassword: 'Неверные имя пользователя или пароль',
       unknownError: 'Неизвестная ошибка',
       networkError: 'Ошибка сети',
+      mustBeUnique: 'Должно быть уникальным',
     },
     modal: {
       addChannel: 'Добавить канал',
@@ -72,7 +73,6 @@ export default {
       shure: 'Уверены?',
       formPlaceholder: 'Введите имя канала...',
       formLabelName: 'Имя канала',
-      mustBeUnique: 'Должно быть уникальным',
     },
     dropdownBar: {
       delete: 'Удалить',
