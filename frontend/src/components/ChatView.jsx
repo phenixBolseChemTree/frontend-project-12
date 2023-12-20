@@ -30,7 +30,7 @@ const ChatView = () => {
   }, [messages]);
 
   return (
-    <Col className="col-9 222 p-0 d-flex flex-column h-100 chat-board ">
+    <Col className="col-9 p-0 d-flex flex-column h-100 chat-board ">
       <Container className="d-flex flex-column h-100">
         <div className="mb-4 p-3 shadow-sm small">
           <p className="m-0">
