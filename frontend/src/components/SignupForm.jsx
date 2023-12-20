@@ -21,16 +21,16 @@ const SignupForm = () => {
 
   const SignupSchema = yup.object().shape({
     name: yup.string()
-      .min(3, t('error.minWord3AndmaxWord20'))
-      .max(20, t('error.minWord3AndmaxWord20'))
-      .required(t('error.requiredField')),
+      .min(3, 'minWord3AndmaxWord20')
+      .max(20, 'minWord3AndmaxWord20')
+      .required('requiredField'),
     password: yup.string()
-      .min(6, t('error.minCharacters6'))
-      .max(50, t('error.maxCharacters50'))
-      .required(t('error.requiredField')),
+      .min(6, 'minCharacters6')
+      .max(50, 'maxCharacters50')
+      .required('requiredField'),
     passwordRes: yup.string()
-      .oneOf([yup.ref('password'), null], t('error.samePasswords'))
-      .required(t('error.requiredField')),
+      .oneOf([yup.ref('password'), null], 'samePasswords')
+      .required('requiredField'),
   });
 
   const formik = useFormik({
@@ -73,7 +73,7 @@ const SignupForm = () => {
         />
         <Form.Label htmlFor="name">{t('signup.userName')}</Form.Label>
         <Form.Control.Feedback type="invalid" tooltip>
-          {formik.errors.name}
+          {t(`error.${formik.errors.name}`)}
         </Form.Control.Feedback>
       </Form.Floating>
 
@@ -90,7 +90,7 @@ const SignupForm = () => {
         <Form.Label htmlFor="password">{t('signup.password')}</Form.Label>
 
         <Form.Control.Feedback type="invalid" tooltip>
-          {formik.errors.password}
+          {t(`error.${formik.errors.password}`)}
         </Form.Control.Feedback>
       </Form.Floating>
       <Form.Floating className="mb-5">
@@ -108,7 +108,7 @@ const SignupForm = () => {
         <Form.Label htmlFor="passwordRes">{t('signup.resPassword')}</Form.Label>
 
         <Form.Control.Feedback type="invalid" tooltip>
-          {signupError ? t('signup.error409') : formik.errors.passwordRes}
+          {signupError ? t('signup.error409') : t(`error.${formik.errors.passwordRes}`)}
 
         </Form.Control.Feedback>
       </Form.Floating>
