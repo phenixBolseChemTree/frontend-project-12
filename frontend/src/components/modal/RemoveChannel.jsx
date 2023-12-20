@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { loadingOn, loadingOff, closeModal } from '../../slice';
+import { closeModal } from '../../slice';
 import { useApi } from '../../context/ApiContext';
 
 const RemoveChannel = ({ handleClose, id }) => {
   const api = useApi();
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.modal.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
 
   const handleSubmit = async () => {
     if (!isLoading) {
-      dispatch(loadingOn());
+      setIsLoading(true);
       try {
         await api.removeChannel({ id });
         toast(t('toast.removeChannel'), { type: 'success' });
-        dispatch(loadingOff());
         dispatch(closeModal());
-      } catch (e) {
-        dispatch(loadingOff());
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -53,4 +52,5 @@ const RemoveChannel = ({ handleClose, id }) => {
     </div>
   );
 };
+
 export default RemoveChannel;
