@@ -6,7 +6,7 @@ import axios from 'axios';
 import {
   addChatData,
 } from '../slice/index';
-import Channels from './Сhannels';
+import Channels from './Channels';
 import ChatView from './ChatView';
 import { useAuth } from '../context/AuthContext';
 import routes from '../routes';
