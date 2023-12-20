@@ -2,19 +2,16 @@ import React, { useRef, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useApi } from '../../context/ApiContext';
-import { loadingOn, loadingOff, closeModal } from '../../slice';
 
 const RenameChannel = ({ handleClose, id }) => {
   const api = useApi();
   const { t } = useTranslation();
   const controlRef = useRef(null);
   const channels = useSelector((state) => state.chat.channels);
-  const isLoading = useSelector((state) => state.modal.isLoading);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (controlRef.current) {
@@ -35,21 +32,19 @@ const RenameChannel = ({ handleClose, id }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: async (values) => {
-      if (!isLoading) {
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
         const { name } = values;
-        dispatch(loadingOn());
-        try {
-          await api.renameChannel({ id, name });
-          toast(t('toast.renameChannel'), { type: 'success' });
-          dispatch(loadingOff());
-          dispatch(closeModal());
-        } catch (e) {
-          dispatch(loadingOff());
-        }
+        setSubmitting(true);
+        await api.renameChannel({ id, name });
+        toast(t('toast.renameChannel'), { type: 'success' });
+        handleClose();
+      } finally {
+        setSubmitting(false);
       }
     },
   });
+
   return (
     <div
       className="modal show"
@@ -80,7 +75,7 @@ const RenameChannel = ({ handleClose, id }) => {
               <Button variant="secondary" onClick={handleClose}>
                 {t('modal.btnCancel')}
               </Button>
-              <Button variant="primary" onClick={formik.handleSubmit} disabled={isLoading}>
+              <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
                 {t('modal.btnSend')}
               </Button>
             </Modal.Footer>
@@ -90,4 +85,5 @@ const RenameChannel = ({ handleClose, id }) => {
     </div>
   );
 };
+
 export default RenameChannel;
