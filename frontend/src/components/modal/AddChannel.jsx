@@ -5,15 +5,14 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { loadingOn, loadingOff, closeModal } from '../../slice';
+import { closeModal } from '../../slice';
 import { useApi } from '../../context/ApiContext';
 
 const AddChannel = ({ handleClose }) => {
   const api = useApi();
   const dispatch = useDispatch();
-  const channels = useSelector((state) => state.chat.channels);
-  const isLoading = useSelector((state) => state.modal.isLoading);
   const { t } = useTranslation();
+  const channels = useSelector((state) => state.chat.channels);
 
   const validationSchema = yup.object().shape({
     name: yup.string()
@@ -28,21 +27,21 @@ const AddChannel = ({ handleClose }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: async (values) => {
-      if (!isLoading) {
-        const { name } = values;
-        dispatch(loadingOn());
-        try {
-          await api.newChannel({ name });
-          toast(t('toast.addChannel'), { type: 'success' });
-          dispatch(loadingOff());
-          dispatch(closeModal());
-        } catch (e) {
-          dispatch(loadingOff());
-        }
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        await api.newChannel(values);
+        toast(t('toast.addChannel'), { type: 'success' });
+        dispatch(closeModal());
+      } finally {
+        setSubmitting(false);
       }
     },
   });
+
+  const handleModalClose = () => {
+    handleClose();
+    dispatch(closeModal());
+  };
 
   return (
     <div
@@ -70,10 +69,10 @@ const AddChannel = ({ handleClose }) => {
               {formik.errors.name}
             </Form.Control.Feedback>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="secondary" onClick={handleModalClose}>
                 {t('modal.btnCancel')}
               </Button>
-              <Button variant="primary" onClick={formik.handleSubmit} disabled={isLoading}>
+              <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
                 {t('modal.btnSend')}
               </Button>
             </Modal.Footer>
@@ -83,4 +82,5 @@ const AddChannel = ({ handleClose }) => {
     </div>
   );
 };
+
 export default AddChannel;
