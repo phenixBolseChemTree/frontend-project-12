@@ -22,18 +22,10 @@ const modalSlice = createSlice({
       typeModal: null,
       modalId: null,
     }),
-    loadingOn: (state) => ({
-      ...state,
-      isLoading: true,
-    }),
-    loadingOff: (state) => ({
-      ...state,
-      isLoading: false,
-    }),
   },
 });
 
 export const {
-  openModal, closeModal, loadingOff, loadingOn,
+  openModal, closeModal,
 } = modalSlice.actions;
 export default modalSlice.reducer;
