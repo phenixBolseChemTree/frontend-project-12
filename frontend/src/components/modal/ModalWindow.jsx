@@ -8,7 +8,7 @@ import RenameChannel from './RenameChannel';
 
 const ModalWindow = () => {
   const modal = useSelector((state) => state.modal);
-  const { isOpened, typeModal, modalId } = modal;
+  const { isOpened, typeModal, extra } = modal;
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -17,8 +17,8 @@ const ModalWindow = () => {
 
   const modalComponents = {
     addChannel: <AddChannel handleClose={handleClose} />,
-    removeChannel: <RemoveChannel handleClose={handleClose} id={modalId} />,
-    renameChannel: <RenameChannel handleClose={handleClose} id={modalId} />,
+    removeChannel: <RemoveChannel handleClose={handleClose} id={extra} />,
+    renameChannel: <RenameChannel handleClose={handleClose} id={extra} />,
   };
 
   const ModalComponent = modalComponents[typeModal] || null;
