@@ -39,8 +39,8 @@ const RenameChannel = ({ handleClose, id }) => {
         await api.renameChannel({ id, name });
         toast(t('toast.renameChannel'), { type: 'success' });
         handleClose();
-      } finally {
-        setSubmitting(false);
+      } catch (e) {
+        console.log(e);
       }
     },
   });

@@ -27,13 +27,13 @@ const AddChannel = ({ handleClose }) => {
       name: '',
     },
     validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values) => {
       try {
         await api.newChannel(values);
         toast(t('toast.addChannel'), { type: 'success' });
         dispatch(closeModal());
-      } finally {
-        setSubmitting(false);
+      } catch (e) {
+        console.log(e);
       }
     },
   });

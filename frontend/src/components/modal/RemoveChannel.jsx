@@ -19,8 +19,8 @@ const RemoveChannel = ({ handleClose, id }) => {
         await api.removeChannel({ id });
         toast(t('toast.removeChannel'), { type: 'success' });
         dispatch(closeModal());
-      } finally {
-        setIsLoading(false);
+      } catch (e) {
+        console.log(e);
       }
     }
   };
