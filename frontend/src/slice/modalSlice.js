@@ -6,7 +6,6 @@ const modalSlice = createSlice({
     typeModal: null,
     modalStatus: false,
     modalId: '1',
-    isLoading: false,
   },
   reducers: {
     openModal: (state, { payload }) => ({
