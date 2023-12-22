@@ -20,7 +20,7 @@ const RemoveChannel = ({ handleClose, id }) => {
         toast(t('toast.removeChannel'), { type: 'success' });
         dispatch(closeModal());
       } catch (e) {
-        console.log(e);
+        toast(t('error.networkError'), { type: 'error' });
       }
     }
   };

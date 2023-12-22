@@ -33,7 +33,7 @@ const AddChannel = ({ handleClose }) => {
         toast(t('toast.addChannel'), { type: 'success' });
         dispatch(closeModal());
       } catch (e) {
-        console.log(e);
+        toast(t('error.networkError'), { type: 'error' });
       }
     },
   });

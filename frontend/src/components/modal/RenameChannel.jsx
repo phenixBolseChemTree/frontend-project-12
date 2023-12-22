@@ -40,7 +40,7 @@ const RenameChannel = ({ handleClose, id }) => {
         toast(t('toast.renameChannel'), { type: 'success' });
         handleClose();
       } catch (e) {
-        console.log(e);
+        toast(t('error.networkError'), { type: 'error' });
       }
     },
   });
