@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const startChannelId = 1;
+
 const chatSlice = createSlice({
   name: 'app',
   initialState: {
     channels: [],
     messages: [],
-    currentChannelId: null,
+    currentChannelId: startChannelId,
   },
   reducers: {
     setCurrentChannelId: (state, action) => ({ ...state, currentChannelId: action.payload }),
@@ -24,7 +26,7 @@ const chatSlice = createSlice({
       if (state.currentChannelId !== action.payload.id) {
         return { ...state, channels: [...newChannels] };
       }
-      return { ...state, channels: [...newChannels], currentChannelId: 1 };
+      return { ...state, channels: [...newChannels], currentChannelId: startChannelId };
     },
     setRenameChannel: (state, action) => {
       const { id, name } = action.payload;
