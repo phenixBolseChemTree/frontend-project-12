@@ -24,7 +24,7 @@ const RenameChannel = ({ handleClose, id }) => {
     name: yup.string()
       .min(3, 'minWord3AndmaxWord20')
       .max(20, 'minWord3AndmaxWord20')
-      .test('is-unique', t('modal.mustBeUnique'), (value) => !channels.map((channel) => channel.name).includes(value))
+      .test('is-unique', 'mustBeUnique', (value) => !channels.map((channel) => channel.name).includes(value))
       .required(''),
   });
 
