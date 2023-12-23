@@ -32,15 +32,17 @@ const ChatForm = () => {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       const validatedText = leoFilter.clean(values.textInputForm);
-      try {
-        await api.newMessage({
-          body: validatedText,
-          username,
-          channelId: currentChannelId,
-        });
-        resetForm();
-      } catch (e) {
-        toast(t('toast.connectError'), { type: 'error' });
+      if (validatedText.trim() !== '') {
+        try {
+          await api.newMessage({
+            body: validatedText,
+            username,
+            channelId: currentChannelId,
+          });
+          resetForm();
+        } catch (e) {
+          toast(t('toast.connectError'), { type: 'error' });
+        }
       }
     },
   });
