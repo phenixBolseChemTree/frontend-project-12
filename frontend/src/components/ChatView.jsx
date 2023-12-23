@@ -27,7 +27,7 @@ const ChatView = () => {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' });
-  }, [messages]);
+  }, [messages, currentChannelId]);
 
   return (
     <Col className="col-9 p-0 d-flex flex-column h-100 chat-board ">
@@ -57,7 +57,7 @@ const ChatView = () => {
               {body}
             </div>
           ))}
-          <div ref={messagesEndRef} />
+          <div className="car12" ref={messagesEndRef} />
         </div>
         <div className="mt-auto px-5 py-3">
           <ChatForm />
