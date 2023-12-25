@@ -62,18 +62,29 @@ const SignupForm = () => {
     <Form onSubmit={formik.handleSubmit}>
       <h1 className="text-center mb-4">{t('login.registration')}</h1>
       <Form.Floating className="mb-3">
+        {/* <Form.Control
+          required
+          type="text"
+          name="name"
+          id="name"
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          value={formik.values.name}
+          isInvalid={!!formik.errors.name}
+        /> */}
         <Form.Control
           required
           type="text"
           name="name"
           id="name"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.name}
-          isInvalid={!!formik.errors.name}
+          isInvalid={formik.touched.name && !!formik.errors.name}
         />
         <Form.Label htmlFor="name">{t('signup.userName')}</Form.Label>
         <Form.Control.Feedback type="invalid" tooltip>
-          {t(`error.${formik.errors.name}`)}
+          {formik.touched.name && formik.errors.name ? t(`error.${formik.errors.name}`) : null}
         </Form.Control.Feedback>
       </Form.Floating>
 
@@ -84,34 +95,34 @@ const SignupForm = () => {
           name="password"
           id="password"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.password}
-          isInvalid={!!formik.errors.password}
+          isInvalid={formik.touched.password && !!formik.errors.password}
         />
         <Form.Label htmlFor="password">{t('signup.password')}</Form.Label>
-
         <Form.Control.Feedback type="invalid" tooltip>
-          {t(`error.${formik.errors.password}`)}
+          {formik.touched.password && formik.errors.password ? t(`error.${formik.errors.password}`) : null}
         </Form.Control.Feedback>
       </Form.Floating>
-      <Form.Floating className="mb-5">
 
+      <Form.Floating className="mb-5">
         <Form.Control
           required
           type="text"
           name="passwordRes"
           id="passwordRes"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.passwordRes}
-          isInvalid={!!formik.errors.passwordRes || signupError}
+          isInvalid={formik.touched.passwordRes && (!!formik.errors.passwordRes || signupError)}
           ref={passwordResRef}
         />
         <Form.Label htmlFor="passwordRes">{t('signup.resPassword')}</Form.Label>
-
         <Form.Control.Feedback type="invalid" tooltip>
-          {signupError ? t('signup.error409') : t(`error.${formik.errors.passwordRes}`)}
-
+          {formik.touched.passwordRes && (signupError ? t('signup.error409') : t(`error.${formik.errors.passwordRes}`))}
         </Form.Control.Feedback>
       </Form.Floating>
+
       <Button
         variant="outline-primary"
         className="w-100"
