@@ -19,7 +19,7 @@ const RenameChannel = ({ handleClose, id }) => {
   const { channels } = useSelector((state) => state.chat);
 
   const channel = getChannelById(channels, id);
-  const channelName = channel.name;
+  const channelName = channel ? channel.name : '';
 
   useEffect(() => {
     if (controlRef.current) {
@@ -37,7 +37,7 @@ const RenameChannel = ({ handleClose, id }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      name: channelName,
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
@@ -74,7 +74,6 @@ const RenameChannel = ({ handleClose, id }) => {
               isInvalid={!!formik.errors.name}
               autoFocus
               ref={controlRef}
-              placeholder={channelName}
             />
             <Form.Label className="visually-hidden" htmlFor="name">{t('modal.formLabelName')}</Form.Label>
             <Form.Control.Feedback type="invalid">
