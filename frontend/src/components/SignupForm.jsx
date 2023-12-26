@@ -74,7 +74,7 @@ const SignupForm = () => {
         />
         <Form.Label htmlFor="name">{t('signup.userName')}</Form.Label>
         <Form.Control.Feedback type="invalid" tooltip>
-          {formik.touched.name && formik.errors.name ? t(`error.${formik.errors.name}`) : null}
+          {t(`error.${formik.errors.name}`)}
         </Form.Control.Feedback>
       </Form.Floating>
 
@@ -91,7 +91,7 @@ const SignupForm = () => {
         />
         <Form.Label htmlFor="password">{t('signup.password')}</Form.Label>
         <Form.Control.Feedback type="invalid" tooltip>
-          {formik.touched.password && formik.errors.password ? t(`error.${formik.errors.password}`) : null}
+          {t(`error.${formik.errors.password}`)}
         </Form.Control.Feedback>
       </Form.Floating>
 
@@ -109,7 +109,7 @@ const SignupForm = () => {
         />
         <Form.Label htmlFor="passwordRes">{t('signup.resPassword')}</Form.Label>
         <Form.Control.Feedback type="invalid" tooltip>
-          {formik.touched.passwordRes && (signupError ? t('signup.error409') : t(`error.${formik.errors.passwordRes}`))}
+          {t(`error.${formik.errors.passwordRes}`)}
         </Form.Control.Feedback>
       </Form.Floating>
 
