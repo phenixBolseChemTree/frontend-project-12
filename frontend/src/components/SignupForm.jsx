@@ -62,16 +62,6 @@ const SignupForm = () => {
     <Form onSubmit={formik.handleSubmit}>
       <h1 className="text-center mb-4">{t('login.registration')}</h1>
       <Form.Floating className="mb-3">
-        {/* <Form.Control
-          required
-          type="text"
-          name="name"
-          id="name"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.name}
-          isInvalid={!!formik.errors.name}
-        /> */}
         <Form.Control
           required
           type="text"

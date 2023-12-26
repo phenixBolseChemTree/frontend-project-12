@@ -57,7 +57,7 @@ const ChatView = () => {
               {body}
             </div>
           ))}
-          <div className="car12" ref={messagesEndRef} />
+          <div ref={messagesEndRef} />
         </div>
         <div className="mt-auto px-5 py-3">
           <ChatForm />
