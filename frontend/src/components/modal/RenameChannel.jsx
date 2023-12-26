@@ -7,12 +7,19 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useApi } from '../../context/ApiContext';
 
+const getChannelById = (channels, channelId) => {
+  console.log('1');
+  return channels.find((channel) => channel.id === channelId);
+};
+
 const RenameChannel = ({ handleClose, id }) => {
   const api = useApi();
   const { t } = useTranslation();
   const controlRef = useRef(null);
-  const { channels, currentChannelId } = useSelector((state) => state.chat);
-  const channelName = channels[currentChannelId + 1].name;
+  const { channels } = useSelector((state) => state.chat);
+
+  const channel = getChannelById(channels, id);
+  const channelName = channel.name;
 
   useEffect(() => {
     if (controlRef.current) {
@@ -24,7 +31,7 @@ const RenameChannel = ({ handleClose, id }) => {
     name: yup.string()
       .min(3, 'minWord3AndmaxWord20')
       .max(20, 'minWord3AndmaxWord20')
-      .test('is-unique', 'mustBeUnique', (value) => !channels.map((channel) => channel.name).includes(value))
+      .test('is-unique', 'mustBeUnique', (value) => !channels.map((_channel) => _channel.name).includes(value))
       .required(''),
   });
 
