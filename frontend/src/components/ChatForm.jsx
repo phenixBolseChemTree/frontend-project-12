@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import { Button, Form } from 'react-bootstrap';
 import leoFilter from 'leo-profanity';
 import { toast } from 'react-toastify';
@@ -21,28 +20,21 @@ const ChatForm = () => {
 
   const { t } = useTranslation();
 
-  const validationSchema = yup.object().shape({
-    textInputForm: yup.string(),
-  });
-
   const formik = useFormik({
     initialValues: {
       textInputForm: '',
     },
-    validationSchema,
     onSubmit: async (values, { resetForm }) => {
       const validatedText = leoFilter.clean(values.textInputForm);
-      if (validatedText.trim() !== '') {
-        try {
-          await api.newMessage({
-            body: validatedText,
-            username,
-            channelId: currentChannelId,
-          });
-          resetForm();
-        } catch (e) {
-          toast(t('toast.connectError'), { type: 'error' });
-        }
+      try {
+        await api.newMessage({
+          body: validatedText,
+          username,
+          channelId: currentChannelId,
+        });
+        resetForm();
+      } catch (e) {
+        toast(t('toast.connectError'), { type: 'error' });
       }
     },
   });
@@ -59,6 +51,7 @@ const ChatForm = () => {
           placeholder={t('chat.formPlaceholder')}
           onChange={formik.handleChange}
           autoFocus
+          required
         />
         <Button
           variant="light"
