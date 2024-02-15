@@ -18,6 +18,10 @@ const Layout = ({ children }) => {
     navigate(routes.login);
   };
 
+  const handleFeedback = () => {
+    navigate(routes.feedback);
+  };
+
   return (
     <div>
       <header>
@@ -31,7 +35,10 @@ const Layout = ({ children }) => {
             <NavbarBrand as={Link} to={auth ? routes.chat : routes.login}>
               {t('nav.chatName')}
             </NavbarBrand>
-            {auth && <Button type="button" onClick={handleLogout} variant="primary">{t('nav.logOut')}</Button>}
+            <div>
+              {auth && <Button style={{ marginRight: 10 }} onClick={handleFeedback} type="button" variant="primary">Обратная связь</Button>}
+              {auth && <Button type="button" onClick={handleLogout} variant="primary">{t('nav.logOut')}</Button>}
+            </div>
           </Container>
         </Navbar>
       </header>

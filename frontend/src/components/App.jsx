@@ -13,6 +13,7 @@ import PrivateOutlet from './PrivateOutlet';
 import routes from '../routes';
 import ModalWindow from './modal/ModalWindow';
 import Layout from './Layout';
+import Feedback from './Feedback';
 
 const App = () => (
   <>
@@ -29,6 +30,7 @@ const App = () => (
           />
           <Route path={routes.signup} element={<Signup />} />
           <Route path={routes.login} element={<Login />} />
+          <Route path={routes.feedback} element={<Feedback />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Layout>

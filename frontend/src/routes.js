@@ -7,4 +7,5 @@ export default {
   login: '/login',
   signup: '/signup',
   chat: '/',
+  feedback: '/feedback',
 };

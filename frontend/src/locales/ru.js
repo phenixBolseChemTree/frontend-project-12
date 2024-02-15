@@ -1,7 +1,7 @@
 export default {
   translation: {
     nav: {
-      chatName: 'Hexlet Chat',
+      chatName: 'Chat',
       logOut: 'Выйти',
     },
     chat: {
