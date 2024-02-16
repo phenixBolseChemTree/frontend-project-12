@@ -28,10 +28,8 @@ const FeedbackForm = () => {
         },
       );
   };
-
   return (
     <Form ref={form} onSubmit={sendEmail}>
-
       <Form.Floating className="mb-3">
         <Form.Control
           required
@@ -42,7 +40,6 @@ const FeedbackForm = () => {
         />
         <Form.Label htmlFor="name">Ваша почта...</Form.Label>
       </Form.Floating>
-
       <Form.Floating className="mb-5">
         <Form.Control
           required

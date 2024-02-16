@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import img from '../assets/error_404.jpeg';
+import img from '../assets/404_3.jpg';
 
 const Page404 = () => {
   const { t } = useTranslation();
